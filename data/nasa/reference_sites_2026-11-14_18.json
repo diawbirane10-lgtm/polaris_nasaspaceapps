@@ -1,0 +1,567 @@
+{
+  "dataset_name": "POLARIS NASA real-data reference pack",
+  "created_on": "2026-11-14",
+  "start_utc": "2026-11-14T00:00Z",
+  "end_utc": "2026-11-18T00:00Z",
+  "interval_hours": 6,
+  "ephemeris": {
+    "source_url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+    "query": "COMMAND 10 (Sun) and 399 (Earth); CENTER coord@301; QUANTITIES 4; COORD_TYPE GEODETIC; APPARENT AIRLESS",
+    "frame": "JPL MEAN_ME (high precision)",
+    "numeric_precision": "azimuth and elevation rounded to 4 decimal degrees for demo only"
+  },
+  "terrain": {
+    "archive": "https://pgda.gsfc.nasa.gov/products/78",
+    "source": "NASA/GSFC LOLA 5m/pixel MOON_ME/DE421 polar-stereographic GeoTIFF",
+    "horizontal_extent": "local 6 km ray horizon, does NOT account for obstacles beyond DEM tiles",
+    "azimuth_resolution_deg": 5,
+    "range_step_m": 50,
+    "frame_warning": "Lunar DEM MOON_ME DE421 frame vs Horizons MEAN_ME may differ slightly; not yet quantified"
+  },
+  "site_warning": "The points are reference sample locations, NOT certified landing sites.",
+  "science_warning": "Only 4 days at 6-hour cadence; longer shadows and occultations may be missed. Solar disk approximation and power system assumptions not validated.",
+  "sites": {
+    "connecting_ridge": {
+      "name": "Connecting Ridge / NASA LOLA Site01",
+      "lat_deg": -89.4632,
+      "lon_e_deg": 222.5102,
+      "dem_height_m": 1944.633,
+      "observer_height_above_surface_m": 2.0,
+      "observer_altitude_horizons_km": 1.946633,
+      "data_status": "real NASA DEM + real JPL Horizons output (rounded for compact demo)",
+      "dem_url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/Site01/Site01_final_adj_5mpp_surf.tif",
+      "dem_sha256": "3ba7b97cb00a2bcf21189c3aeb535f65afc21207154ab9f0d43c5bdc1f7e747e",
+      "jpl_raw_response_sha256": {
+        "sun": "7b9ce0863e118268f9accc49fbaeb23aa1dd741386c85d2f5cec846f39e709fd",
+        "earth": "39be00a456986560a42f4e53c890b5dd2ef0462d47e867b485a667e57c980ed8"
+      },
+      "horizon_profile": {
+        "elevations_deg": [
+          1.307,
+          1.419,
+          1.59,
+          1.675,
+          1.704,
+          1.684,
+          1.701,
+          1.825,
+          1.674,
+          1.624,
+          1.808,
+          1.747,
+          1.699,
+          1.737,
+          1.695,
+          1.654,
+          1.557,
+          1.562,
+          1.601,
+          1.72,
+          1.949,
+          1.844,
+          1.755,
+          1.82,
+          1.524,
+          1.372,
+          1.191,
+          1.072,
+          0.984,
+          0.592,
+          0.161,
+          -0.258,
+          0.051,
+          0.205,
+          0.371,
+          0.369,
+          0.252,
+          -0.119,
+          -0.225,
+          -0.42,
+          -0.48,
+          -0.697,
+          -0.918,
+          -1.286,
+          -1.656,
+          -2.06,
+          -2.463,
+          -2.646,
+          -3.17,
+          -3.526,
+          -3.921,
+          -4.288,
+          -4.41,
+          -4.511,
+          -4.292,
+          -4.531,
+          -4.654,
+          -4.514,
+          -4.212,
+          -4.05,
+          -3.868,
+          -3.225,
+          -2.946,
+          -2.331,
+          -1.649,
+          -1.133,
+          -0.579,
+          0.001,
+          0.224,
+          0.487,
+          0.785,
+          0.964
+        ],
+        "azimuth_step_deg": 5,
+        "max_range_km": 6,
+        "radial_step_m": 50,
+        "method": "NASA LOLA DEM 5m/pixel, east/north projected ray sampling and spherical curvature"
+      },
+      "ephemeris": {
+        "sun": [
+          {
+            "utc": "2026-11-14T00:00Z",
+            "az_deg": 264.093,
+            "el_deg": 1.5014
+          },
+          {
+            "utc": "2026-11-14T06:00Z",
+            "az_deg": 261.0462,
+            "el_deg": 1.4732
+          },
+          {
+            "utc": "2026-11-14T12:00Z",
+            "az_deg": 257.9997,
+            "el_deg": 1.4451
+          },
+          {
+            "utc": "2026-11-14T18:00Z",
+            "az_deg": 254.9537,
+            "el_deg": 1.4172
+          },
+          {
+            "utc": "2026-11-15T00:00Z",
+            "az_deg": 251.908,
+            "el_deg": 1.3897
+          },
+          {
+            "utc": "2026-11-15T06:00Z",
+            "az_deg": 248.8627,
+            "el_deg": 1.3626
+          },
+          {
+            "utc": "2026-11-15T12:00Z",
+            "az_deg": 245.8178,
+            "el_deg": 1.336
+          },
+          {
+            "utc": "2026-11-15T18:00Z",
+            "az_deg": 242.7734,
+            "el_deg": 1.31
+          },
+          {
+            "utc": "2026-11-16T00:00Z",
+            "az_deg": 239.7294,
+            "el_deg": 1.2846
+          },
+          {
+            "utc": "2026-11-16T06:00Z",
+            "az_deg": 236.6857,
+            "el_deg": 1.26
+          },
+          {
+            "utc": "2026-11-16T12:00Z",
+            "az_deg": 233.6426,
+            "el_deg": 1.2361
+          },
+          {
+            "utc": "2026-11-16T18:00Z",
+            "az_deg": 230.5998,
+            "el_deg": 1.2131
+          },
+          {
+            "utc": "2026-11-17T00:00Z",
+            "az_deg": 227.5575,
+            "el_deg": 1.1911
+          },
+          {
+            "utc": "2026-11-17T06:00Z",
+            "az_deg": 224.5157,
+            "el_deg": 1.17
+          },
+          {
+            "utc": "2026-11-17T12:00Z",
+            "az_deg": 221.4742,
+            "el_deg": 1.15
+          },
+          {
+            "utc": "2026-11-17T18:00Z",
+            "az_deg": 218.4333,
+            "el_deg": 1.1311
+          },
+          {
+            "utc": "2026-11-18T00:00Z",
+            "az_deg": 215.3927,
+            "el_deg": 1.1133
+          }
+        ],
+        "earth": [
+          {
+            "utc": "2026-11-14T00:00Z",
+            "az_deg": 136.2326,
+            "el_deg": -5.0362
+          },
+          {
+            "utc": "2026-11-14T06:00Z",
+            "az_deg": 135.887,
+            "el_deg": -4.776
+          },
+          {
+            "utc": "2026-11-14T12:00Z",
+            "az_deg": 135.5401,
+            "el_deg": -4.5048
+          },
+          {
+            "utc": "2026-11-14T18:00Z",
+            "az_deg": 135.1928,
+            "el_deg": -4.2231
+          },
+          {
+            "utc": "2026-11-15T00:00Z",
+            "az_deg": 134.8465,
+            "el_deg": -3.9317
+          },
+          {
+            "utc": "2026-11-15T06:00Z",
+            "az_deg": 134.5023,
+            "el_deg": -3.6311
+          },
+          {
+            "utc": "2026-11-15T12:00Z",
+            "az_deg": 134.1617,
+            "el_deg": -3.322
+          },
+          {
+            "utc": "2026-11-15T18:00Z",
+            "az_deg": 133.8258,
+            "el_deg": -3.005
+          },
+          {
+            "utc": "2026-11-16T00:00Z",
+            "az_deg": 133.4961,
+            "el_deg": -2.681
+          },
+          {
+            "utc": "2026-11-16T06:00Z",
+            "az_deg": 133.1741,
+            "el_deg": -2.3505
+          },
+          {
+            "utc": "2026-11-16T12:00Z",
+            "az_deg": 132.8611,
+            "el_deg": -2.0143
+          },
+          {
+            "utc": "2026-11-16T18:00Z",
+            "az_deg": 132.5588,
+            "el_deg": -1.6731
+          },
+          {
+            "utc": "2026-11-17T00:00Z",
+            "az_deg": 132.2685,
+            "el_deg": -1.3278
+          },
+          {
+            "utc": "2026-11-17T06:00Z",
+            "az_deg": 131.9918,
+            "el_deg": -0.979
+          },
+          {
+            "utc": "2026-11-17T12:00Z",
+            "az_deg": 131.7303,
+            "el_deg": -0.6276
+          },
+          {
+            "utc": "2026-11-17T18:00Z",
+            "az_deg": 131.4855,
+            "el_deg": -0.2744
+          },
+          {
+            "utc": "2026-11-18T00:00Z",
+            "az_deg": 131.2589,
+            "el_deg": 0.0797
+          }
+        ]
+      }
+    },
+    "shackleton_rim": {
+      "name": "Shackleton Rim / NASA LOLA Site04",
+      "lat_deg": -89.7804,
+      "lon_e_deg": 203.803,
+      "dem_height_m": 1739.122,
+      "observer_height_above_surface_m": 2.0,
+      "observer_altitude_horizons_km": 1.741122,
+      "data_status": "real NASA DEM + real JPL Horizons output (rounded for compact demo)",
+      "dem_url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/Site04/Site04_final_adj_5mpp_surf.tif",
+      "dem_sha256": "38ff70dbdf2f066c2cfa94a646c3a59d653ce7f6b4528b15fc1b43ee397ce758",
+      "jpl_raw_response_sha256": {
+        "sun": "159d3f2886e6dd141b1102c54b4badf6acb2f104abadae662019316c4ba0109f",
+        "earth": "420f7ca8a92bf8cd2a36ad5e14dbd34c8cbf31d494c9af1cef2dcaf47efa507b"
+      },
+      "horizon_profile": {
+        "elevations_deg": [
+          -1.685,
+          -1.923,
+          -1.832,
+          -1.911,
+          -1.679,
+          -1.965,
+          -2.41,
+          -2.466,
+          -2.239,
+          -2.209,
+          -2.293,
+          -2.394,
+          -2.601,
+          -2.63,
+          -2.556,
+          -2.145,
+          -2.038,
+          -1.983,
+          -2.143,
+          -2.293,
+          -2.466,
+          -1.926,
+          -2.099,
+          -2.129,
+          -2.161,
+          -1.954,
+          -1.9,
+          -1.981,
+          -2.267,
+          -2.462,
+          -2.47,
+          -2.264,
+          -1.938,
+          -1.79,
+          -1.609,
+          -1.625,
+          -1.763,
+          -3.033,
+          -3.847,
+          -5.201,
+          -4.982,
+          -4.851,
+          -4.824,
+          -4.992,
+          -5.707,
+          -5.707,
+          -7.22,
+          -7.365,
+          -7.424,
+          -7.514,
+          -7.529,
+          -7.461,
+          -7.461,
+          -6.523,
+          -6.569,
+          -6.679,
+          -6.174,
+          -6.174,
+          -5.989,
+          -5.489,
+          -4.923,
+          -3.799,
+          -3.503,
+          -3.038,
+          -2.478,
+          -2.113,
+          -2.121,
+          -0.738,
+          -0.325,
+          -1.045,
+          -1.168,
+          -1.355
+        ],
+        "azimuth_step_deg": 5,
+        "max_range_km": 6,
+        "radial_step_m": 50,
+        "method": "NASA LOLA DEM 5m/pixel, east/north projected ray sampling and spherical curvature"
+      },
+      "ephemeris": {
+        "sun": [
+          {
+            "utc": "2026-11-14T00:00Z",
+            "az_deg": 282.8086,
+            "el_deg": 1.6053
+          },
+          {
+            "utc": "2026-11-14T06:00Z",
+            "az_deg": 279.7615,
+            "el_deg": 1.5939
+          },
+          {
+            "utc": "2026-11-14T12:00Z",
+            "az_deg": 276.7147,
+            "el_deg": 1.5823
+          },
+          {
+            "utc": "2026-11-14T18:00Z",
+            "az_deg": 273.6683,
+            "el_deg": 1.5706
+          },
+          {
+            "utc": "2026-11-15T00:00Z",
+            "az_deg": 270.6223,
+            "el_deg": 1.5588
+          },
+          {
+            "utc": "2026-11-15T06:00Z",
+            "az_deg": 267.5767,
+            "el_deg": 1.5469
+          },
+          {
+            "utc": "2026-11-15T12:00Z",
+            "az_deg": 264.5315,
+            "el_deg": 1.535
+          },
+          {
+            "utc": "2026-11-15T18:00Z",
+            "az_deg": 261.4867,
+            "el_deg": 1.523
+          },
+          {
+            "utc": "2026-11-16T00:00Z",
+            "az_deg": 258.4423,
+            "el_deg": 1.5112
+          },
+          {
+            "utc": "2026-11-16T06:00Z",
+            "az_deg": 255.3983,
+            "el_deg": 1.4994
+          },
+          {
+            "utc": "2026-11-16T12:00Z",
+            "az_deg": 252.3547,
+            "el_deg": 1.4878
+          },
+          {
+            "utc": "2026-11-16T18:00Z",
+            "az_deg": 249.3116,
+            "el_deg": 1.4763
+          },
+          {
+            "utc": "2026-11-17T00:00Z",
+            "az_deg": 246.2689,
+            "el_deg": 1.4649
+          },
+          {
+            "utc": "2026-11-17T06:00Z",
+            "az_deg": 243.2267,
+            "el_deg": 1.4538
+          },
+          {
+            "utc": "2026-11-17T12:00Z",
+            "az_deg": 240.1849,
+            "el_deg": 1.443
+          },
+          {
+            "utc": "2026-11-17T18:00Z",
+            "az_deg": 237.1435,
+            "el_deg": 1.4324
+          },
+          {
+            "utc": "2026-11-18T00:00Z",
+            "az_deg": 234.1026,
+            "el_deg": 1.4221
+          }
+        ],
+        "earth": [
+          {
+            "utc": "2026-11-14T00:00Z",
+            "az_deg": 154.9623,
+            "el_deg": -4.8474
+          },
+          {
+            "utc": "2026-11-14T06:00Z",
+            "az_deg": 154.6156,
+            "el_deg": -4.5889
+          },
+          {
+            "utc": "2026-11-14T12:00Z",
+            "az_deg": 154.2674,
+            "el_deg": -4.3194
+          },
+          {
+            "utc": "2026-11-14T18:00Z",
+            "az_deg": 153.9188,
+            "el_deg": -4.0395
+          },
+          {
+            "utc": "2026-11-15T00:00Z",
+            "az_deg": 153.5711,
+            "el_deg": -3.7497
+          },
+          {
+            "utc": "2026-11-15T06:00Z",
+            "az_deg": 153.2256,
+            "el_deg": -3.4508
+          },
+          {
+            "utc": "2026-11-15T12:00Z",
+            "az_deg": 152.8834,
+            "el_deg": -3.1434
+          },
+          {
+            "utc": "2026-11-15T18:00Z",
+            "az_deg": 152.546,
+            "el_deg": -2.8281
+          },
+          {
+            "utc": "2026-11-16T00:00Z",
+            "az_deg": 152.2147,
+            "el_deg": -2.5057
+          },
+          {
+            "utc": "2026-11-16T06:00Z",
+            "az_deg": 151.8911,
+            "el_deg": -2.1769
+          },
+          {
+            "utc": "2026-11-16T12:00Z",
+            "az_deg": 151.5765,
+            "el_deg": -1.8423
+          },
+          {
+            "utc": "2026-11-16T18:00Z",
+            "az_deg": 151.2724,
+            "el_deg": -1.5026
+          },
+          {
+            "utc": "2026-11-17T00:00Z",
+            "az_deg": 150.9804,
+            "el_deg": -1.1587
+          },
+          {
+            "utc": "2026-11-17T06:00Z",
+            "az_deg": 150.702,
+            "el_deg": -0.8113
+          },
+          {
+            "utc": "2026-11-17T12:00Z",
+            "az_deg": 150.4387,
+            "el_deg": -0.4612
+          },
+          {
+            "utc": "2026-11-17T18:00Z",
+            "az_deg": 150.1921,
+            "el_deg": -0.1093
+          },
+          {
+            "utc": "2026-11-18T00:00Z",
+            "az_deg": 149.9637,
+            "el_deg": 0.2436
+          }
+        ]
+      }
+    }
+  }
+}

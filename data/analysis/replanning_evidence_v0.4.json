@@ -1,0 +1,1266 @@
+[
+  {
+    "analysis_type": "counterfactual_v0.4",
+    "dataset_sha256": "9dc1f5b098dc14d55b0638c7fc2f689e3c22dde08726af9ff1e22e7de19e61f2",
+    "data_kind": "JPL Horizons az/el + local NASA/GSFC LOLA 5m DEM-derived skyline",
+    "site_key": "connecting_ridge",
+    "comparison_site_key": "shackleton_rim",
+    "inputs": {
+      "start_utc": "2026-11-14T00:00Z",
+      "duration_hours": 24,
+      "delay_hours": 48,
+      "pv_area_m2": 16,
+      "load_w": 400,
+      "battery_kwh": 20,
+      "mode": "horizontal"
+    },
+    "scenarios": {
+      "original": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-14T00:00Z",
+        "end_utc": "2026-11-15T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 46.53,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 46.53,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "delayed": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-16T00:00Z",
+        "end_utc": "2026-11-17T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 44.43,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 44.43,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "alternative_site_after_delay": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-16T00:00Z",
+        "end_utc": "2026-11-17T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 75.0,
+          "earth_local_clear_upper_bound_pct": 75.0,
+          "earth_obstructed_by_local_terrain_pct": 25.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 18.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 6.0,
+          "min_soc_pct": 46.88,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 46.88,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 6.0,
+        "earth_clear_upper_bound_hours": 18.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      }
+    },
+    "changes": {
+      "delay_same_site": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 0.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": 0.0,
+        "min_soc_pct": -2.1,
+        "unserved_energy_kwh": 0.0
+      },
+      "site_change_at_delayed_time": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 18.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": -18.0,
+        "min_soc_pct": 2.45,
+        "unserved_energy_kwh": 0.0
+      }
+    },
+    "delayed_site_energy_sensitivity": [
+      {
+        "id": "nominal",
+        "load_w": 400.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 44.43,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "load_plus_20pct",
+        "load_w": 480.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 34.83,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "pv_area_minus_20pct",
+        "load_w": 400.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 41.95,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "combined_stress",
+        "load_w": 480.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 32.35,
+        "unserved_energy_kwh": 0.0
+      }
+    ],
+    "recommendation": null,
+    "interpretation": "Comparison only; no certified site ranking or robust mission-feasibility claim",
+    "confidence": "Limited local geometric evidence (2m mast, 6km terrain, 5-degree bins, 6h samples)",
+    "scientific_limits": [
+      "Earth above local horizon is a potential line-of-sight upper bound, not confirmed direct-to-Earth communication.",
+      "A local obstruction can establish blocked geometry; terrain beyond 6km is not included.",
+      "Solar exposure and computed photovoltaic energy may be overestimated due to unknown distant shadows.",
+      "Energy and battery model is illustrative, ignores losses, dust, thermal loads and subsystems.",
+      "Scenarios are compared on sampled left-endpoint values at six-hour cadence.",
+      "Both points are NASA dataset sampling sites, not certified safe lunar landing sites."
+    ]
+  },
+  {
+    "analysis_type": "counterfactual_v0.4",
+    "dataset_sha256": "9dc1f5b098dc14d55b0638c7fc2f689e3c22dde08726af9ff1e22e7de19e61f2",
+    "data_kind": "JPL Horizons az/el + local NASA/GSFC LOLA 5m DEM-derived skyline",
+    "site_key": "connecting_ridge",
+    "comparison_site_key": "shackleton_rim",
+    "inputs": {
+      "start_utc": "2026-11-14T12:00Z",
+      "duration_hours": 24,
+      "delay_hours": 48,
+      "pv_area_m2": 16,
+      "load_w": 400,
+      "battery_kwh": 20,
+      "mode": "horizontal"
+    },
+    "scenarios": {
+      "original": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-14T12:00Z",
+        "end_utc": "2026-11-15T12:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 45.98,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 45.98,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "delayed": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-16T12:00Z",
+        "end_utc": "2026-11-17T12:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 43.98,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 43.98,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "alternative_site_after_delay": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-16T12:00Z",
+        "end_utc": "2026-11-17T12:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 100.0,
+          "earth_local_clear_upper_bound_pct": 100.0,
+          "earth_obstructed_by_local_terrain_pct": 0.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 24.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 0.0,
+          "min_soc_pct": 46.65,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 46.65,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 0.0,
+        "earth_clear_upper_bound_hours": 24.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      }
+    },
+    "changes": {
+      "delay_same_site": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 0.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": 0.0,
+        "min_soc_pct": -2.0,
+        "unserved_energy_kwh": 0.0
+      },
+      "site_change_at_delayed_time": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 24.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": -24.0,
+        "min_soc_pct": 2.67,
+        "unserved_energy_kwh": 0.0
+      }
+    },
+    "delayed_site_energy_sensitivity": [
+      {
+        "id": "nominal",
+        "load_w": 400.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 43.98,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "load_plus_20pct",
+        "load_w": 480.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 34.38,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "pv_area_minus_20pct",
+        "load_w": 400.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 41.58,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "combined_stress",
+        "load_w": 480.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 31.98,
+        "unserved_energy_kwh": 0.0
+      }
+    ],
+    "recommendation": null,
+    "interpretation": "Comparison only; no certified site ranking or robust mission-feasibility claim",
+    "confidence": "Limited local geometric evidence (2m mast, 6km terrain, 5-degree bins, 6h samples)",
+    "scientific_limits": [
+      "Earth above local horizon is a potential line-of-sight upper bound, not confirmed direct-to-Earth communication.",
+      "A local obstruction can establish blocked geometry; terrain beyond 6km is not included.",
+      "Solar exposure and computed photovoltaic energy may be overestimated due to unknown distant shadows.",
+      "Energy and battery model is illustrative, ignores losses, dust, thermal loads and subsystems.",
+      "Scenarios are compared on sampled left-endpoint values at six-hour cadence.",
+      "Both points are NASA dataset sampling sites, not certified safe lunar landing sites."
+    ]
+  },
+  {
+    "analysis_type": "counterfactual_v0.4",
+    "dataset_sha256": "9dc1f5b098dc14d55b0638c7fc2f689e3c22dde08726af9ff1e22e7de19e61f2",
+    "data_kind": "JPL Horizons az/el + local NASA/GSFC LOLA 5m DEM-derived skyline",
+    "site_key": "connecting_ridge",
+    "comparison_site_key": "shackleton_rim",
+    "inputs": {
+      "start_utc": "2026-11-14T18:00Z",
+      "duration_hours": 24,
+      "delay_hours": 48,
+      "pv_area_m2": 16,
+      "load_w": 400,
+      "battery_kwh": 20,
+      "mode": "horizontal"
+    },
+    "scenarios": {
+      "original": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-14T18:00Z",
+        "end_utc": "2026-11-15T18:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 45.71,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 45.71,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "delayed": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-16T18:00Z",
+        "end_utc": "2026-11-17T18:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 43.76,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 43.76,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "alternative_site_after_delay": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-16T18:00Z",
+        "end_utc": "2026-11-17T18:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 100.0,
+          "earth_local_clear_upper_bound_pct": 100.0,
+          "earth_obstructed_by_local_terrain_pct": 0.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 24.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 0.0,
+          "min_soc_pct": 46.54,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 46.54,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 0.0,
+        "earth_clear_upper_bound_hours": 24.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      }
+    },
+    "changes": {
+      "delay_same_site": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 0.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": 0.0,
+        "min_soc_pct": -1.95,
+        "unserved_energy_kwh": 0.0
+      },
+      "site_change_at_delayed_time": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 24.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": -24.0,
+        "min_soc_pct": 2.78,
+        "unserved_energy_kwh": 0.0
+      }
+    },
+    "delayed_site_energy_sensitivity": [
+      {
+        "id": "nominal",
+        "load_w": 400.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 43.76,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "load_plus_20pct",
+        "load_w": 480.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 34.16,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "pv_area_minus_20pct",
+        "load_w": 400.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 41.41,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "combined_stress",
+        "load_w": 480.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 31.81,
+        "unserved_energy_kwh": 0.0
+      }
+    ],
+    "recommendation": null,
+    "interpretation": "Comparison only; no certified site ranking or robust mission-feasibility claim",
+    "confidence": "Limited local geometric evidence (2m mast, 6km terrain, 5-degree bins, 6h samples)",
+    "scientific_limits": [
+      "Earth above local horizon is a potential line-of-sight upper bound, not confirmed direct-to-Earth communication.",
+      "A local obstruction can establish blocked geometry; terrain beyond 6km is not included.",
+      "Solar exposure and computed photovoltaic energy may be overestimated due to unknown distant shadows.",
+      "Energy and battery model is illustrative, ignores losses, dust, thermal loads and subsystems.",
+      "Scenarios are compared on sampled left-endpoint values at six-hour cadence.",
+      "Both points are NASA dataset sampling sites, not certified safe lunar landing sites."
+    ]
+  },
+  {
+    "analysis_type": "counterfactual_v0.4",
+    "dataset_sha256": "9dc1f5b098dc14d55b0638c7fc2f689e3c22dde08726af9ff1e22e7de19e61f2",
+    "data_kind": "JPL Horizons az/el + local NASA/GSFC LOLA 5m DEM-derived skyline",
+    "site_key": "connecting_ridge",
+    "comparison_site_key": "shackleton_rim",
+    "inputs": {
+      "start_utc": "2026-11-15T00:00Z",
+      "duration_hours": 24,
+      "delay_hours": 48,
+      "pv_area_m2": 16,
+      "load_w": 400,
+      "battery_kwh": 20,
+      "mode": "horizontal"
+    },
+    "scenarios": {
+      "original": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-15T00:00Z",
+        "end_utc": "2026-11-16T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 45.44,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 45.44,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "delayed": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-17T00:00Z",
+        "end_utc": "2026-11-18T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 43.56,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 43.56,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "alternative_site_after_delay": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-17T00:00Z",
+        "end_utc": "2026-11-18T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 100.0,
+          "earth_local_clear_upper_bound_pct": 100.0,
+          "earth_obstructed_by_local_terrain_pct": 0.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 24.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 0.0,
+          "min_soc_pct": 46.43,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 46.43,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 0.0,
+        "earth_clear_upper_bound_hours": 24.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      }
+    },
+    "changes": {
+      "delay_same_site": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 0.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": 0.0,
+        "min_soc_pct": -1.88,
+        "unserved_energy_kwh": 0.0
+      },
+      "site_change_at_delayed_time": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 24.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": -24.0,
+        "min_soc_pct": 2.87,
+        "unserved_energy_kwh": 0.0
+      }
+    },
+    "delayed_site_energy_sensitivity": [
+      {
+        "id": "nominal",
+        "load_w": 400.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 43.56,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "load_plus_20pct",
+        "load_w": 480.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 33.96,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "pv_area_minus_20pct",
+        "load_w": 400.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 41.25,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "combined_stress",
+        "load_w": 480.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 31.65,
+        "unserved_energy_kwh": 0.0
+      }
+    ],
+    "recommendation": null,
+    "interpretation": "Comparison only; no certified site ranking or robust mission-feasibility claim",
+    "confidence": "Limited local geometric evidence (2m mast, 6km terrain, 5-degree bins, 6h samples)",
+    "scientific_limits": [
+      "Earth above local horizon is a potential line-of-sight upper bound, not confirmed direct-to-Earth communication.",
+      "A local obstruction can establish blocked geometry; terrain beyond 6km is not included.",
+      "Solar exposure and computed photovoltaic energy may be overestimated due to unknown distant shadows.",
+      "Energy and battery model is illustrative, ignores losses, dust, thermal loads and subsystems.",
+      "Scenarios are compared on sampled left-endpoint values at six-hour cadence.",
+      "Both points are NASA dataset sampling sites, not certified safe lunar landing sites."
+    ]
+  },
+  {
+    "analysis_type": "counterfactual_v0.4",
+    "dataset_sha256": "9dc1f5b098dc14d55b0638c7fc2f689e3c22dde08726af9ff1e22e7de19e61f2",
+    "data_kind": "JPL Horizons az/el + local NASA/GSFC LOLA 5m DEM-derived skyline",
+    "site_key": "shackleton_rim",
+    "comparison_site_key": "connecting_ridge",
+    "inputs": {
+      "start_utc": "2026-11-14T00:00Z",
+      "duration_hours": 24,
+      "delay_hours": 48,
+      "pv_area_m2": 16,
+      "load_w": 400,
+      "battery_kwh": 20,
+      "mode": "horizontal"
+    },
+    "scenarios": {
+      "original": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-14T00:00Z",
+        "end_utc": "2026-11-15T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 47.82,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 47.82,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "delayed": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-16T00:00Z",
+        "end_utc": "2026-11-17T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 75.0,
+          "earth_local_clear_upper_bound_pct": 75.0,
+          "earth_obstructed_by_local_terrain_pct": 25.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 18.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 6.0,
+          "min_soc_pct": 46.88,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 46.88,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 6.0,
+        "earth_clear_upper_bound_hours": 18.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "alternative_site_after_delay": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-16T00:00Z",
+        "end_utc": "2026-11-17T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 44.43,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 44.43,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      }
+    },
+    "changes": {
+      "delay_same_site": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 18.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": -18.0,
+        "min_soc_pct": -0.94,
+        "unserved_energy_kwh": 0.0
+      },
+      "site_change_at_delayed_time": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": -18.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": 18.0,
+        "min_soc_pct": -2.45,
+        "unserved_energy_kwh": 0.0
+      }
+    },
+    "delayed_site_energy_sensitivity": [
+      {
+        "id": "nominal",
+        "load_w": 400.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 46.88,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "load_plus_20pct",
+        "load_w": 480.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 37.28,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "pv_area_minus_20pct",
+        "load_w": 400.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 43.9,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "combined_stress",
+        "load_w": 480.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 34.3,
+        "unserved_energy_kwh": 0.0
+      }
+    ],
+    "recommendation": null,
+    "interpretation": "Comparison only; no certified site ranking or robust mission-feasibility claim",
+    "confidence": "Limited local geometric evidence (2m mast, 6km terrain, 5-degree bins, 6h samples)",
+    "scientific_limits": [
+      "Earth above local horizon is a potential line-of-sight upper bound, not confirmed direct-to-Earth communication.",
+      "A local obstruction can establish blocked geometry; terrain beyond 6km is not included.",
+      "Solar exposure and computed photovoltaic energy may be overestimated due to unknown distant shadows.",
+      "Energy and battery model is illustrative, ignores losses, dust, thermal loads and subsystems.",
+      "Scenarios are compared on sampled left-endpoint values at six-hour cadence.",
+      "Both points are NASA dataset sampling sites, not certified safe lunar landing sites."
+    ]
+  },
+  {
+    "analysis_type": "counterfactual_v0.4",
+    "dataset_sha256": "9dc1f5b098dc14d55b0638c7fc2f689e3c22dde08726af9ff1e22e7de19e61f2",
+    "data_kind": "JPL Horizons az/el + local NASA/GSFC LOLA 5m DEM-derived skyline",
+    "site_key": "shackleton_rim",
+    "comparison_site_key": "connecting_ridge",
+    "inputs": {
+      "start_utc": "2026-11-14T12:00Z",
+      "duration_hours": 24,
+      "delay_hours": 48,
+      "pv_area_m2": 16,
+      "load_w": 400,
+      "battery_kwh": 20,
+      "mode": "horizontal"
+    },
+    "scenarios": {
+      "original": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-14T12:00Z",
+        "end_utc": "2026-11-15T12:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 47.58,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 47.58,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "delayed": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-16T12:00Z",
+        "end_utc": "2026-11-17T12:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 100.0,
+          "earth_local_clear_upper_bound_pct": 100.0,
+          "earth_obstructed_by_local_terrain_pct": 0.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 24.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 0.0,
+          "min_soc_pct": 46.65,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 46.65,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 0.0,
+        "earth_clear_upper_bound_hours": 24.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "alternative_site_after_delay": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-16T12:00Z",
+        "end_utc": "2026-11-17T12:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 43.98,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 43.98,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      }
+    },
+    "changes": {
+      "delay_same_site": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 24.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": -24.0,
+        "min_soc_pct": -0.93,
+        "unserved_energy_kwh": 0.0
+      },
+      "site_change_at_delayed_time": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": -24.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": 24.0,
+        "min_soc_pct": -2.67,
+        "unserved_energy_kwh": 0.0
+      }
+    },
+    "delayed_site_energy_sensitivity": [
+      {
+        "id": "nominal",
+        "load_w": 400.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 46.65,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "load_plus_20pct",
+        "load_w": 480.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 37.05,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "pv_area_minus_20pct",
+        "load_w": 400.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 43.72,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "combined_stress",
+        "load_w": 480.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 34.12,
+        "unserved_energy_kwh": 0.0
+      }
+    ],
+    "recommendation": null,
+    "interpretation": "Comparison only; no certified site ranking or robust mission-feasibility claim",
+    "confidence": "Limited local geometric evidence (2m mast, 6km terrain, 5-degree bins, 6h samples)",
+    "scientific_limits": [
+      "Earth above local horizon is a potential line-of-sight upper bound, not confirmed direct-to-Earth communication.",
+      "A local obstruction can establish blocked geometry; terrain beyond 6km is not included.",
+      "Solar exposure and computed photovoltaic energy may be overestimated due to unknown distant shadows.",
+      "Energy and battery model is illustrative, ignores losses, dust, thermal loads and subsystems.",
+      "Scenarios are compared on sampled left-endpoint values at six-hour cadence.",
+      "Both points are NASA dataset sampling sites, not certified safe lunar landing sites."
+    ]
+  },
+  {
+    "analysis_type": "counterfactual_v0.4",
+    "dataset_sha256": "9dc1f5b098dc14d55b0638c7fc2f689e3c22dde08726af9ff1e22e7de19e61f2",
+    "data_kind": "JPL Horizons az/el + local NASA/GSFC LOLA 5m DEM-derived skyline",
+    "site_key": "shackleton_rim",
+    "comparison_site_key": "connecting_ridge",
+    "inputs": {
+      "start_utc": "2026-11-14T18:00Z",
+      "duration_hours": 24,
+      "delay_hours": 48,
+      "pv_area_m2": 16,
+      "load_w": 400,
+      "battery_kwh": 20,
+      "mode": "horizontal"
+    },
+    "scenarios": {
+      "original": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-14T18:00Z",
+        "end_utc": "2026-11-15T18:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 47.47,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 47.47,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "delayed": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-16T18:00Z",
+        "end_utc": "2026-11-17T18:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 100.0,
+          "earth_local_clear_upper_bound_pct": 100.0,
+          "earth_obstructed_by_local_terrain_pct": 0.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 24.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 0.0,
+          "min_soc_pct": 46.54,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 46.54,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 0.0,
+        "earth_clear_upper_bound_hours": 24.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "alternative_site_after_delay": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-16T18:00Z",
+        "end_utc": "2026-11-17T18:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 43.76,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 43.76,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      }
+    },
+    "changes": {
+      "delay_same_site": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 24.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": -24.0,
+        "min_soc_pct": -0.93,
+        "unserved_energy_kwh": 0.0
+      },
+      "site_change_at_delayed_time": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": -24.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": 24.0,
+        "min_soc_pct": -2.78,
+        "unserved_energy_kwh": 0.0
+      }
+    },
+    "delayed_site_energy_sensitivity": [
+      {
+        "id": "nominal",
+        "load_w": 400.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 46.54,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "load_plus_20pct",
+        "load_w": 480.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 36.94,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "pv_area_minus_20pct",
+        "load_w": 400.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 43.63,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "combined_stress",
+        "load_w": 480.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 34.03,
+        "unserved_energy_kwh": 0.0
+      }
+    ],
+    "recommendation": null,
+    "interpretation": "Comparison only; no certified site ranking or robust mission-feasibility claim",
+    "confidence": "Limited local geometric evidence (2m mast, 6km terrain, 5-degree bins, 6h samples)",
+    "scientific_limits": [
+      "Earth above local horizon is a potential line-of-sight upper bound, not confirmed direct-to-Earth communication.",
+      "A local obstruction can establish blocked geometry; terrain beyond 6km is not included.",
+      "Solar exposure and computed photovoltaic energy may be overestimated due to unknown distant shadows.",
+      "Energy and battery model is illustrative, ignores losses, dust, thermal loads and subsystems.",
+      "Scenarios are compared on sampled left-endpoint values at six-hour cadence.",
+      "Both points are NASA dataset sampling sites, not certified safe lunar landing sites."
+    ]
+  },
+  {
+    "analysis_type": "counterfactual_v0.4",
+    "dataset_sha256": "9dc1f5b098dc14d55b0638c7fc2f689e3c22dde08726af9ff1e22e7de19e61f2",
+    "data_kind": "JPL Horizons az/el + local NASA/GSFC LOLA 5m DEM-derived skyline",
+    "site_key": "shackleton_rim",
+    "comparison_site_key": "connecting_ridge",
+    "inputs": {
+      "start_utc": "2026-11-15T00:00Z",
+      "duration_hours": 24,
+      "delay_hours": 48,
+      "pv_area_m2": 16,
+      "load_w": 400,
+      "battery_kwh": 20,
+      "mode": "horizontal"
+    },
+    "scenarios": {
+      "original": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-15T00:00Z",
+        "end_utc": "2026-11-16T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 47.35,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 47.35,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "delayed": {
+        "site_key": "shackleton_rim",
+        "site_name": "Shackleton Rim / NASA LOLA Site04",
+        "start_utc": "2026-11-17T00:00Z",
+        "end_utc": "2026-11-18T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 100.0,
+          "earth_local_clear_upper_bound_pct": 100.0,
+          "earth_obstructed_by_local_terrain_pct": 0.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 24.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 0.0,
+          "min_soc_pct": 46.43,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 46.43,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 0.0,
+        "earth_clear_upper_bound_hours": 24.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      },
+      "alternative_site_after_delay": {
+        "site_key": "connecting_ridge",
+        "site_name": "Connecting Ridge / NASA LOLA Site01",
+        "start_utc": "2026-11-17T00:00Z",
+        "end_utc": "2026-11-18T00:00Z",
+        "summary": {
+          "sun_visible_pct": 100.0,
+          "earth_visible_pct": 0.0,
+          "earth_local_clear_upper_bound_pct": 0.0,
+          "earth_obstructed_by_local_terrain_pct": 100.0,
+          "sun_local_clear_upper_bound_pct": 100.0,
+          "sun_visible_hours": 24.0,
+          "earth_visible_hours": 0.0,
+          "max_dark_hours": 0.0,
+          "max_earth_gap_hours": 24.0,
+          "min_soc_pct": 43.56,
+          "unserved_energy_kwh": 0.0,
+          "last_soc_pct": 43.56,
+          "duration_hours": 24.0,
+          "horizon_model": "DEM-profile",
+          "n_samples": 5
+        },
+        "local_earth_blocked_hours": 24.0,
+        "earth_clear_upper_bound_hours": 0.0,
+        "local_solar_illumination_upper_bound_hours": 24.0,
+        "energy_note": "Optimistic energy bound: unmodeled distant terrain may reduce collection"
+      }
+    },
+    "changes": {
+      "delay_same_site": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": 24.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": -24.0,
+        "min_soc_pct": -0.92,
+        "unserved_energy_kwh": 0.0
+      },
+      "site_change_at_delayed_time": {
+        "sun_visible_hours": 0.0,
+        "earth_visible_hours": -24.0,
+        "max_dark_hours": 0.0,
+        "max_earth_gap_hours": 24.0,
+        "min_soc_pct": -2.87,
+        "unserved_energy_kwh": 0.0
+      }
+    },
+    "delayed_site_energy_sensitivity": [
+      {
+        "id": "nominal",
+        "load_w": 400.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 46.43,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "load_plus_20pct",
+        "load_w": 480.0,
+        "area_m2": 16.0,
+        "min_soc_pct": 36.83,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "pv_area_minus_20pct",
+        "load_w": 400.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 43.54,
+        "unserved_energy_kwh": 0.0
+      },
+      {
+        "id": "combined_stress",
+        "load_w": 480.0,
+        "area_m2": 12.8,
+        "min_soc_pct": 33.94,
+        "unserved_energy_kwh": 0.0
+      }
+    ],
+    "recommendation": null,
+    "interpretation": "Comparison only; no certified site ranking or robust mission-feasibility claim",
+    "confidence": "Limited local geometric evidence (2m mast, 6km terrain, 5-degree bins, 6h samples)",
+    "scientific_limits": [
+      "Earth above local horizon is a potential line-of-sight upper bound, not confirmed direct-to-Earth communication.",
+      "A local obstruction can establish blocked geometry; terrain beyond 6km is not included.",
+      "Solar exposure and computed photovoltaic energy may be overestimated due to unknown distant shadows.",
+      "Energy and battery model is illustrative, ignores losses, dust, thermal loads and subsystems.",
+      "Scenarios are compared on sampled left-endpoint values at six-hour cadence.",
+      "Both points are NASA dataset sampling sites, not certified safe lunar landing sites."
+    ]
+  }
+]

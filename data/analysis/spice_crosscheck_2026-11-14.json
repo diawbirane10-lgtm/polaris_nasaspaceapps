@@ -1,0 +1,58 @@
+{
+  "verification": "Independent NASA NAIF SPICE vs NASA/JPL Horizons, 14\u201328 November 2026, 6h sampling",
+  "date_executed": "2026-11-14",
+  "reference": "JPL Horizons QUANTITIES=4 observer azimuth/elevation, DE441, CENTER=coord@301, APPARENT=AIRLESS",
+  "computed": "SpiceyPy spkcpo, surface observer in MOON_ME, aberration LT+S, DE440s + moon_pa_de440_200625 + moon_de440_250416",
+  "number_comparisons": 228,
+  "kernels_sha256": {
+    "de440s.bsp": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2",
+    "moon_pa_de440_200625.bpc": "60cd55aa401eaa97360636f567554bfe4e37bb829f901b4460a455dfaf783f",
+    "pck00011.tpc": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+    "moon_de440_250416.tf": "a47c71e9c9f33796bdafb2c9d69a7ee447b6016ecad80f71cd6f3e479f9cf768",
+    "naif0012.tls": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+  },
+  "comparisons": [
+    {
+      "site": "connecting_ridge",
+      "body": "sun",
+      "n": 57,
+      "rmse_az_deg": 2.852155925566709e-07,
+      "rmse_el_deg": 2.711040009342424e-07,
+      "max_abs_az_deg": 4.94174372533962e-07,
+      "max_abs_el_deg": 4.968892275414305e-07
+    },
+    {
+      "site": "connecting_ridge",
+      "body": "earth",
+      "n": 57,
+      "rmse_az_deg": 5.032463519920575e-07,
+      "rmse_el_deg": 2.9211342616950477e-07,
+      "max_abs_az_deg": 1.0157138774502528e-06,
+      "max_abs_el_deg": 5.366650221994007e-07
+    },
+    {
+      "site": "shackleton_rim",
+      "body": "sun",
+      "n": 57,
+      "rmse_az_deg": 2.9840539247317245e-07,
+      "rmse_el_deg": 2.907273743947229e-07,
+      "max_abs_az_deg": 4.92182294919985e-07,
+      "max_abs_el_deg": 4.982376988760251e-07
+    },
+    {
+      "site": "shackleton_rim",
+      "body": "earth",
+      "n": 57,
+      "rmse_az_deg": 4.4083185650339175e-07,
+      "rmse_el_deg": 3.325686052415406e-07,
+      "max_abs_az_deg": 7.929590140065557e-07,
+      "max_abs_el_deg": 5.256289128396929e-07
+    }
+  ],
+  "interpretation": "A strong geometry cross-check on the sampled coordinates/dates only. Not an independent validation of Moon LOLA terrain, solar irradiance, or real radio-link availability.",
+  "notes": [
+    "SPICE DE440s and Horizons DE441 are different ephemeris versions, although highly concordant for these dates.",
+    "The stored reference dataset is 4 days; the full 14-day verification was performed in an Internet-enabled research environment; rerun the provided script for 4-day, locally bundled samples.",
+    "No site has been certified suitable for landing."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "title": "POLARIS source catalogue: NASA-recommended sources plus reproducibility datasets",
+  "official_challenge": "https://www.spaceappschallenge.org/2026/challenges/lunar-landing-site-navigator/?tab=details",
+  "sources": [
+    {
+      "name": "NASA LROC QuickMap",
+      "role": "Visual reconnaissance and topographic context for two chosen sites; website for human verification, not machine-ingested as tile data",
+      "url": "https://quickmap.lroc.asu.edu/",
+      "status": "linked and referenced in UI; manual review supported"
+    },
+    {
+      "name": "NASA Moon Trek",
+      "role": "Interactive south-pole cartographic atlas using NASA WMTS solar illumination and mean Earth visibility layers",
+      "url": "https://trek.nasa.gov/moon/",
+      "api": "https://trek.nasa.gov/tiles/apidoc/trekAPI.html?body=moon",
+      "wmts_layers": [
+        "WAC_POLE_ILL_PCT_SOUTH_100M",
+        "AVGVISIB_85S_060M_201608_EARTH_SP"
+      ],
+      "status": "real NASA WMTS tiles displayed in atlas; published aggregate maps, not live mission results"
+    },
+    {
+      "name": "JPL Horizons",
+      "role": "Actual geodetic observer apparent solar and terrestrial azimuth/elevation by date",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "status": "real source samples bundled; dynamic API mode requires internet"
+    },
+    {
+      "name": "NASA Goddard LOLA",
+      "role": "Surface elevations and 6 km horizon surrounding two fixed points, 5m/pixel original",
+      "url": "https://pgda.gsfc.nasa.gov/data/LOLA_5mpp/",
+      "status": "two NASA DEM GeoTIFF files examined, 80MB originals not bundled; SHA256 and derived profiles stored"
+    },
+    {
+      "name": "NAIF SPICE",
+      "role": "Independent numerical validation of Horizons positions, not the relief",
+      "url": "https://naif.jpl.nasa.gov/",
+      "status": "228 angle comparison values verified, rerun program provided"
+    }
+  ],
+  "science_boundary": "Lunar landing certification, far terrain, communications link budget, thermal survival and exact PV orientation are not included."
+}

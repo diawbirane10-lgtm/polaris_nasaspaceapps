@@ -1,0 +1,14 @@
+{
+  "audit": "JPL Horizons one-hour versus six-hour sample sensitivity",
+  "retrieved_on": "2026-11-14",
+  "source": "JPL Horizons Sun 10 / Earth 399, observer coord@301, 2026-11-14 through 2026-11-18, APPARENT=AIRLESS, QUANTITIES=4",
+  "reference_sites": ["connecting_ridge", "shackleton_rim"],
+  "method": "Sampled left-endpoint visibility against the same existing 6-km NASA LOLA-derived skyline with 2-m observer; 1h and 6h calculations use identical geometry thresholds. Energy figures not considered in the primary comparison.",
+  "results": [
+    {"site": "connecting_ridge", "window_utc": ["2026-11-16T00:00Z", "2026-11-17T00:00Z"], "six_hour_local_earth_clear_h": 0, "one_hour_local_earth_clear_h": 0, "six_hour_max_gap_h": 24, "one_hour_max_gap_h": 24},
+    {"site": "shackleton_rim", "window_utc": ["2026-11-16T00:00Z", "2026-11-17T00:00Z"], "six_hour_local_earth_clear_h": 18, "one_hour_local_earth_clear_h": 21, "six_hour_max_gap_h": 6, "one_hour_max_gap_h": 3},
+    {"site": "shackleton_rim", "window_utc": ["2026-11-14T00:00Z", "2026-11-18T00:00Z"], "six_hour_local_earth_clear_h": 42, "one_hour_local_earth_clear_h": 45, "six_hour_max_gap_h": 54, "one_hour_max_gap_h": 51}
+  ],
+  "limitations": ["One-hour ephemeris calculations were checked in an Internet-connected scientific environment, but the complete hourly data are not embedded in this release.", "The local skyline covers 6 km only; remote terrain and a real communications budget are not modeled.", "One-hour sampling does not yield exact rise and set times. An adaptive event finder is still required.", "The SPICE/Horizons comparison validates ephemeris implementations, not terrain classification or flight safety."],
+  "conclusion": "The previously published 18h number should not be presented without its 6h sampling qualifier; at 1h the same local geometric model yields 21h. Use the finer sample for illustrative narrative and maintain 6h figures only with explicit cadence labels."
+}

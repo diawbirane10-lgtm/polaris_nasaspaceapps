@@ -1,0 +1,14 @@
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+.env
+*.tif
+*.tiff
+*.zip
+
+# Full-size NASA binary archives (re-download from original NASA source)
+data/nasa/original_dems/
+
+# NASA NAIF kernel cache is fetchable from published source + manifest
+data/cache/
