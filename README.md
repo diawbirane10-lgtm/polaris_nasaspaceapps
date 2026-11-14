@@ -6,7 +6,7 @@
 
 > **A launch delay changes the Moon you land on.** POLARIS lets anyone explore how a mission's location and timing affect local solar illumination, potential direct-to-Earth visibility and a simplified energy budget — using documented NASA datasets, rather than invented scientific outputs.
 
-**Status: v0.6, engineering demonstrator.** Deployed on Vercel and tested locally on 14 November 2026. **Not a flight-qualified tool, a certified landing-site selector, or a radio-link predictor.**
+**Status: v0.8, engineering demonstrator (multi-view interface).** Deployed on Vercel and tested locally on 14 November 2026. **Not a flight-qualified tool, a certified landing-site selector, or a radio-link predictor.**
 
 ## What judges can try
 
@@ -96,3 +96,7 @@ ChatGPT assisted with architecture, code, verification workflows, user interface
 **Project source license: MIT** — see [`LICENSE`](LICENSE). NASA data, third-party assets and libraries retain their respective source terms; the project MIT license does not override them.
 
 *POLARIS is a NASA Space Apps participant project, not a NASA/JPL-approved or endorsed product.*
+
+## Mission UI v0.8 — 6 views
+
+Use the permanent sidebar or browser URL fragments `#/mission`, `#/sky`, `#/scenarios`, `#/power`, `#/atlas`, `#/evidence`. Native JavaScript retains the same proven FastAPI endpoints. The Power Systems page directly models the degree-appropriate electrical subsystem (PV, electric load, batteries, state of charge). See `docs/INTERFACE_ARCHITECTURE_v0.8.md`.

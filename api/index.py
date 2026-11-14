@@ -19,7 +19,7 @@ except ImportError:
     from api.nasa_reference import analyze_reference, load_dataset
     from api.decision import counterfactual
 
-app = FastAPI(title="POLARIS lunar mission navigator", version="0.6.0")
+app = FastAPI(title="POLARIS lunar mission navigator", version="0.8.0")
 BASE = Path(__file__).resolve().parent.parent
 
 @app.get('/api/health')
