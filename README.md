@@ -1,3 +1,5 @@
+# POLARIS v1.8 — Registration, admin review and Supabase Auth sessions
+
 # POLARIS — Lunar Mission Decision Intelligence
 
 **NASA Space Apps Challenge 2026 · Lunar Landing Site Navigator (10 — CLPS)**
@@ -154,9 +156,24 @@ The public NASA Space Apps demonstration remains accessible without a login. The
 
 This code is an **integration candidate**: a new dedicated POLARIS Supabase project, MFA sign-in UX, applied/tested RLS policies, session-lifecycle controls and audit/storage verification are still necessary before private mission data is accepted. Do not point POLARIS to Supabase databases belonging to unrelated applications. See [secure workspace design](docs/SECURE_WORKSPACE_ARCHITECTURE_v1.5.md) and the [unapplied SQL reference](supabase/sql/secure_workspace_schema.sql). Validate security using at least two distinct real accounts, not only mocked tests.
 
+## v1.7 — Sport Programme UI / mission sign-in / multilingual copilot
 
-## Secure workspace v1.6 (14 November 2026)
+- `/` shows the actual Supabase Mission Workspace sign-in first; `/demo` is the public NASA hackathon demonstration (no sign-in required).
+- White background, square cards, exact Sport Programme palette, keyboard-accessible controls.
+- Free-form mission chat accepts multi-turn messages; the question is sent to the Python calculation engine.
+- Connected LLM conversations require `POLARIS_LLM_API_KEY` in server environment (`POLARIS_LLM_PROVIDER=groq` or `huggingface`). The UI explicitly reports when LLM is not connected. An offline rule-based calculation mode is NOT represented as a connected LLM.
+- No API tokens are sent to browsers or committed to GitHub.
 
-- [Private Mission Workspace](https://polaris-spaceapps-2026.vercel.app/workspace) (Supabase Auth + MFA + Postgres RLS + realtime mission sync).
-- [Deployment, security boundaries, and activation checklist](docs/SUPABASE_LIVE_WORKSPACE_v1.6.md).
-- The publicly accessible demo remains separate from private mission records. Approved operator profiles are provisioned by an administrator; private exports remain fail-closed until the server-side audit key is configured.
+
+## Private workspace enrollment (v1.8)
+
+- Login / registration: `/`
+- Administrator console: `/admin`
+- Public NASA demonstration: `/demo`
+- Mission workspace: `/workspace`
+- Status tracking: `GET /api/access/status` (signed-in applicant)
+- Administrator queue: `GET /api/admin/requests`
+- Auth session history: `GET /api/admin/sessions`
+- Database migration and first administrator bootstrap: [`docs/ADMIN_APPROVAL_v18.md`](docs/ADMIN_APPROVAL_v18.md).
+
+The administrator approves the applicant; the applicant never chooses their own role or verified name. Status is pending amber, approved green and rejected red. Supabase Auth does not expose passwords to the administrator. The first administrator must be provisioned in the dedicated Supabase project before a real review can occur.
