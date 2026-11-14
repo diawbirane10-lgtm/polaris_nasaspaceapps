@@ -34,7 +34,7 @@ def _settings() -> tuple[str, str, str]:
     service_key = os.getenv('POLARIS_SUPABASE_SERVER_KEY', '')
     parsed = urlparse(url)
     if (parsed.scheme != 'https' or not parsed.netloc or parsed.path or parsed.query
-            or not url.endswith('.supabase.co') or not public_key or not service_key):
+            or not url.endswith('.supabase.co') or not public_key):
         raise HTTPException(status_code=503, detail='Private workspace not configured')
     return url, public_key, service_key
 
@@ -107,6 +107,8 @@ def require_workspace_identity(
 def record_report_export(identity: WorkspaceIdentity, report: dict, kind: str) -> str:
     """Server-only append audit. Never release private PDF if audit logging fails."""
     url, _, service_key = _settings()
+    if not service_key:
+        raise HTTPException(status_code=503, detail='Private report audit requires a configured server key')
     payload = {'actor_user_id': identity.user_id, 'event_type': 'report_export',
                'review_fingerprint': report['review_id'], 'report_kind': kind}
     try:

@@ -153,3 +153,10 @@ Use the permanent sidebar or browser URL fragments `#/mission`, `#/sky`, `#/scen
 The public NASA Space Apps demonstration remains accessible without a login. The dedicated **private** API endpoints under `/api/private/` enforce validated asymmetric Supabase JWT, MFA (`aal2`), a server-provisioned active operator profile and an export audit event. The private report author is taken from the protected profile, **never** from editable browser input. A missing auth provider configuration fails closed with HTTP 503.
 
 This code is an **integration candidate**: a new dedicated POLARIS Supabase project, MFA sign-in UX, applied/tested RLS policies, session-lifecycle controls and audit/storage verification are still necessary before private mission data is accepted. Do not point POLARIS to Supabase databases belonging to unrelated applications. See [secure workspace design](docs/SECURE_WORKSPACE_ARCHITECTURE_v1.5.md) and the [unapplied SQL reference](supabase/sql/secure_workspace_schema.sql). Validate security using at least two distinct real accounts, not only mocked tests.
+
+
+## Secure workspace v1.6 (14 November 2026)
+
+- [Private Mission Workspace](https://polaris-spaceapps-2026.vercel.app/workspace) (Supabase Auth + MFA + Postgres RLS + realtime mission sync).
+- [Deployment, security boundaries, and activation checklist](docs/SUPABASE_LIVE_WORKSPACE_v1.6.md).
+- The publicly accessible demo remains separate from private mission records. Approved operator profiles are provisioned by an administrator; private exports remain fail-closed until the server-side audit key is configured.

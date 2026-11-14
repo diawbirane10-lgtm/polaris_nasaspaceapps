@@ -95,3 +95,27 @@ CREATE POLICY report_read_own ON public.report_records FOR SELECT TO authenticat
 -- No direct SELECT/INSERT/UPDATE/DELETE for client role on audit table.
 
 COMMIT;
+
+-- Additional security hardening applied 2026-11-14 on Polaris dedicated project.
+REVOKE EXECUTE ON FUNCTION public.rls_auto_enable() FROM PUBLIC, anon, authenticated;
+CREATE SCHEMA IF NOT EXISTS polaris_private;
+REVOKE ALL ON SCHEMA polaris_private FROM PUBLIC, anon, authenticated;
+CREATE OR REPLACE FUNCTION polaris_private.audit_mission_changes()
+RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog,public,pg_temp AS $function$
+BEGIN
+  IF auth.uid() IS NULL OR auth.uid() <> NEW.owner_id THEN
+    RAISE EXCEPTION 'Invalid mission audit identity';
+  END IF;
+  INSERT INTO public.engineering_audit(actor_user_id,event_type)
+  VALUES (auth.uid(), CASE WHEN TG_OP = 'INSERT' THEN 'mission_create' ELSE 'mission_update' END);
+  RETURN NEW;
+END $function$;
+REVOKE ALL ON FUNCTION polaris_private.audit_mission_changes() FROM PUBLIC, anon, authenticated;
+DROP TRIGGER IF EXISTS polaris_mission_audit ON public.mission_plans;
+CREATE TRIGGER polaris_mission_audit AFTER INSERT OR UPDATE ON public.mission_plans
+FOR EACH ROW EXECUTE FUNCTION polaris_private.audit_mission_changes();
+DO $block$ BEGIN
+ IF NOT EXISTS (SELECT 1 FROM pg_publication_tables WHERE pubname='supabase_realtime' AND schemaname='public' AND tablename='mission_plans') THEN
+  ALTER PUBLICATION supabase_realtime ADD TABLE public.mission_plans;
+ END IF;
+END $block$;

@@ -27,10 +27,29 @@ except ImportError:
     from api.review import MissionReviewRequest, build_review
     from api.review_pdf import make_decision_pdf, latex_decision_report
 
-app = FastAPI(title="POLARIS lunar mission navigator", version="1.5.0")
+app = FastAPI(title="POLARIS lunar mission navigator", version="1.6.0")
 from .private import router as private_router
 app.include_router(private_router)
+from .workspace import router as workspace_router
+app.include_router(workspace_router)
 BASE = Path(__file__).resolve().parent.parent
+
+@app.get('/api/workspace-config')
+def workspace_config():
+    # Only publishable keys can be exposed to the browser; never a service key.
+    from .security import _settings
+    from fastapi import HTTPException
+    try:
+        url, key, _ = _settings()
+        return {'available':True,'supabase_url':url,'publishable_key':key,
+                'mfa_required':True,'identity_source':'verified operator directory'}
+    except HTTPException:
+        return {'available':False,'mfa_required':True}
+
+@app.get('/workspace')
+@app.get('/workspace.html')
+def workspace_page():
+    return FileResponse(BASE/'public'/'workspace.html')
 
 @app.get('/api/health')
 def health():
