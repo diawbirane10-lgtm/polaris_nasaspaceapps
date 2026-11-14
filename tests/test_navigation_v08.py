@@ -8,11 +8,11 @@ ROOT = Path(__file__).resolve().parent.parent
 CLIENT = TestClient(app)
 
 
-def test_six_explorable_views_and_keyboard_ready_navigation():
+def test_eight_explorable_views_and_keyboard_ready_navigation():
     r = CLIENT.get('/')
     assert r.status_code == 200
     dom = BeautifulSoup(r.text, 'html.parser')
-    routes = ['mission', 'sky', 'scenarios', 'power', 'atlas', 'evidence']
+    routes = ['mission', 'sky', 'scenarios', 'power', 'atlas', 'evidence', 'copilot', 'review']
     assert [a.get('data-nav') for a in dom.select('[data-nav]')] == routes
     assert all(dom.select_one('[data-page="'+p+'"]') is not None for p in routes)
     assert dom.select_one('a.skip-link')['href'] == '#contentStart'

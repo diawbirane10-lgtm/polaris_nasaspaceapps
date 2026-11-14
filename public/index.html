@@ -100,13 +100,80 @@ footer.footer{margin-top:22px}
 @media(max-width:900px){.shell{grid-template-columns:1fr}.rail{position:sticky;top:0;z-index:18;width:100%;height:auto;min-height:62px;display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:8px 12px;box-shadow:0 5px 25px #01070bcc}.rail .brandmark{margin:0;width:35px;height:35px;flex-shrink:0;font-size:18px}.railnav{width:auto;margin:0;display:flex;flex-direction:row;overflow:auto;align-items:center;gap:3px}.railnav a{min-width:42px;height:41px;justify-content:center;padding:7px;gap:3px}.railnav .nav-name,.railnav .nav-key{display:none}.railbottom{display:none}.railnav a[aria-current=page]{box-shadow:inset 0 -2px #64f1e5}.top{top:64px}.power-workspace{grid-template-columns:1fr}}
 @media(max-width:760px){.top{position:relative;top:0}.scen-controls{grid-template-columns:1fr}.scen-controls .action{grid-column:auto}.flowbar{gap:8px;flex-wrap:wrap}.flowbar #stepExplain{flex:1 0 50%}.flowbar #nextPage{margin-left:auto}.view-heading{margin:8px 0 18px}.evidence-grid,.power-kpis{grid-template-columns:1fr}.workspace{grid-template-columns:1fr}.railnav .nav-icon{height:18px;width:18px}.railnav a{min-width:39px}.main{padding:12px 14px 24px}.power-kpis strong{font-size:22px}}
 @media(prefers-reduced-motion:reduce){.railnav a,.flowbar button,.view-heading,.panel{scroll-behavior:auto;animation:none!important;transition:none!important}}
+
+/* UI/UX Pro Max applied: task-based route, in-context feedback, readable data, reduced-motion. */
+.copilot-layout{display:grid;grid-template-columns:minmax(280px,0.82fr) minmax(0,1.35fr);gap:16px;align-items:start}
+.copilot-panel{padding:25px;min-width:0}
+.copilot-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}
+.copilot-head h2{font-size:20px;letter-spacing:-.04em;margin:0}
+.copilot-mode{border:1px solid #356978;background:#112f3b;color:#8af3e8;border-radius:40px;padding:7px 12px;font:700 11px ui-monospace,monospace}
+.copilot-chat{min-height:310px;max-height:50vh;overflow:auto;display:flex;flex-direction:column;gap:14px;padding:12px 2px 20px;scrollbar-color:#2e5a69 transparent}
+.chat-line{max-width:94%;padding:14px 16px;border:1px solid #2d5363;background:#0b1c2a;border-radius:15px 15px 15px 4px;font-size:13px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}
+.chat-line.user{background:#12313c;border-color:#368a92;border-radius:15px 15px 4px 15px;align-self:flex-end;color:#e4ffff}
+.chat-line.bot{align-self:flex-start;color:#d6e8ef}
+.chat-meta{font:700 10px ui-monospace,monospace;letter-spacing:.08em;color:#75cfcc;margin-bottom:7px}
+.chat-quick{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.chat-quick button{padding:10px 12px;background:#0b2734;border:1px solid #396576;color:#e7ffff;border-radius:100px;font-size:12px;min-height:44px}
+.chat-quick button:hover{background:#174050;border-color:#74e5dc}
+.copilot-form label,.copilot-thresholds label{display:block;color:#bdd2df;font-size:12px;font-weight:650;margin:0 0 6px}
+.copilot-form textarea{width:100%;height:92px;resize:vertical;background:#081622;border:1px solid #3c6072;border-radius:12px;color:#f2fdff;padding:13px;font:14px/1.5 system-ui,sans-serif}
+.copilot-form textarea:focus-visible,.copilot-thresholds input:focus-visible{outline:2px solid #f4c57a;outline-offset:2px}
+.copilot-form .chat-submit{margin-top:11px;display:flex;align-items:center;gap:10px}
+.copilot-form .chat-submit button{min-height:46px;flex:1}
+.copilot-form .chat-submit small{color:#92a9b8;max-width:140px;font-size:11px}
+.copilot-thresholds{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:15px 0 5px}
+.copilot-thresholds input{width:100%;font:700 16px ui-monospace,monospace;background:#091723;color:#e9f9fe;border:1px solid #305362;padding:10px 11px;border-radius:9px;min-height:44px}
+.copilot-outcomes{display:grid;gap:11px;margin-top:15px}
+.co-card{border:1px solid #315568;border-radius:13px;padding:13px;background:#0b1926}
+.co-card h3{font-size:12px;letter-spacing:.025em;margin:0 0 10px}
+.co-card .co-stats{display:flex;gap:16px;flex-wrap:wrap}
+.co-stat small{display:block;color:#93aab6;font-size:10px}.co-stat strong{display:block;font-size:24px;letter-spacing:-.04em;color:#dffefa;font-variant-numeric:tabular-nums}
+.co-fail{border-left:3px solid #f4c57a}.co-pass{border-left:3px solid #75e4b8}
+.copilot-provenance{font-size:11px;color:#9bb8c5;line-height:1.6;border-top:1px solid #274354;padding-top:14px;margin-top:18px}
+.copilot-provenance a{color:#9ae7ef;display:inline-block;margin-right:15px}
+.co-section-title{display:flex;gap:12px;align-items:center;justify-content:space-between}
+.co-section-title strong{font-size:13px}
+.co-apply{background:#213c42;color:#c3fff3;border:1px solid #37756f;padding:9px 12px;border-radius:8px;min-height:42px;font-size:11px;font-weight:750}
+.copilot-hint{background:#0a2631;border:1px solid #265362;border-radius:10px;padding:13px;font-size:12px;color:#c0dfe1;line-height:1.6}
+.copilot-loading{opacity:.72}
+@media(max-width:1030px){.copilot-layout{grid-template-columns:1fr}}
+@media(max-width:600px){.copilot-panel{padding:16px}.copilot-thresholds{grid-template-columns:1fr 1fr}.chat-line{max-width:100%}.copilot-chat{min-height:240px;max-height:42vh}.copilot-mode{font-size:9px}.co-stat strong{font-size:21px}}
+@media(prefers-reduced-motion:reduce){.chat-line,.co-card{animation:none!important;transition:none!important}}
+
+
+/* Mission Decision Review 1.4 — Sport Programme's precise utilitarian hierarchy,
+   plus restrained event-driven telemetry animation from POLARIS mission UX. */
+.decision-review{display:grid;grid-template-columns:minmax(285px,.78fr) minmax(0,1.5fr);gap:14px;align-items:start;font-family:inherit}
+.decision-review>div{min-width:0;background:#0c1824;border:1px solid #355061;padding:22px}
+.review-left{position:sticky;top:12px}
+.review-section-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid #415867;padding-bottom:16px;margin-bottom:16px;flex-wrap:wrap}
+.review-section-head strong{font-size:20px;font-weight:700;letter-spacing:-.04em}.review-index{font-family:ui-monospace,Consolas,monospace;font-size:11px;letter-spacing:.08em;color:#79e4da}.review-run-id{font:10px ui-monospace,monospace;color:#9cb6c0;margin-left:auto}
+.review-muted{color:#a8beca;line-height:1.6;font-size:13px}.review-form{display:grid;gap:12px;margin-top:18px}
+.review-form>label{font-size:12px;font-weight:650;color:#d5e9ed}
+.review-form>input,.review-form>select{width:100%;min-height:46px;background:#101f2d;color:#f1fbff;border:1px solid #537181;border-radius:2px;padding:10px 12px;font-size:14px}
+.review-scenarios{border:1px solid #3f5869;padding:12px 14px;display:grid;gap:11px;min-width:0}.review-scenarios input[type=number]{width:100%;min-height:40px;border:1px solid #527080;background:#0d2330;color:#e7f6f7;padding:8px;margin:5px 0 10px;font-size:14px;border-radius:2px}.review-scenarios div>label{font-size:11px;display:block;color:#bdd5dc}.review-scenarios legend{font-size:12px;font-weight:700;color:#c8e4ea;padding:0 6px}.review-scenarios label,.review-flag{display:flex;gap:12px;align-items:center;cursor:pointer;line-height:1.4}.review-scenarios input,.review-flag input{accent-color:#5be2cf;width:19px;height:19px;flex:0 0 auto}
+.review-primary{background:#78eadb;color:#032a2d;border:1px solid #78eadb;font-weight:800;letter-spacing:.02em;padding:13px 16px;min-height:48px;cursor:pointer;border-radius:2px}
+.review-primary:disabled,.review-actions button:disabled{opacity:.45;cursor:not-allowed}.review-outline{background:transparent;color:#88f3e5}
+.review-source-card{border-top:1px solid #405869;margin-top:22px;padding-top:18px;font-size:12px}.review-source-card a{display:inline-block;margin-top:8px}
+.review-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;border:1px solid #31485c;background:#31485c;margin:20px 0}.review-kpis>div{background:#0a1420;padding:15px;min-width:0}
+.review-kpis span{font:10px ui-monospace,monospace;letter-spacing:.04em;color:#9cb7c5;display:block}.review-kpis strong{font-size:clamp(24px,3vw,44px);font-weight:760;letter-spacing:-.065em;color:#e9ffff;display:block;margin-top:6px;line-height:1.1;font-variant-numeric:tabular-nums}
+.review-run-card{border-top:1px solid #395467;padding:16px 0}.review-run-head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.review-run-head strong{font-size:15px}.review-run-head em{font:700 11px ui-monospace,monospace;font-style:normal;color:#8cf8dc}.review-run-head em.is-fail{color:#ffc18b}.review-run-card p{font-size:12px;color:#a3bfca}
+.review-rules{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 12px;margin-top:10px}.review-rules>span{padding:7px 0;border-bottom:1px solid #253c4e;font-size:12px}.review-rules>span:nth-child(even){text-align:right;font-weight:700;font-variant-numeric:tabular-nums}.review-events{border-left:2px solid #6cbcaf;margin:12px 0 0;padding:3px 10px 3px 14px}.review-events p{font-size:11px;margin:7px 0;color:#b2c7d0}
+.review-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:18px}.review-actions>button:not(.review-primary){color:#d7eaf0;border:1px solid #4c6776;background:transparent;border-radius:2px;min-height:48px;padding:11px 8px;font-weight:700;font-size:11px}.review-actions button{transition:background .16s,border-color .16s}.review-actions button:hover:not(:disabled){border-color:#8df5e6}
+.review-empty{border-left:2px solid #7ad9d7;padding-left:14px;color:#d5e9f0;line-height:1.65}
+@media(max-width:1050px){.decision-review{grid-template-columns:1fr}.review-left{position:static}}
+@media(max-width:560px){.decision-review>div{padding:16px}.review-kpis{grid-template-columns:repeat(3,1fr)}.review-kpis>div{padding:10px}.review-kpis span{font-size:9px}.review-kpis strong{font-size:27px}.review-actions{grid-template-columns:1fr}.review-rules{grid-template-columns:1fr}.review-rules>span:nth-child(even){text-align:left;margin-bottom:8px}}
+@media(prefers-reduced-motion:reduce){.review-kpis strong{transition:none}}
+@media(max-width:760px){.shell{grid-template-columns:minmax(0,1fr)}.rail{min-width:0;max-width:100vw;overflow:hidden;justify-content:flex-start;gap:12px}.railnav{flex:1 1 auto;min-width:0;max-width:calc(100vw - 92px);overflow-x:auto;scrollbar-width:thin;justify-content:flex-start}.railnav a{flex:0 0 39px;width:39px}.main{min-width:0}.brandmark{flex:0 0 43px}}
 </style>
 </head>
 <body data-view="mission"><a class="skip-link" href="#contentStart">Skip to content</a>
 <div class="shell">
-<aside aria-label="POLARIS navigation" class="rail"><a aria-label="POLARIS home" class="brandmark" href="#home">✧</a><nav aria-label="Primary mission navigation" class="railnav"><a aria-current="page" aria-label="Mission" data-nav="mission" href="#/mission" title="Mission"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/rocket.svg"/><span class="nav-name">Mission</span><span class="nav-key">1</span></a><a aria-label="Sky &amp; terrain" data-nav="sky" href="#/sky" title="Sky &amp; terrain"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/orbit.svg"/><span class="nav-name">Sky &amp; terrain</span><span class="nav-key">2</span></a><a aria-label="Scenarios" data-nav="scenarios" href="#/scenarios" title="Scenarios"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/git-compare.svg"/><span class="nav-name">Scenarios</span><span class="nav-key">3</span></a><a aria-label="Power systems" data-nav="power" href="#/power" title="Power systems"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/battery-charging.svg"/><span class="nav-name">Power systems</span><span class="nav-key">4</span></a><a aria-label="Lunar atlas" data-nav="atlas" href="#/atlas" title="Lunar atlas"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/map.svg"/><span class="nav-name">Lunar atlas</span><span class="nav-key">5</span></a><a aria-label="Evidence" data-nav="evidence" href="#/evidence" title="Evidence"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/shield-check.svg"/><span class="nav-name">Evidence</span><span class="nav-key">6</span></a></nav><div class="railbottom">NASA SPACE APPS · 2026</div></aside>
+<aside aria-label="POLARIS navigation" class="rail"><a aria-label="POLARIS home" class="brandmark" href="#home">✧</a><nav aria-label="Primary mission navigation" class="railnav"><a aria-current="page" aria-label="Mission" data-nav="mission" href="#/mission" title="Mission"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/rocket.svg"/><span class="nav-name">Mission</span><span class="nav-key">1</span></a><a aria-label="Sky &amp; terrain" data-nav="sky" href="#/sky" title="Sky &amp; terrain"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/orbit.svg"/><span class="nav-name">Sky &amp; terrain</span><span class="nav-key">2</span></a><a aria-label="Scenarios" data-nav="scenarios" href="#/scenarios" title="Scenarios"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/git-compare.svg"/><span class="nav-name">Scenarios</span><span class="nav-key">3</span></a><a aria-label="Power systems" data-nav="power" href="#/power" title="Power systems"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/battery-charging.svg"/><span class="nav-name">Power systems</span><span class="nav-key">4</span></a><a aria-label="Lunar atlas" data-nav="atlas" href="#/atlas" title="Lunar atlas"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/map.svg"/><span class="nav-name">Lunar atlas</span><span class="nav-key">5</span></a><a aria-label="Evidence" data-nav="evidence" href="#/evidence" title="Evidence"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/shield-check.svg"/><span class="nav-name">Evidence</span><span class="nav-key">6</span></a><a aria-label="Mission AI Copilot" data-nav="copilot" href="#/copilot" title="Mission Copilot"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/bot.svg"/><span class="nav-name">AI Copilot</span><span class="nav-key">7</span></a><a aria-label="Mission Decision Review" data-nav="review" href="#/review" title="Decision Review"><img alt="" aria-hidden="true" class="nav-icon" src="/assets/icons/file-check.svg"/><span class="nav-name">Decision Review</span><span class="nav-key">8</span></a></nav><div class="railbottom">NASA SPACE APPS · 2026</div></aside>
 <main class="main" id="contentStart" tabindex="-1">
-<header class="top"><div class="wordmark">POLARIS<small>MISSION INTELLIGENCE SYSTEM</small></div><div class="topright"><div class="text"><span id="currentPageLabel">MISSION / OVERVIEW</span><br/><span class="muted">NASA SPACE APPS / 2026</span></div><div class="live">NASA REFERENCE MODE</div></div></header><div aria-label="Mission workflow" class="flowbar"><span id="stepProgress">01 / 06</span><span id="stepExplain">Select a lunar observer and inspect NASA data.</span><button id="nextPage" type="button">NEXT STEP ↗</button></div><section class="view-heading" data-page="sky"><p class="eyebrow">02 / OBSERVATIONS</p><h1>Sky &amp; terrain</h1><p>See where the Sun and Earth appear above the local 6 km lunar horizon.</p><small>Replay is accessible on the mission screen.</small></section><section class="view-heading" data-page="scenarios"><p class="eyebrow">03 / COUNTERFACTUAL</p><h1>Mission reschedule lab</h1><p>Change the landing date, then compare three scenarios using the same assumptions.</p><small>No site is declared safe or optimal.</small></section><section class="view-heading" data-page="power"><p class="eyebrow">04 / ELECTRICAL ENGINEERING</p><h1>Solar power &amp; battery</h1><p>Explore how electrical load, panel orientation and battery capacity influence energy margins.</p><small>Illustrative model — no thermal, aging or ground communications constraints.</small></section><section class="view-heading" data-page="atlas"><p class="eyebrow">05 / CARTOGRAPHY</p><h1>Lunar south-pole atlas</h1><p>Explore Moon Trek data layers and open the official NASA scientific resources.</p><small>Maps show aggregated layers, not a prediction for your selected date.</small></section><section class="view-heading" data-page="evidence"><p class="eyebrow">06 / MODEL VALIDATION</p><h1>Evidence &amp; science</h1><p>Audit the POLARIS processing chain, NASA references and independent SPICE cross-check.</p><small>A scientific demonstration, not a certified flight planning tool.</small></section>
+<header class="top"><div class="wordmark">POLARIS<small>MISSION INTELLIGENCE SYSTEM</small></div><div class="topright"><div class="text"><span id="currentPageLabel">MISSION / OVERVIEW</span><br/><span class="muted">NASA SPACE APPS / 2026</span></div><div class="live">NASA REFERENCE MODE</div></div></header><div aria-label="Mission workflow" class="flowbar"><span id="stepProgress">01 / 08</span><span id="stepExplain">Select a lunar observer and inspect NASA data.</span><button id="nextPage" type="button">NEXT STEP ↗</button></div><section class="view-heading" data-page="sky"><p class="eyebrow">02 / OBSERVATIONS</p><h1>Sky &amp; terrain</h1><p>See where the Sun and Earth appear above the local 6 km lunar horizon.</p><small>Replay is accessible on the mission screen.</small></section><section class="view-heading" data-page="scenarios"><p class="eyebrow">03 / COUNTERFACTUAL</p><h1>Mission reschedule lab</h1><p>Change the landing date, then compare three scenarios using the same assumptions.</p><small>No site is declared safe or optimal.</small></section><section class="view-heading" data-page="power"><p class="eyebrow">04 / ELECTRICAL ENGINEERING</p><h1>Solar power &amp; battery</h1><p>Explore how electrical load, panel orientation and battery capacity influence energy margins.</p><small>Illustrative model — no thermal, aging or ground communications constraints.</small></section><section class="view-heading" data-page="atlas"><p class="eyebrow">05 / CARTOGRAPHY</p><h1>Lunar south-pole atlas</h1><p>Explore Moon Trek data layers and open the official NASA scientific resources.</p><small>Maps show aggregated layers, not a prediction for your selected date.</small></section><section class="view-heading" data-page="evidence"><p class="eyebrow">06 / MODEL VALIDATION</p><h1>Evidence &amp; science</h1><p>Audit the POLARIS processing chain, NASA references and independent SPICE cross-check.</p><small>A scientific demonstration, not a certified flight planning tool.</small></section>
+<section class="view-heading" data-page="copilot"><p class="eyebrow">07 / EXPLAINABLE DECISION SUPPORT</p><h1>Mission AI Copilot</h1><p>Ask why a plan fails, compare dated alternatives, and recompute electrical-system changes with documented NASA inputs.</p><small>Numerical answers always originate from the Python mission engine. AI text generation is optional.</small></section>
+<section class="view-heading" data-page="review"><p class="eyebrow">08 / ENGINEERING DECISION PACKAGE</p><h1>Mission Decision Review</h1><p>Choose what was studied, inspect computed limits and events, then export a tailored Decision Brief or Engineering Dossier.</p><small>Numerical acceptance thresholds are selected by the engineer; each report is generated afresh from the mission model.</small></section>
 <section class="intro" data-page="mission"><div><div class="eyebrow">NASA SPACE APPS 2026 / LUNAR LANDING SITE NAVIGATOR</div><h1>Mission planning,<br/><span>reimagined.</span></h1><p>Compare lunar sites. Simulate a delayed landing. Understand the Sun, Earth, terrain and energy constraints — with traceable NASA observations.</p><div class="intro-actions"><button class="mission-cta" id="startTourTop" type="button">◇   EXPLORE MISSION MESH</button><span class="cue">PRESS <kbd>`</kbd> FOR FLIGHT TERMINAL</span><a class="mission-cta secondary-cta" href="#/scenarios">⇄ TRY A DELAY SCENARIO</a></div></div><div class="flight-label"><div class="flight-symbol">☾</div><div><b>ENGINEERING PROTOTYPE</b><small>Research tool · Not flight qualified</small></div></div></section>
 <section aria-label="Mission operations workspace" class="workspace" data-page="mission" id="mission">
 <section aria-labelledby="plan-title" class="panel"><div class="panel-inner">
@@ -200,6 +267,87 @@ footer.footer{margin-top:22px}
 </div><div class="status-inline" style="margin-top:15px"><i>◎</i><span>Moon Trek layers are long-term or aggregate context, not date-specific images of the illumination at the mission's selected time.</span></div></div>
 <div class="panel panel-inner"><div class="panel-head"><h3>Moon Trek south-pole atlas</h3><span class="badge">OFFICIAL WMTS</span></div><div class="mapcontrols"><button aria-pressed="true" class="active" id="mapSun">Solar illumination</button><button aria-pressed="false" id="mapEarth">Mean Earth visibility</button></div><div aria-label="NASA Moon Trek south pole map tiles" class="mapbox"><div class="maptiles" id="maptiles"></div><div class="mapring"></div></div><p class="micro" id="mapStatus">NASA Moon Trek aggregate layer. Map requires access to NASA tile server.</p></div>
 </section>
+
+<section class="copilot-layout" data-page="copilot" id="copilotWorkspace" aria-label="Mission analysis copilot">
+ <div class="panel copilot-panel">
+  <div class="copilot-head"><div><p class="eyebrow">CONFIGURE CONSTRAINTS</p><h2>Flight director desk</h2></div><span class="copilot-mode" id="copilotMode">ENGINEERING</span></div>
+  <p class="copilot-hint">Uses the selected lunar site, UTC landing date, +delay and electrical settings from the Mission / Scenarios / Power screens. Every analysis recomputes the three scenarios from NASA-sourced reference data.</p>
+  <div class="copilot-thresholds">
+   <div><label for="coMinSoc">Minimum battery reserve (%)</label><input id="coMinSoc" type="number" value="20" step="5" min="0" max="100"/></div>
+   <div><label for="coMinEarth">Minimum local Earth visibility (h)</label><input id="coMinEarth" type="number" value="6" step="1" min="0" max="24"/></div>
+   <div><label for="coMaxGap">Maximum continuous Earth gap (h)</label><input id="coMaxGap" type="number" value="24" step="1" min="0" max="48"/></div>
+   <div><label for="coAction">What-if experiment</label><select id="coAction" class="ghost" style="width:100%;min-height:44px;background:#0b1e2b"><option value="explain">Assess current plan</option><option value="load_plus_40">Electrical load +40%</option><option value="battery_plus_50">Battery capacity +50%</option><option value="pv_minus_20">PV array area -20%</option><option value="pv_plus_30">PV array area +30%</option></select></div>
+  </div>
+  <div class="subtle-rule"></div>
+  <p class="eyebrow">SUGGESTED QUESTIONS</p>
+  <div class="chat-quick"><button type="button" data-coprompt="What is blocking our mission constraints?">Identify bottlenecks</button><button type="button" data-coprompt="Compare the delayed scenario with switching lunar sites.">Compare two sites</button><button type="button" data-coprompt="Does a larger battery solve the electrical bottleneck?" data-action="battery_plus_50">Increase battery</button><button type="button" data-coprompt="What happens if the electrical demand increases by 40 percent?" data-action="load_plus_40">Load +40%</button></div>
+  <p class="copilot-hint" style="margin-top:15px">Mission criteria are editable requirements, not a hidden weighted score. The assistant shows each constraint and the exact result that passed or failed it.</p>
+  <button class="ghost" style="width:100%;margin-top:14px;min-height:44px" type="button" id="coJumpScenarios">← Edit mission date, delay and sites</button>
+ </div>
+ <div class="panel copilot-panel">
+  <div class="copilot-head"><div><p class="eyebrow">MISSION INTELLIGENCE / DIALOG</p><h2>Ask POLARIS</h2></div><span class="copilot-mode" id="copilotConnection">DATA-CONNECTED</span></div>
+  <div class="copilot-chat" id="copilotChat" role="log" aria-live="polite" aria-relevant="additions text"><div class="chat-line bot"><div class="chat-meta">POLARIS / FLIGHT DIRECTOR</div>I can explain mission constraints, compare landing schedules and recompute what-if changes. Start with “Identify bottlenecks” or ask your own question.</div></div>
+  <form class="copilot-form" id="copilotForm"><label for="copilotQuestion">Mission question</label><textarea id="copilotQuestion" placeholder="Why does the delayed mission fail our electrical or visibility limits?" minlength="3" maxlength="360" required></textarea><div class="chat-submit"><button class="action" type="submit" id="copilotSubmit">ANALYZE LIVE MISSION ↗</button><small>Evidence-led engineering answers</small></div></form>
+  <div class="copilot-outcomes" id="copilotOutcomes" aria-live="polite"></div>
+  <section class="report-download panel" aria-label="Mission Simulation Report" style="padding:16px;margin-top:14px;border-radius:12px">
+    <div class="copilot-head"><div><p class="eyebrow">ENGINEERING DELIVERABLE</p><h3 style="margin:5px 0 6px">Mission Simulation Report</h3></div><span class="badge good">ON DEMAND</span></div>
+    <p class="copilot-hint">Generate a report from the current site, mission date, electrical design and engineer-defined constraints. Charts are colored; report text is black on white.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+      <button id="coReportPdf" type="button" class="action" style="flex:1;min-width:155px;min-height:44px">↓ DOWNLOAD PDF</button>
+      <button id="coReportTex" type="button" class="ghost" style="flex:1;min-width:155px;min-height:44px">↓ DOWNLOAD LATEX SOURCE</button>
+    </div>
+    <p class="micro" role="status" aria-live="polite" id="coReportStatus">Ready to generate a simulation dossier.</p>
+  </section>
+  <button class="ghost" type="button" id="coJumpReview" style="width:100%;min-height:44px;margin-top:12px">↗ OPEN MISSION DECISION REVIEW</button>
+  <div class="copilot-provenance" id="copilotProvenance">The backend calculates all results. A configured language model may provide additional explanations; it never changes the numerical outputs.</div>
+ </div>
+</section>
+
+
+<section class="decision-review" data-page="review" id="reviewWorkspace" aria-label="Mission Decision Review">
+  <div class="review-left">
+   <div class="review-section-head"><span class="review-index">01 — DEFINE</span><strong>Review configuration</strong></div>
+   <p class="review-muted">The report follows the mission in Mission, Scenarios and Power. Changing those inputs invalidates the previous decision.</p>
+   <form id="reviewForm" class="review-form">
+    <label for="reviewLabel">Mission study name</label><input id="reviewLabel" maxlength="80" required value="Lunar south-pole mission study"/>
+    <label for="reviewFocus">What was actually studied?</label><select id="reviewFocus"><option value="integrated">Integrated mission study</option><option value="electrical">Electrical power &amp; storage</option><option value="geometry">Sun / Earth observation geometry</option></select>
+    <fieldset class="review-scenarios" id="reviewRequirements"><legend>Engineer-defined mission requirements</legend>
+     <div id="reviewRulePower"><label for="reviewMinSoc">Minimum battery SOC (%)</label><input id="reviewMinSoc" type="number" min="0" max="100" step="1" value="20"/></div>
+     <div id="reviewRuleGeo"><label for="reviewMinEarth">Minimum Earth above local skyline (h)</label><input id="reviewMinEarth" type="number" min="0" max="48" step="1" value="6"/>
+       <label for="reviewMaxGap">Maximum Earth skyline gap (h)</label><input id="reviewMaxGap" type="number" min="0" max="48" step="1" value="24"/></div>
+    </fieldset>
+    <fieldset class="review-scenarios"><legend>Scenarios to document</legend>
+      <label><input type="checkbox" name="scenario" value="original" checked/> Original mission</label>
+      <label><input type="checkbox" name="scenario" value="delayed" checked/> Delayed mission</label>
+      <label><input type="checkbox" name="scenario" value="alternative_site_after_delay" checked/> Alternate observation site</label>
+    </fieldset>
+    <label class="review-flag"><input id="reviewEvents" type="checkbox" checked/> Detect actual threshold and skyline events</label>
+    <label class="review-flag"><input id="reviewTrace" type="checkbox" checked/> Include time-series curves in dossier</label>
+    <button class="review-primary" type="submit" id="reviewCompute">↗ COMPUTE MISSION DECISION</button>
+   </form>
+   <div class="review-source-card"><span class="review-index">SOURCE OF TRUTH</span><p>JPL Horizons · NASA LOLA · Python mission engine. The review recomputes scenarios before generating any document.</p><a href="/api/spice-validation" target="_blank" rel="noopener">Open SPICE evidence ↗</a></div>
+  </div>
+  <div class="review-right">
+   <div class="review-section-head"><span class="review-index">02 — EVALUATE</span><strong>Mission decision record</strong><span class="review-run-id" id="reviewId">NO RUN</span></div>
+   <p class="review-empty" id="reviewStatus" role="status" aria-live="polite">Configure and run a decision review to see evaluated requirements and computed scenarios.</p>
+   <div class="review-kpis" aria-label="Review counts">
+     <div><span>SCENARIOS CHECKED</span><strong class="review-count" id="reviewScenarioCount">0</strong></div>
+     <div><span>BLOCKING CRITERIA</span><strong class="review-count" id="reviewBlockerCount">0</strong></div>
+     <div><span>DETECTED EVENTS</span><strong class="review-count" id="reviewEventCount">0</strong></div>
+   </div>
+   <div class="review-results" id="reviewResults" aria-live="polite"></div>
+   <div class="review-section-head"><span class="review-index">03 — DOCUMENT</span><strong>Decision package</strong></div>
+   <p class="review-muted">Short Decision Brief for a meeting; detailed simulation dossier for engineering review. The graphs and sections match the selected study.</p>
+   <div class="review-actions">
+      <button class="review-primary" type="button" data-review-download="brief.pdf" disabled>↓ DECISION BRIEF · PDF</button>
+      <button class="review-primary review-outline" type="button" data-review-download="dossier.pdf" disabled>↓ ENGINEERING DOSSIER · PDF</button>
+      <button type="button" data-review-download="dossier.tex" disabled>LATEX SOURCE</button>
+      <button type="button" data-review-download="dossier.json" disabled>RAW EVIDENCE JSON</button>
+   </div>
+   <p class="review-muted" id="reviewDownloadStatus" aria-live="polite">Run a review to enable exports.</p>
+  </div>
+</section>
+
 <footer class="footer"><span>POLARIS 2026 · NASA Space Apps / Lunar Landing Site Navigator · Independent participant project, not endorsed or certified by NASA.</span><span class="footlinks"><a href="/api/health">System status</a><a href="/api/science-audit">Audit</a><a href="https://www.spaceappschallenge.org/2026/challenges/lunar-landing-site-navigator/" rel="noopener" target="_blank">Challenge statement</a></span></footer>
 </main></div>
 <div aria-label="POLARIS flight terminal" aria-modal="true" class="missioncmd" hidden="" id="missionCommand" role="dialog">
@@ -220,8 +368,8 @@ function getInputs(){return new URLSearchParams({site:state.site,start:el('landi
 function selected(){for(const key of ['connecting_ridge','shackleton_rim']){const b=el('site-'+key);b.classList.toggle('on',state.site===key);b.setAttribute('aria-pressed',String(state.site===key))}}
 async function json(url){const r=await fetch(url);let d;try{d=await r.json()}catch(_){throw Error('Server returned unreadable data ('+r.status+')')}if(!r.ok)throw Error(typeof d.detail==='string'?d.detail:'Request failed ('+r.status+')');return d}
 function download(name,data){const b=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');const u=URL.createObjectURL(b);a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
-function formatMetric(x,unit){return n(x,unit==='%'?1:0)+' <i>'+unit+'</i>'}
-function renderMetrics(){const o=state.reference;if(!o)return;const s=o.summary;el('metricSun').innerHTML=formatMetric(s.sun_visible_pct,'%');el('metricEarth').innerHTML=formatMetric(s.earth_visible_pct,'%');el('metricGap').innerHTML=formatMetric(s.max_earth_gap_hours,'h');el('metricSoc').innerHTML=formatMetric(s.min_soc_pct,'%');el('metricSunNote').textContent=n(s.sun_visible_hours,0)+' h potentially sunlit / '+n(s.duration_hours,0)+' h';el('metricEarthNote').textContent=n(s.earth_visible_hours,0)+' h local upper bound; NOT a radio link';}
+function formatMetric(x,unit){return '<span class="mission-metric-number">0</span> <i>'+unit+'</i>'}
+function renderMetrics(){const o=state.reference;if(!o)return;const s=o.summary;el('metricSun').innerHTML=formatMetric(s.sun_visible_pct,'%');el('metricEarth').innerHTML=formatMetric(s.earth_visible_pct,'%');el('metricGap').innerHTML=formatMetric(s.max_earth_gap_hours,'h');el('metricSoc').innerHTML=formatMetric(s.min_soc_pct,'%');el('metricSunNote').textContent=n(s.sun_visible_hours,0)+' h potentially sunlit / '+n(s.duration_hours,0)+' h';el('metricEarthNote').textContent=n(s.earth_visible_hours,0)+' h local upper bound; NOT a radio link';for(const [id,v,d] of [['metricSun',s.sun_visible_pct,1],['metricEarth',s.earth_visible_pct,1],['metricGap',s.max_earth_gap_hours,0],['metricSoc',s.min_soc_pct,1]])polarisCount(el(id).querySelector('.mission-metric-number'),v,'',d);}
 function skyPoint(az,elev,cx=310,cy=242){const ang=(az-90)*Math.PI/180,r=Math.max(38,Math.min(201,145-elev*7));return [cx+Math.cos(ang)*r,cy+Math.sin(ang)*r]}
 function skylinePath(arr){return arr.map((v,i)=>{const [x,y]=skyPoint(i*5,v);return(x.toFixed(2)+','+y.toFixed(2))}).join(' ')}
 function trackPath(rows,azKey,elKey){return rows.map(r=>{const [x,y]=skyPoint(r[azKey],r[elKey]);return x.toFixed(2)+','+y.toFixed(2)}).join(' ')}
@@ -299,26 +447,35 @@ el('cmdForm').addEventListener('submit',async ev=>{
  if(t==='spice'){terminalResult('Opening scientific cross-check source in new tab…');window.open('/api/spice-validation','_blank','noopener');return}
  terminalResult('UNKNOWN COMMAND: '+t+'\nType help for approved commands. Values must remain inside the NASA demo dataset.');
 });
+// Reduced-motion-aware UI metric count-up; numeric endpoints remain unchanged.
+function polarisCount(elm,target,suffix='',digits=0){
+ if(!elm||!Number.isFinite(target))return;const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(reduce){elm.textContent=target.toFixed(digits)+suffix;return}
+ const current=parseFloat(elm.textContent.replace(/[^\d.\-]/g,''));const start=Number.isFinite(current)?current:0;
+ const begin=performance.now(),length=350;function step(t){const u=Math.min(1,(t-begin)/length),e=1-Math.pow(1-u,3);elm.textContent=(start+(target-start)*e).toFixed(digits)+suffix;if(u<1)requestAnimationFrame(step)}requestAnimationFrame(step)
+}
 // Keep the interactive processing mesh synchronized when API requests complete.
 const originalRenderMetrics=renderMetrics;renderMetrics=()=>{originalRenderMetrics();meshSelect(meshIdx)};
 const originalRenderDecision=renderDecision;renderDecision=(d)=>{originalRenderDecision(d);meshSelect(meshIdx)};
 
 makeAtlas('sun');loadReference();
-/* POLARIS v0.8 — mission multi-view router; six URL-addressable screens. */
+/* POLARIS v0.9 — mission multi-view router; seven URL-addressable screens. */
 const ROUTES=[
  {id:'mission',title:'MISSION / OVERVIEW',hint:'Choose one NASA lunar observation point and load its mission model.'},
  {id:'sky',title:'SKY / TOPOGRAPHY',hint:'Study Sun and Earth elevations against the local topographic horizon.'},
  {id:'scenarios',title:'SCENARIOS / WHAT-IF',hint:'Select a date, delay and site, then run three comparable missions.'},
  {id:'power',title:'ELECTRICAL / POWER',hint:'Vary PV area, battery capacity and electrical load, then recompute.'},
  {id:'atlas',title:'ATLAS / NASA',hint:'View NASA map layers and explore the source datasets.'},
- {id:'evidence',title:'EVIDENCE / VALIDATION',hint:'Check the model pipeline, numerical cross-checks and uncertainty.'}
+ {id:'evidence',title:'EVIDENCE / VALIDATION',hint:'Check the model pipeline, numerical cross-checks and uncertainty.'},
+ {id:'copilot',title:'COPILOT / DECISION SUPPORT',hint:'Ask a question, configure constraints and calculate a new mission experiment.'},
+ {id:'review',title:'DECISION / REVIEW',hint:'Recompute mission constraints and export a scenario-specific engineering decision package.'}
 ];
 function routeId(){const id=location.hash.replace(/^#\/?/,'').split('?')[0]||'mission';return ROUTES.some(x=>x.id===id)?id:'mission'}
 function navigateRoute(){const id=routeId(),pos=ROUTES.findIndex(x=>x.id===id);document.body.dataset.view=id;
  document.querySelectorAll('[data-page]').forEach(x=>{x.hidden=x.dataset.page!==id});
  document.querySelectorAll('[data-nav]').forEach(x=>{const selected=x.dataset.nav===id;if(selected)x.setAttribute('aria-current','page');else x.removeAttribute('aria-current')});
- el('currentPageLabel').textContent=ROUTES[pos].title;el('stepProgress').textContent=String(pos+1).padStart(2,'0')+' / 06';
- el('stepExplain').textContent=ROUTES[pos].hint;el('nextPage').textContent=pos===5?'BACK TO MISSION ↗':'NEXT STEP ↗';
+ el('currentPageLabel').textContent=ROUTES[pos].title;el('stepProgress').textContent=String(pos+1).padStart(2,'0')+' / 08';
+ el('stepExplain').textContent=ROUTES[pos].hint;el('nextPage').textContent=pos===6?'BACK TO MISSION ↗':'NEXT STEP ↗';
  document.title='POLARIS — '+ROUTES[pos].title.replace(' / ',' · ');
  window.scrollTo({top:0,left:0,behavior:'instant'});
  if(id==='power')renderPower();if(id==='scenarios')syncQuickInputs();
@@ -368,6 +525,88 @@ for(const cid of ['area','load','battery','orientation','landing','shift','qSite
 for(const site of ['connecting_ridge','shackleton_rim'])el('site-'+site).addEventListener('click',invalidateDecision,{capture:true});
 el('powerRun').addEventListener('click',invalidateDecision,{capture:true});
 el('powerSwapSite').addEventListener('click',invalidateDecision,{capture:true});
+
+
+/* Copilot: no fabricated calculations, backend POST recomputes all scenarios. */
+let copilotBusy=false,lastCopilot=null,lastParameterField=null;
+function coLine(kind,text){const node=document.createElement('div');node.className='chat-line '+kind;if(kind==='bot'){const name=document.createElement('div');name.className='chat-meta';name.textContent='POLARIS / MISSION ANALYSIS';node.append(name)}const body=document.createElement('div');body.textContent=text;node.append(body);el('copilotChat').append(node);node.scrollIntoView({block:'nearest'});return node}
+function coBar(num,max){const d=document.createElement('strong');d.textContent=Number(num).toFixed(1);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && Number.isFinite(num)){let n=0,t0=performance.now();const tick=(t)=>{const p=Math.min(1,(t-t0)/480);d.textContent=(num*(1-Math.pow(1-p,3))).toFixed(1);if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)}return d}
+function coRender(data){const out=el('copilotOutcomes');out.replaceChildren();if(!data.scenarios||!data.scenarios.length){el('copilotProvenance').textContent='No simulation was run. '+(data.flow?.reason||'Clarification or review requested.');return}for(const s of data.scenarios){const card=document.createElement('article');card.className='co-card '+(s.constraints.status==='PASS'?'co-pass':'co-fail');const head=document.createElement('div');head.className='co-section-title';const title=document.createElement('strong');title.textContent=s.id.replaceAll('_',' ').toUpperCase();const badge=document.createElement('span');badge.className='badge '+(s.constraints.status==='PASS'?'good':'amber');badge.textContent=s.constraints.status;head.append(title,badge);card.append(head);const stats=document.createElement('div');stats.className='co-stats';for(const [label,key,unit] of [['MIN SOC','min_soc_pct','%'],['EARTH GEOMETRY','earth_visible_hours',' h'],['ENERGY DEFICIT','unserved_energy_kwh',' kWh']]){const b=document.createElement('div');b.className='co-stat';const caption=document.createElement('small');caption.textContent=label;const value=coBar(Number(s.metrics[key]));b.append(caption,value,document.createTextNode(unit));stats.append(b)}card.append(stats);const rule=document.createElement('p');rule.className='micro';rule.textContent=s.constraints.rules.map(x=>(x.status==='PASS'?'✓ ':'⚠ ')+x.label+': '+x.observed+x.unit+' '+x.op+' '+x.threshold+x.unit).join(' · ');card.append(rule);out.append(card)}
+ if(data.what_if){const box=document.createElement('div');box.className='copilot-hint';const text=document.createElement('div');text.textContent='RECALCULATED PROPOSAL: '+data.what_if.label+' — Minimum SOC '+data.what_if.old.min_soc_pct+'% → '+data.what_if.new.min_soc_pct+'%. Unserved energy '+data.what_if.old.unserved_energy_kwh+' → '+data.what_if.new.unserved_energy_kwh+' kWh.';box.append(text);const button=document.createElement('button');button.className='co-apply';button.type='button';button.textContent='APPLY & SIMULATE MISSION ↗';button.setAttribute('aria-label','APPLY THESE PARAMETERS to the live mission and recompute scenarios');button.addEventListener('click',async()=>{for(const [k,v] of Object.entries(data.what_if.changed_inputs)){if(k==='load_w'){el('load').value=v;el('powerLoad').value=v;el('loadVal').textContent=v+' W'}if(k==='battery_kwh'){el('battery').value=v;el('powerBattery').value=v}if(k==='pv_area_m2'){el('area').value=v;el('powerArea').value=v;el('areaVal').textContent=v+' m²'}if(k==='site_key'){state.site=v;selected()}if(k==='delay_hours'){el('shift').value=String(v);el('qDelay').value=String(v)}}syncPowerInputs();invalidateDecision();location.hash='#/scenarios';await loadReference();await runDecision();renderPower()});box.append(button);out.append(box)}
+ const provenance=el('copilotProvenance');provenance.replaceChildren();const label=document.createElement('p');label.textContent='Source dataset SHA-256: '+(data.dataset_sha256||'unavailable').slice(0,18)+'… · '+(data.mode==='llm_explainer'?'Language model explanation: '+data.provider+' / '+data.provider_model:'Engineering-calculated analysis; no external LLM needed.');provenance.append(label);for(const e of data.evidence){const a=document.createElement('a');a.href=e.url;a.target='_blank';a.rel='noopener';a.textContent=e.label+' ↗';provenance.append(a)}
+}
+async function runCopilot(){if(copilotBusy)return;copilotBusy=true;const button=el('copilotSubmit');button.disabled=true;button.textContent='CALCULATING…';const q=el('copilotQuestion').value.trim();coLine('user',q);const loading=coLine('bot','Recomputing the mission geometry and constraints…');const payload={question:q,previous_field:lastParameterField,site:state.site,start:el('landing').value||'2026-11-14T00:00Z',duration_hours:24,delay_hours:Number(el('shift').value),pv_area_m2:Number(el('area').value),load_w:Number(el('load').value),battery_kwh:Number(el('battery').value),panel_mode:el('orientation').value,action:el('coAction').value,min_soc_pct:Number(el('coMinSoc').value),min_local_earth_hours:Number(el('coMinEarth').value),max_local_earth_gap_hours:Number(el('coMaxGap').value)};
+ try{const response=await fetch('/api/copilot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(22000)});const body=await response.json();if(!response.ok)throw Error(typeof body.detail==='string'?body.detail:'Unable to compute mission');const label=body.mode==='llm_explainer'?'LLM-EXPLAINED + PYTHON-VERIFIED':body.mode==='engineering_fallback'?'ENGINEERING · LLM UNAVAILABLE':'ENGINEERING ANALYSIS';el('copilotMode').textContent=label;loading.querySelector('div:last-child').textContent=body.answer;lastCopilot=body;coRender(body);if(body.flow&&body.flow.updates){const fields=Object.keys(body.flow.updates);if(fields.length===1)lastParameterField=fields[0]}if(body.mode==='llm_explainer'&&body.language_model_commentary)coLine('bot','LLM interpretation (additional commentary): '+body.language_model_commentary)}catch(err){loading.querySelector('div:last-child').textContent='Unable to evaluate the mission: '+err.message+' — verify the mission date, delay and numerical thresholds.'}finally{button.disabled=false;button.textContent='ANALYZE LIVE MISSION ↗';copilotBusy=false}}
+el('copilotForm').addEventListener('submit',e=>{e.preventDefault();runCopilot()});
+function reportPayload(){return {question:el('copilotQuestion').value.trim()||'Generate the current mission simulation report',site:state.site,start:el('landing').value||'2026-11-14T00:00Z',duration_hours:24,delay_hours:Number(el('shift').value),pv_area_m2:Number(el('area').value),load_w:Number(el('load').value),battery_kwh:Number(el('battery').value),panel_mode:el('orientation').value,action:'explain',min_soc_pct:Number(el('coMinSoc').value),min_local_earth_hours:Number(el('coMinEarth').value),max_local_earth_gap_hours:Number(el('coMaxGap').value)}}
+async function downloadReport(extension){const id=extension==='pdf'?'coReportPdf':'coReportTex';const button=el(id);button.disabled=true;el('coReportStatus').textContent='Recomputing the mission report…';try{const r=await fetch('/api/mission-report.'+extension,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(reportPayload()),signal:AbortSignal.timeout(27000)});if(!r.ok){let detail=await r.text();try{detail=JSON.parse(detail).detail||detail}catch{}throw Error(String(detail).slice(0,250))}const content=await r.blob();const url=URL.createObjectURL(content),a=document.createElement('a');a.href=url;a.download='POLARIS_'+(r.headers.get('X-POLARIS-REPORT-ID')||'mission')+'.'+extension;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);el('coReportStatus').textContent='Report generated from the current simulation settings: '+a.download}catch(err){el('coReportStatus').textContent='Report unavailable: '+err.message}finally{button.disabled=false}}
+el('coReportPdf').addEventListener('click',()=>downloadReport('pdf'));el('coReportTex').addEventListener('click',()=>downloadReport('tex'));
+
+for(const button of document.querySelectorAll('[data-coprompt]'))button.addEventListener('click',()=>{el('copilotQuestion').value=button.dataset.coprompt;if(button.dataset.action)el('coAction').value=button.dataset.action;runCopilot()});
+el('coJumpScenarios').addEventListener('click',()=>location.hash='#/scenarios');
+
+
+/* Mission Decision Review: computed-only, always bound to the active mission. */
+let latestReview=null,reviewBusy=false;
+function reviewPayload(){const p=reportPayload();return {...p,focus:el('reviewFocus').value,
+  selected_scenarios:[...document.querySelectorAll('input[name="scenario"]:checked')].map(n=>n.value),
+  include_trace:el('reviewTrace').checked,include_events:el('reviewEvents').checked,
+  mission_label:el('reviewLabel').value.trim(),min_soc_pct:Number(el('reviewMinSoc').value),
+  min_local_earth_hours:Number(el('reviewMinEarth').value),max_local_earth_gap_hours:Number(el('reviewMaxGap').value)};}
+function numberRise(node,end){if(!node)return;const value=Number(end)||0;
+ if(matchMedia('(prefers-reduced-motion:reduce)').matches){node.textContent=String(value);return}
+ let start=performance.now();const update=t=>{const z=Math.min(1,(t-start)/450);node.textContent=String(Math.round(value*(1-Math.pow(1-z,3))));if(z<1)requestAnimationFrame(update)};requestAnimationFrame(update)}
+function markReviewStale(){if(!latestReview)return;latestReview=null;el('reviewStatus').textContent='Mission parameters changed. Recompute the review to refresh the decision.';
+ for(const b of document.querySelectorAll('[data-review-download]'))b.disabled=true;el('reviewId').textContent='STALE RUN'}
+function reviewBlock(text,cls){const div=document.createElement('div');div.className=cls||'';div.textContent=text;return div}
+function renderDecisionReview(d){latestReview=d;el('reviewId').textContent=d.review_id;el('reviewStatus').textContent=d.status+' — '+d.analysis_scope;
+ numberRise(el('reviewScenarioCount'),d.scenarios.length);numberRise(el('reviewBlockerCount'),d.blocking_criteria.length);numberRise(el('reviewEventCount'),d.total_detected_events);
+ const target=el('reviewResults');target.replaceChildren();
+ for(const sc of d.scenarios){const card=document.createElement('article');card.className='review-run-card';
+ const header=document.createElement('div');header.className='review-run-head';
+ const name=document.createElement('strong');name.textContent=sc.label+' / '+sc.site.split(' / ')[0];
+ const status=document.createElement('em');status.className=sc.blocking_criteria.length?'is-fail':'';status.textContent=sc.decision;header.append(name,status);card.append(header);
+ const sub=reviewBlock('UTC '+sc.start_utc+' • '+sc.checks.length+' criteria evaluated • '+sc.event_count+' detected events');sub.className='review-muted';card.append(sub);
+ const grid=document.createElement('div');grid.className='review-rules';for(const r of sc.checks){
+  const left=document.createElement('span');left.textContent=r.label+' ('+r.op+' '+r.threshold+' '+r.unit+')';
+  const right=document.createElement('span');right.textContent=r.observed.toFixed(2)+' '+r.unit+' · '+r.status;
+  right.style.color=r.status==='FAIL'?'#ffbf8a':'#8beddd';grid.append(left,right)}card.append(grid);
+ if(sc.events.length){const ev=document.createElement('div');ev.className='review-events';for(const item of sc.events.slice(0,7)){
+ const p=document.createElement('p');p.textContent=item.description;ev.append(p)}card.append(ev)}target.append(card)}
+ for(const b of document.querySelectorAll('[data-review-download]'))b.disabled=false;
+ el('reviewDownloadStatus').textContent='Decision package ready: '+d.review_id+' • '+d.selected_scenarios.length+' selected scenarios.'}
+async function computeDecisionReview(e){if(e)e.preventDefault();if(reviewBusy)return;
+ const req=reviewPayload();if(!req.selected_scenarios.length){el('reviewStatus').textContent='Select at least one scenario.';return}
+ reviewBusy=true;el('reviewCompute').disabled=true;el('reviewCompute').textContent='RECOMPUTING NASA SIMULATIONS…';
+ el('reviewStatus').textContent='Calculating current mission and verifying engineer-selected thresholds…';
+ try{const r=await fetch('/api/mission-review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(req),signal:AbortSignal.timeout(28000)});
+ const body=await r.json();if(!r.ok)throw Error(body.detail||'Unable to compute decision');renderDecisionReview(body)}
+ catch(err){el('reviewStatus').textContent='Review failed: '+err.message;markReviewStale()}
+ finally{reviewBusy=false;el('reviewCompute').disabled=false;el('reviewCompute').textContent='↗ COMPUTE MISSION DECISION'}}
+function reviewScopeFields(){el('reviewRulePower').hidden=el('reviewFocus').value==='geometry';el('reviewRuleGeo').hidden=el('reviewFocus').value==='electrical'}
+el('reviewFocus').addEventListener('change',reviewScopeFields);
+for(const [reviewId,coId] of [['reviewMinSoc','coMinSoc'],['reviewMinEarth','coMinEarth'],['reviewMaxGap','coMaxGap']]){
+ el(reviewId).value=el(coId).value;
+ el(reviewId).addEventListener('change',()=>{el(coId).value=el(reviewId).value;markReviewStale()});
+ el(coId).addEventListener('change',()=>{el(reviewId).value=el(coId).value;markReviewStale()})}
+reviewScopeFields();
+el('reviewForm').addEventListener('submit',computeDecisionReview);
+el('coJumpReview').addEventListener('click',()=>{location.hash='#/review'});
+for(const control of document.querySelectorAll('#reviewForm input,#reviewForm select'))control.addEventListener('input',markReviewStale);
+for(const id of ['area','load','battery','orientation','landing','shift','coMinSoc','coMinEarth','coMaxGap','qSite','qStart','qDelay','powerArea','powerLoad','powerBattery','powerMode']){
+ const item=el(id);if(item){item.addEventListener('input',markReviewStale);item.addEventListener('change',markReviewStale)}}
+for(const id of ['site-connecting_ridge','site-shackleton_rim'])el(id).addEventListener('click',markReviewStale);
+for(const b of document.querySelectorAll('[data-review-download]'))b.addEventListener('click',async()=>{
+ if(!latestReview)return;const [kind,fmt]=b.dataset.reviewDownload.split('.');b.disabled=true;
+ el('reviewDownloadStatus').textContent='Recomputing '+kind+' and generating '+fmt.toUpperCase()+'…';
+ try{const r=await fetch('/api/mission-decision/'+kind+'.'+fmt,{method:'POST',headers:{'Content-Type':'application/json'},
+  body:JSON.stringify(reviewPayload()),signal:AbortSignal.timeout(30000)});
+ if(!r.ok){const d=await r.json();throw Error(d.detail||'Report generation failed')}
+ const blob=await r.blob();const href=URL.createObjectURL(blob);const a=document.createElement('a');a.href=href;
+ a.download='POLARIS_'+(r.headers.get('X-POLARIS-REVIEW-ID')||'decision')+'_'+kind+'.'+fmt;
+ document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(href),1500);
+ el('reviewDownloadStatus').textContent='Generated '+a.download+' from the current mission inputs.'}
+ catch(err){el('reviewDownloadStatus').textContent='Export failed: '+err.message}finally{b.disabled=false}});
 
 syncPowerInputs();navigateRoute();
 

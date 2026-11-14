@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 import os
 from pathlib import Path
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 from requests.exceptions import RequestException
 
@@ -14,12 +14,22 @@ try:
     from .core import Site, get_ephemeris, mission_metrics
     from .nasa_reference import analyze_reference, load_dataset
     from .decision import counterfactual
+    from .report import build_report_data, latex_source, make_pdf
+    from .copilot import CopilotRequest, analyze
+    from .review import MissionReviewRequest, build_review
+    from .review_pdf import make_decision_pdf, latex_decision_report
 except ImportError:
     from api.core import Site, get_ephemeris, mission_metrics
     from api.nasa_reference import analyze_reference, load_dataset
     from api.decision import counterfactual
+    from api.report import build_report_data, latex_source, make_pdf
+    from api.copilot import CopilotRequest, analyze
+    from api.review import MissionReviewRequest, build_review
+    from api.review_pdf import make_decision_pdf, latex_decision_report
 
-app = FastAPI(title="POLARIS lunar mission navigator", version="0.8.0")
+app = FastAPI(title="POLARIS lunar mission navigator", version="1.5.0")
+from .private import router as private_router
+app.include_router(private_router)
 BASE = Path(__file__).resolve().parent.parent
 
 @app.get('/api/health')
@@ -64,6 +74,75 @@ def replan(site: str=Query('connecting_ridge'),
                               pv_area_m2=area,load_w=load,battery_kwh=battery,mode=mode)
     except ValueError as exc:
         raise HTTPException(status_code=422,detail=str(exc))
+
+
+@app.post('/api/copilot')
+def mission_copilot(request: CopilotRequest):
+    try:
+        return analyze(request)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)[:220])
+
+@app.post('/api/mission-report.pdf')
+def mission_report_pdf(request: CopilotRequest):
+    """Recompute scenario tables and downloadable technical PDF on demand."""
+    try:
+        report = build_report_data(request)
+        pdf, renderer = make_pdf(report, prefer_latex=False)  # portable serverless PDF
+        return Response(content=pdf, media_type='application/pdf', headers={
+            'Content-Disposition': f'attachment; filename="POLARIS_{report["report_id"]}.pdf"',
+            'X-POLARIS-REPORT-ID': report['report_id'],
+            'X-POLARIS-RENDERER': 'reportlab',
+        })
+    except ValueError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)[:260])
+
+@app.post('/api/mission-report.tex')
+def mission_report_tex(request: CopilotRequest):
+    """Download the exact XeLaTeX scientific report source using Libertinus Serif."""
+    try:
+        report=build_report_data(request)
+        return Response(content=latex_source(report).encode('utf-8'), media_type='text/x-tex', headers={
+            'Content-Disposition':f'attachment; filename="POLARIS_{report["report_id"]}.tex"',
+            'X-POLARIS-REPORT-ID':report['report_id'],
+        })
+    except ValueError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)[:260])
+
+@app.post('/api/mission-report.json')
+def mission_report_json(request: CopilotRequest):
+    try:return build_report_data(request)
+    except ValueError as exc:raise HTTPException(status_code=422,detail=str(exc)[:260])
+
+@app.post('/api/mission-review')
+def mission_review(request: MissionReviewRequest):
+    """Review the currently requested mission against real computed requirements."""
+    try:
+        return build_review(request)
+    except ValueError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)[:300])
+
+
+@app.post('/api/mission-decision/{kind}.{fmt}')
+def mission_decision_package(kind: str, fmt: str, request: MissionReviewRequest):
+    """On-demand decision packages. Never accept browser-supplied simulation results."""
+    if kind not in ('brief','dossier') or fmt not in ('pdf','tex','json'):
+        raise HTTPException(status_code=404, detail='Unknown decision package')
+    try:
+        data=build_review(request)
+        if fmt=='json':return data
+        if fmt=='tex':
+            payload=latex_decision_report(data,kind).encode('utf-8')
+            mime='application/x-tex';renderer='xelatex-source'
+        else:
+            payload,renderer=make_decision_pdf(data,kind,prefer_latex=False)
+            mime='application/pdf'
+        return Response(content=payload,media_type=mime,headers={
+            'Content-Disposition':f'attachment; filename="POLARIS_{data["review_id"]}_{kind}.{fmt}"',
+            'X-POLARIS-REVIEW-ID':data['review_id'],'X-POLARIS-RENDERER':renderer,
+        })
+    except ValueError as exc:
+        raise HTTPException(status_code=422,detail=str(exc)[:300])
 
 
 @app.get('/api/science-sources')
