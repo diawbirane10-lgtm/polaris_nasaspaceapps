@@ -45,7 +45,7 @@ def _jwks_client(auth_url: str) -> jwt.PyJWKClient:
                            cache_jwk_set=True, lifespan=300, timeout=8)
 
 
-def _verify_claims(token: str, url: str) -> dict:
+def _verify_claims(token: str, url: str, *, require_mfa: bool = True) -> dict:
     try:
         key = _jwks_client(url).get_signing_key_from_jwt(token).key
         claims = jwt.decode(token, key, algorithms=['RS256', 'ES256'],
@@ -63,7 +63,7 @@ def _verify_claims(token: str, url: str) -> dict:
         raise HTTPException(status_code=401, detail='Invalid account identity') from exc
     if claims.get('role') != 'authenticated' or claims.get('is_anonymous') is True:
         raise HTTPException(status_code=403, detail='Verified organization account required')
-    if claims.get('aal') != 'aal2':
+    if require_mfa and claims.get('aal') != 'aal2':
         raise HTTPException(status_code=403, detail='Multi-factor authentication required')
     return claims
 

@@ -11,14 +11,14 @@ from typing import Any
 
 # Explicit, auditable intent architecture: conversation support is not a FAQ.
 _FIELDS = {
-    'load_w': r'(?:electrical\s+)?(?:load|consumption|demand|power\s+draw|consommation|puissance|charge(?:\s+électrique)?)',
-    'battery_kwh': r'(?:battery|storage|batterie|stockage|capacity|capacité)',
-    'pv_area_m2': r'(?:pv\s+(?:array|area)|solar\s+(?:panels?|array|area)|photovoltaic\s+area|panneaux?\s+(?:solaires?|photovoltaïques?)|surface\s+(?:solaire|pv)|pv|panels?)',
+    'load_w': r'(?:electrical\s+)?(?:load|consumption|demand|power\s+draw|consommation|consumo|potencia|demanda|carga|puissance|charge(?:\s+électrique)?)',
+    'battery_kwh': r'(?:battery|storage|batterie|batería|bateria|almacenamiento|stockage|capacity|capacité)',
+    'pv_area_m2': r'(?:pv\s+(?:array|area)|solar\s+(?:panels?|array|area)|photovoltaic\s+area|paneles?|panneaux?\s+(?:solaires?|solares?|fotovoltaicos?|photovoltaïques?)|surface\s+(?:solaire|pv)|pv|panels?)',
 }
-_UNIT = {'load_w':r'(?:w|watts?)','battery_kwh':r'(?:kwh|kilowatt.hours?)','pv_area_m2':r'(?:m2|m²|sq\s*m|square\s*meters?)'}
-_VERBS_UP = r'(?:increase|increases|increasing|raise|raised|boost|add|augmenter?|augmente|hausse|up|more|plus|\+)'
-_VERBS_DOWN = r'(?:decrease|decreases|decreasing|reduce|reduced|lower|cut|baisser?|réduire|diminue|down|less|moins|\-)'
-_PERCENT = r'(\d+(?:[.,]\d+)?)\s*(?:%|percent|pour\s*cent)'
+_UNIT = {'load_w':r'(?:w|watts?)','battery_kwh':r'(?:kwh|kilowatt.hours?)','pv_area_m2':r'(?:m2|m²|sq\s*m|square\s*meters?|metros?\s*cuadrados?)'}
+_VERBS_UP = r'(?:increase|increases|increasing|raise|raised|boost|add|augmenter?|augmente|hausse|aumenta(?:r)?|subir|incrementar|up|more|plus|\+)'
+_VERBS_DOWN = r'(?:decrease|decreases|decreasing|reduce|reduced|lower|cut|baisser?|réduire|réduis|diminue|reducir|disminuir|bajar|down|less|moins|\-)'
+_PERCENT = r'(\d+(?:[.,]\d+)?)\s*(?:%|percent|por\s*ciento|pour\s*cent)'
 _NUMBER = r'(\d+(?:[.,]\d+)?)'
 
 @dataclass(frozen=True)
@@ -42,7 +42,7 @@ def _matches(text: str, field: str) -> list[re.Match]:
 def _extract_edit(text: str, field: str, current: float) -> float | None:
     """Parse local natural-language engineering edits; never infer an omitted unit."""
     # Keep independent instructions apart: "reduce load 10% and increase PV 30%".
-    fragments=re.split(r"\s+(?:and|et|then|puis)\s+|[;,]\s*(?=[a-z])", text, flags=re.I)
+    fragments=re.split(r"\s+(?:and|et|then|puis|y|después)\s+|[;,]\s*(?=[a-z])", text, flags=re.I)
     for fragment in fragments:
         for hit in _matches(fragment, field):
             left=fragment[:hit.start()];right=fragment[hit.end():]
@@ -88,13 +88,13 @@ def plan_question(question: str, current: dict[str,float], previous: dict[str, A
     # A flight director can alter *mission* parameters, not just electrical sizing.
     # Only explicit operator directives are applied: observations like "a 24h delay"
     # are not silently interpreted as an instruction to modify the plan.
-    move=re.search(r'\b(?:delay|postpone|push(?:\s+back)?|retarder|reporter|décaler)\s+(?:(?:the|la|le|our)\s+)?(?:(?:mission|landing|launch|schedule|atterrissage|départ)\s+)?(?:by\s+|de\s+|d[\'’]\s*)?(\d{1,3})\s*(?:hours?|hrs?|h|heures?)\b',q,re.I)
+    move=re.search(r'\b(?:delay|postpone|push(?:\s+back)?|retarder|reporter|décaler|retrasar|posponer)\s+(?:(?:the|la|le|our|el|mi)\s+)?(?:(?:mission|landing|launch|schedule|atterrissage|aterrizaje|lanzamiento|misión|départ)\s+)?(?:by\s+|de\s+|d[\'’]\s*)?(\d{1,3})\s*(?:hours?|hrs?|h|heures?|horas?)\b',q,re.I)
     if move:
         delay=int(move.group(1))
         if delay not in range(6,73,6):
             raise ValueError('Mission delay must be between 6 and 72 hours, in 6-hour increments')
         changes['delay_hours']=delay
-    site_match=re.search(r'\b(?:switch|change|move|select|choose|try|use|passer|choisir|utiliser)\b[^.!?]{0,45}\b(shackleton(?:\s+rim)?|connecting\s+ridge|ridge)\b',q,re.I)
+    site_match=re.search(r'\b(?:switch|change|move|select|choose|try|use|passer|choisir|utiliser|cambiar|elegir|usar)\b[^.!?]{0,45}\b(shackleton(?:\s+rim)?|connecting\s+ridge|ridge)\b',q,re.I)
     if site_match:
         changes['site_key']='shackleton_rim' if 'shackleton' in site_match.group(1) else 'connecting_ridge'
     if changes:
@@ -102,9 +102,9 @@ def plan_question(question: str, current: dict[str,float], previous: dict[str, A
         return FlowPlan('simulate_change',changes,'Recompute with '+summary)
     if re.search(r'\b(source|evidence|provenance|nasa data|spice|validation|method|référence|preuve|fiabilit|how.*calculat)\b',q):
         return FlowPlan('sources',{},'Inspect NASA data provenance and SPICE audit')
-    if re.search(r'\b(compare|comparison|versus|vs\.?|site|alternative|better|préférable|comparer|ridge|shackleton|différence)\b',q):
+    if re.search(r'\b(compare|comparison|versus|vs\.?|site|alternative|better|préférable|comparer|comparar|diferencia|mejor|ridge|shackleton|différence)\b',q):
         return FlowPlan('compare_sites',{},'Compare matching mission scenarios')
-    if re.search(r'\b(why|fail|constraint|risk|risk|bottleneck|recommend|solution|optimi[sz]|improve|mission|energy|battery|solar|earth|sun|power|communication|visibility|soc|pourquoi|contrainte|risque|énergie|batterie|soleil|terre|visibilité|échec)\b',q):
+    if re.search(r'\b(why|fail|constraint|risk|risk|bottleneck|recommend|solution|optimi[sz]|improve|mission|energy|battery|solar|earth|sun|power|communication|visibility|soc|pourquoi|contrainte|risque|énergie|batterie|soleil|terre|visibilité|échec|por\s*qué|riesgo|restricción|energía|batería|tierra|sol|visibilidad|falla|fallo)\b',q):
         return FlowPlan('evaluate_constraints',{},'Evaluate mission constraints and engineering tradeoffs')
     return FlowPlan('clarify',{},'Intent not sufficiently determined','low',
                     'I can compare sites, explain constraints, inspect NASA evidence, or calculate a change such as “increase load by 25%”. Which would help?')

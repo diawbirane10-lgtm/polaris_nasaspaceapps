@@ -104,3 +104,28 @@ def update_mission(mission_id:str,plan:MissionPlanInput,identity:WorkspaceIdenti
                'input_configuration':plan.input_configuration})
     if len(rows)!=1:raise HTTPException(status_code=404,detail='Mission not found')
     return {'mission':rows[0]}
+
+
+@router.post('/session')
+def record_workspace_session(identity:WorkspaceIdentity=Depends(require_workspace_identity)):
+    """Immutable first visit time set by Postgres; one entry per verified JWT session.
+
+    We record when the authenticated engineer opens the private workspace; it is
+    not a claim to capture every login to the external Supabase Auth service.
+    """
+    import jwt
+    claims=jwt.decode(identity.token,options={'verify_signature':False,'verify_exp':False})
+    try: session_id=str(UUID(claims['session_id']))
+    except (KeyError,TypeError,ValueError) as exc:
+        raise HTTPException(status_code=403,detail='An authenticated session identifier is required') from exc
+    url,key,_=_settings()
+    payload={'user_id':identity.user_id,'auth_session_id':session_id}
+    headers={'apikey':key,'Authorization':'Bearer '+identity.token,'Content-Type':'application/json',
+             'Prefer':'return=minimal'}
+    try:
+        r=requests.post(url+'/rest/v1/workspace_visits',json=payload,headers=headers,timeout=(3,9))
+    except requests.RequestException as exc:
+        raise HTTPException(503,detail='Session audit unavailable') from exc
+    if r.status_code not in (200,201,204,409):
+        raise HTTPException(503,detail='Workspace session could not be audited')
+    return {'recorded':True,'first_seen_for_session':r.status_code!=409}

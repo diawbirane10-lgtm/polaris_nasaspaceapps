@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#ffffff">
+<title>POLARIS — Administration Console</title>
+<link rel="stylesheet" href="/assets/admin.css">
+</head>
+<body>
+<header class="topbar">
+ <div class="brand"><span class="brand-mark">P</span><span class="brand-copy"><strong>POLARIS / ADMIN</strong><small>Mission Control · Identity &amp; Access</small></span></div>
+ <nav><a href="/">Mission Login</a><a href="/demo">NASA Demo</a><span class="nav-status" id="authState">RESTRICTED</span><button type="button" class="quiet-button hidden" id="signOut">Sign out</button></nav>
+</header>
+<main class="shell">
+ <div id="status" class="notice" role="status" aria-live="polite">Checking identity provider configuration…</div>
+ <section id="loginPanel" class="login-grid hidden" aria-labelledby="authTitle">
+  <div class="panel intro-panel"><p class="eyebrow">01 / ACCESS CONTROL</p><h1 id="authTitle">Administration<br>and accreditation.</h1><p class="lead">Review engineer access requests, authorize accounts, and inspect verified authentication session dates. Every approval is enforced by PostgreSQL.</p>
+   <div class="principles"><div><b>01</b> Administrator-only</div><div><b>02</b> Mandatory TOTP MFA</div><div><b>03</b> No password visibility</div></div>
+  </div>
+  <div class="panel login-form"><p class="eyebrow">ADMINISTRATOR SIGN-IN</p><h2>Verify your identity</h2><p class="muted">Only a provisioned POLARIS administrator can open this dashboard.</p>
+  <form id="loginForm"><label for="email">Account email</label><input type="email" id="email" required autocomplete="username" placeholder="admin@example.org">
+  <label for="password">Password</label><input type="password" id="password" required autocomplete="current-password">
+  <button type="submit" id="loginButton" class="primary-button">Continue with MFA →</button></form>
+  <p class="hint">If you were not approved as an administrator, access is denied even when your password is correct.</p>
+  </div>
+ </section>
+ <section id="mfaPanel" class="login-grid hidden" aria-labelledby="mfaTitle">
+  <div class="panel intro-panel"><p class="eyebrow">02 / MFA</p><h1>Second factor.<br>Verified operator.</h1><p class="lead">Administration requires an authenticator app. Session tokens remain in memory and are never saved to browser storage.</p></div>
+  <div class="panel login-form"><h2 id="mfaTitle">Confirm administrator MFA</h2><div id="enrollment" class="hidden"><p>Scan the enrollment code with your authenticator app.</p><img id="mfaQr" width="185" height="185" alt="POLARIS TOTP enrollment QR code"></div>
+  <form id="mfaForm"><label for="totp">Six-digit authenticator code</label><input id="totp" autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required><button type="submit" class="primary-button">Open administration →</button></form></div>
+ </section>
+ <section id="dashboard" class="hidden" aria-labelledby="dashTitle">
+  <div class="heading"><div><p class="eyebrow">POLARIS / ADMINISTRATION</p><h1 id="dashTitle">Access &amp; Activity</h1><p class="muted" id="adminName">Authenticated administrator</p></div><div class="heading-actions"><span class="live-label" id="refreshedAt">Synced manually</span><button type="button" class="quiet-button" id="refreshAll">Refresh data</button></div></div>
+  <div class="metrics" aria-label="Platform access metrics">
+   <div class="metric"><span>Pending accreditation</span><strong id="pendingMetric">—</strong></div>
+   <div class="metric"><span>Approved operators</span><strong id="approvedMetric">—</strong></div>
+   <div class="metric"><span>Rejected requests</span><strong id="rejectedMetric">—</strong></div>
+   <div class="metric"><span>Sessions issued in 24h</span><strong id="sessionsMetric">—</strong></div>
+  </div>
+  <div class="admin-tabs" role="group" aria-label="Administration views">
+   <button type="button" id="tabRequests" class="admin-tab active" aria-pressed="true">Accreditation queue</button>
+   <button type="button" id="tabDirectory" class="admin-tab" aria-pressed="false">User directory</button>
+   <button type="button" id="tabSessions" class="admin-tab" aria-pressed="false">Connection history</button>
+  </div>
+  <section id="requestsView" class="data-section"><div class="section-head"><div><h2>Access requests</h2><p>First name, last name, staff ID and submission time. No passwords or login credentials.</p></div><label class="control-label" for="requestFilter">Show<select id="requestFilter"><option value="pending">Pending only</option><option value="all">All requests</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select></label></div>
+  <div class="table-scroller"><table><thead><tr><th>Engineer</th><th>Employee ID</th><th>Submitted · UTC</th><th>Status</th><th>Decision</th></tr></thead><tbody id="requestRows"></tbody></table></div></section>
+  <section id="directoryView" class="data-section hidden"><div class="section-head"><div><h2>Operator directory</h2><p>Self-declared details remain pending until manually accredited.</p></div><label class="control-label" for="userSearch">Search<input id="userSearch" type="search" placeholder="Name or staff ID"></label></div>
+   <div class="table-scroller"><table><thead><tr><th>First name</th><th>Last name</th><th>Employee ID</th><th>Accreditation</th><th>Requested · UTC</th><th>Reviewed · UTC</th></tr></thead><tbody id="directoryRows"></tbody></table></div></section>
+  <section id="sessionsView" class="data-section hidden"><div class="section-head"><div><h2>Authentication history</h2><p>Real Supabase Auth session creation times, not simulated browser visits.</p></div><span class="record-count" id="sessionCount">Last 150 sessions</span></div>
+   <div class="table-scroller"><table><thead><tr><th>First name</th><th>Last name</th><th>Employee ID</th><th>Account status</th><th>Session created · UTC</th></tr></thead><tbody id="sessionRows"></tbody></table></div><p class="muted fineprint">Session issuance is an authentication event, not continuous monitoring of browsing behavior. Timestamps are stored in UTC.</p></section>
+  <footer>POLARIS ADMIN • Dedicated Supabase PostgreSQL • Role-based access • MFA required</footer>
+ </section>
+</main>
+<script src="/assets/admin.js" defer></script>
+</body>
+</html>

@@ -2,11 +2,44 @@
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
 let config=null, session=null, identity=null, pendingFactor=null, challengeId=null,
-    activeId=null,liveSocket=null, heartbeat=null, latestReview=null, reconnectAttempt=0,signingOut=false;
+    activeId=null,liveSocket=null, heartbeat=null, latestReview=null, reconnectAttempt=0,signingOut=false,
+    approvalTimer=null, approvalState=null;
 const urls={auth:'/auth/v1',realtime:'/realtime/v1/websocket'};
 const safeMessage=(message,error=false)=>{$('message').textContent=message;$('message').className='status'+(error?' error':'')};
-function view(name){['loginSection','mfaSection','workspaceSection'].forEach(x=>$(x).classList.toggle('hidden',x!==name));$('intro').classList.toggle('hidden',name==='workspaceSection')}
+function view(name){['loginSection','pendingSection','mfaSection','workspaceSection'].forEach(x=>$(x).classList.toggle('hidden',x!==name));$('intro').classList.toggle('hidden',name==='workspaceSection')}
 function busy(id,val){$(id).disabled=val}
+function accessTab(name){const signup=name==='signup';$('loginForm').classList.toggle('hidden',signup);$('signupForm').classList.toggle('hidden',!signup);
+ $('showSignin').classList.toggle('active',!signup);$('showSignin').setAttribute('aria-pressed',String(!signup));
+ $('showSignup').classList.toggle('active',signup);$('showSignup').setAttribute('aria-pressed',String(signup));
+ $('accessInstructions').textContent=signup?'Submit your details for accreditation. Email verification and administrator approval are required.':'Sign in to your approved account, or create a new registration request.'}
+function approvalLabel(state){const badge=$('approvalBadge');badge.className='approval-state '+(state==='approved'?'approved':state==='rejected'?'rejected':'pending');badge.textContent=state.toUpperCase();}
+function stopApprovalPolling(){if(approvalTimer){clearInterval(approvalTimer);approvalTimer=null}}
+async function accessStatus(){if(!session?.access_token)throw Error('Sign in first');const r=await fetch('/api/access/status',{headers:{Authorization:'Bearer '+session.access_token},cache:'no-store'});
+ const j=await r.json().catch(()=>({}));if(!r.ok)throw Error(j.detail||'Unable to retrieve account status');return j;}
+async function refreshApproval(){if(!session?.access_token)return;try{const response=await accessStatus();approvalState=response.status;
+ approvalLabel(response.status);$('approvalDetails').textContent=(response.first_name?response.first_name+' '+response.last_name+' · '+response.staff_id+'. ':'')+
+ (response.status==='pending'?'Waiting for administrator review.':response.status==='rejected'?'Request rejected. Contact the workspace administrator.':response.status==='approved'?'Approved. Complete MFA verification to access your missions.':'No registration request found. Contact the administrator.');
+ if(response.status==='approved'){stopApprovalPolling();$('proceedMfa').classList.remove('hidden');safeMessage('Access approved. Continue with multi-factor authentication to open the workspace.');}
+ else if(response.status==='rejected'){stopApprovalPolling();$('proceedMfa').classList.add('hidden');safeMessage('Your request was rejected. Access is not granted.',true)}
+ else{$('proceedMfa').classList.add('hidden');safeMessage('Signed in. Workspace access is '+response.status+'.')}
+ }catch(e){safeMessage('Status unavailable: '+e.message,true)}}
+async function beginMfa(){const factorState=await authCall('/factors');const candidates=(factorState?.totp||[]).filter(x=>x.status==='verified');
+ if(candidates.length){pendingFactor=candidates[0].id;await startChallenge();}
+ else{const enrol=await authCall('/factors',{method:'POST',body:{factor_type:'totp',friendly_name:'POLARIS Mission Workspace'}});
+  pendingFactor=enrol.id;$('enrolPane').classList.remove('hidden');const qr=enrol.totp?.qr_code||'';
+  if(!qr.startsWith('data:image/svg+xml')&&!qr.startsWith('data:image/png'))throw Error('TOTP setup image missing');
+  $('mfaQr').src=qr;$('mfaSecretHint').textContent='Keep the authenticator secret private. Enter a six-digit code to continue.';
+  await startChallenge();}}
+async function register(e){e.preventDefault();busy('signupBtn',true);safeMessage('Submitting a secure access request…');try{
+ const first=$('firstName').value.trim(),last=$('lastName').value.trim(),staff=$('staffId').value.trim();
+ if(!/^[a-zA-Z0-9][a-zA-Z0-9._-]{2,31}$/.test(staff))throw Error('Employee ID must be 3–32 letters, digits, dots, dashes or underscores');
+ if(!$('acceptTerms').checked)throw Error('You must accept the terms.');
+ await authCall('/signup',{method:'POST',token:config.publishable_key,body:{email:$('signupEmail').value.trim(),password:$('signupPassword').value,
+ data:{polaris_signup:'true',first_name:first,last_name:last,staff_id:staff,accepted_terms:'true',terms_version:'polaris-2026-11-14'}}});
+ $('signupPassword').value='';accessTab('signin');$('email').value=$('signupEmail').value.trim();
+ safeMessage('If this account is newly created, verify your email if prompted, then sign in to check its accreditation status. Existing accounts can sign in directly; no mission access is granted without approval.');
+ }catch(e){safeMessage('Registration not completed: '+e.message,true)}finally{busy('signupBtn',false)}}
+
 function authHeaders(token){return {'apikey':config.publishable_key,'Authorization':'Bearer '+token,'Content-Type':'application/json'}}
 async function authCall(route,{method='GET',body,token=session?.access_token}={}){
   const r=await fetch(config.supabase_url+urls.auth+route,{method,headers:authHeaders(token||config.publishable_key),
@@ -27,17 +60,18 @@ async function init(){try{
  }catch(e){safeMessage(e.message,true)}}
 async function login(e){e.preventDefault();busy('loginBtn',true);safeMessage('Verifying credentials…');try{
  const result=await authCall('/token?grant_type=password',{method:'POST',body:{email:$('email').value.trim(),password:$('password').value}});
- session=result;$('password').value='';
- // Always require fresh MFA completion even if the JWT advertises an assurance level.
- const factorState=await authCall('/factors');const candidates=(factorState?.totp||[]).filter(x=>x.status==='verified');
- if(candidates.length){pendingFactor=candidates[0].id;await startChallenge();}
- else{const enrol=await authCall('/factors',{method:'POST',body:{factor_type:'totp',friendly_name:'POLARIS Mission Workspace'}});
-  pendingFactor=enrol.id;$('enrolPane').classList.remove('hidden');
-  const qr=enrol.totp?.qr_code||'';
-  if(!qr.startsWith('data:image/svg+xml')&&!qr.startsWith('data:image/png'))throw Error('Enrollment QR code was not provided by the identity service');
-  $('mfaQr').src=qr;$('mfaSecretHint').textContent='Keep this TOTP enrollment secret private. After scanning, enter the six-digit code.';
-  await startChallenge();}
- }catch(e){session=null;safeMessage('Sign-in failed: '+e.message,true)}finally{busy('loginBtn',false)}}
+ session=result;$('password').value='';$('sessionState').textContent='ACCOUNT AUTHENTICATED';$('logout').classList.remove('hidden');
+ const access=await accessStatus();approvalState=access.status;
+ if(access.status==='pending'||access.status==='rejected'||access.status==='approved'){
+  view('pendingSection');approvalLabel(access.status);
+  $('approvalDetails').textContent='Your access request: '+access.status.toUpperCase()+'.';
+  if(access.status==='pending'){stopApprovalPolling();approvalTimer=setInterval(refreshApproval,15000)}
+  $('proceedMfa').classList.toggle('hidden',access.status!=='approved');
+  safeMessage(access.status==='pending'?'Your request is waiting for approval.':access.status==='approved'?'Account approved. Continue with MFA to access the workspace.':'Your request was rejected.',access.status==='rejected');
+ }else if(access.status==='not_registered'){
+  await beginMfa();
+ }else{throw Error('Unrecognized account status')}
+ }catch(e){session=null;stopApprovalPolling();safeMessage('Sign-in failed: '+e.message,true)}finally{busy('loginBtn',false)}}
 async function startChallenge(){const q=await authCall('/factors/'+encodeURIComponent(pendingFactor)+'/challenge',{method:'POST',body:{}});
  challengeId=q.id;view('mfaSection');$('totp').value='';$('totp').focus();safeMessage('Enter the fresh six-digit code from your authenticator app.')}
 async function verifyMfa(e){e.preventDefault();try{
@@ -45,12 +79,12 @@ async function verifyMfa(e){e.preventDefault();try{
  const out=await authCall('/factors/'+encodeURIComponent(pendingFactor)+'/verify',{method:'POST',body:{challenge_id:challengeId,code}});
  if(!out.access_token)throw Error('Authenticator did not return a verified session');
  session={...session,...out};$('totp').value='';$('mfaQr').removeAttribute('src');$('enrolPane').classList.add('hidden');
- const account=await api('whoami');identity=account;$('operatorLabel').textContent='Authenticated: '+account.name+'  ·  '+account.role.toUpperCase();
+ stopApprovalPolling();const account=await api('whoami');identity=account;$('operatorLabel').textContent='Authenticated: '+account.name+'  ·  '+account.role.toUpperCase();
  $('sessionState').textContent='MFA VERIFIED';$('logout').classList.remove('hidden');view('workspaceSection');
  safeMessage('Identity verified. Your mission workspace is isolated by database access policies.');await loadMissions();startRealtime();
  }catch(e){safeMessage('MFA verification: '+e.message,true)}}
 function clearState(){session=null;identity=null;activeId=null;latestReview=null;pendingFactor=null;challengeId=null;
- closeRealtime();$('sessionState').textContent='SIGN IN REQUIRED';$('logout').classList.add('hidden');view('loginSection')}
+ closeRealtime();stopApprovalPolling();$('proceedMfa').classList.add('hidden');$('sessionState').textContent='SIGN IN REQUIRED';$('logout').classList.add('hidden');view('loginSection')}
 async function logout(){signingOut=true;try{if(session)await authCall('/logout',{method:'POST'})}catch(_e){}clearState();signingOut=false;safeMessage('Signed out. Session credentials cleared from this tab.')}
 function fillEditor(cfg){for(const [id,value]of Object.entries(cfg||{})){const el=$(id);if(el&&value!==undefined&&value!==null)el.value=String(value)}}
 function currentCfg(){return {site:$('site').value,focus:$('focus').value,start:$('start').value,delay:Number($('delay').value),
@@ -105,6 +139,12 @@ function startRealtime(){closeRealtime();if(!identity?.user_id||!session?.access
  ws.onclose=()=>{stopHeartbeat();realtimeLabel(false);if(liveSocket===ws&&session&&!signingOut){liveSocket=null;const delay=Math.min(30000,1000*(2**Math.min(5,reconnectAttempt++)));setTimeout(()=>{if(session&&!liveSocket)startRealtime()},delay)}};
  ws.onerror=()=>realtimeLabel(false);
  }catch(_){realtimeLabel(false)}}
+$('showSignin').addEventListener('click',()=>accessTab('signin'));
+$('showSignup').addEventListener('click',()=>accessTab('signup'));
+$('signupForm').addEventListener('submit',register);
+$('refreshApproval').addEventListener('click',refreshApproval);
+$('proceedMfa').addEventListener('click',beginMfa);
+$('pendingLogout').addEventListener('click',logout);
 $('loginForm').addEventListener('submit',login);$('mfaForm').addEventListener('submit',verifyMfa);
 $('cancelMfa').addEventListener('click',()=>{clearState();safeMessage('Authentication cancelled.')});
 $('logout').addEventListener('click',logout);$('newMission').addEventListener('click',newMission);

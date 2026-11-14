@@ -1,0 +1,37 @@
+/* POLARIS secure workspace: matched exact Sport Programme palette. */
+:root{color-scheme:light;--panel:#fff;--line:#d9dce1;--muted:#696d73;--bright:#145dff;--amber:#c28a00;--danger:#cb3831;background:#fff!important;color:#111!important;font-family:Arial,Helvetica,sans-serif}
+body{background:#fff;color:#111}
+header{background:#fff!important;border-bottom:1px solid #111;box-shadow:none!important}
+.logo,.logo small,h1,h2,h3{color:#111!important}
+.logo small,.eyebrow{color:#145dff!important}
+a{color:#145dff!important}
+.tag,.badge{color:#50545a!important;border-color:#d9dce1!important;background:#fff!important}
+.lead,.muted,.textsmall,.metric small{color:#696d73!important}
+.panel,.scene,.mission-card,.metric{background:#fff!important;color:#111!important;border:1px solid #d9dce1!important;background-image:none!important;box-shadow:none!important;border-radius:0!important}
+.scene{min-height:310px!important}.visual{background:#f7f7f5!important}.orb{width:135px;height:135px;border:1px solid #145dff!important;box-shadow:none!important}.orb:after{border:1px dashed #009fbd!important}.orb:before{background:#c28a00!important}
+input,select,textarea{background:#fff!important;color:#111!important;border:1px solid #aeb7bf!important;border-radius:0!important}
+label{color:#50545a!important}button{background:#111!important;color:#fff!important;border:1px solid #111!important;border-radius:0!important}button.secondary{background:#fff!important;color:#111!important;border-color:#111!important}
+button:hover:not(:disabled){background:#145dff!important;color:#fff!important;border-color:#145dff!important}
+.status{background:#f7f7f5!important;color:#50545a!important;border-color:#d9dce1!important}.status.error{background:#fff0e6!important;color:#cb3831!important;border-color:#cb3831!important}.status.success{background:#ecf8f2!important;color:#157b58!important;border-color:#157b58!important}
+.mission-card small{color:#696d73!important}.mission-card[aria-current=true]{background:#eaf4ff!important;border-color:#145dff!important}
+.metric strong{color:#145dff!important}.live .dot{background:#157b58!important}.live.connected .dot{box-shadow:none!important}.pill{color:#c28a00!important}
+footer{color:#696d73!important}
+.public-demo{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:750;border:1px solid #111;background:#fff;color:#111!important;text-decoration:none;margin-top:16px}
+.public-demo:hover{background:#111;color:#fff!important}
+@media(max-width:760px){.scene{min-height:180px!important}}
+
+/* POLARIS identity accreditation — Sport Programme design tokens. */
+.access-tabs{display:grid;grid-template-columns:repeat(2,1fr);margin:16px 0 19px;border:1px solid #d9dce1}
+.access-tab{border:0!important;border-right:1px solid #d9dce1!important;background:#fff!important;color:#50545a!important;text-transform:uppercase;letter-spacing:.08em;font-size:11px!important}
+.access-tab:last-child{border-right:0!important}
+.access-tab.active{color:#fff!important;background:#111!important}
+.name-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.terms-consent{display:flex;align-items:flex-start;gap:10px;color:#111!important;font-size:12px;line-height:1.6;margin-top:20px}
+.terms-consent input{width:18px!important;height:18px!important;flex:0 0 18px;margin-top:1px}
+.terms-consent a{color:#145dff!important}
+.approval-state{padding:15px 18px;display:inline-block;border:1px solid #aeb7bf;font:800 17px/1.2 ui-monospace,Consolas,monospace;letter-spacing:.08em;margin:11px 0 17px}
+.approval-state.pending{background:#fff5e6;color:#a3620c;border-color:#e8b36b}
+.approval-state.approved{background:#edf9f2;color:#157b58;border-color:#8bc4a7}
+.approval-state.rejected{background:#fff0ed;color:#cb3831;border-color:#ec9d9b}
+.pending-color{color:#a3620c}.status{border-radius:0!important}
+@media(max-width:460px){.name-fields{grid-template-columns:1fr}.access-tab{min-height:47px!important}}
