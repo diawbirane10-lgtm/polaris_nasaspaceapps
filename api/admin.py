@@ -13,7 +13,7 @@ from urllib.parse import urlparse
 
 import requests
 from fastapi import APIRouter, Depends, HTTPException, Request
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
 from pydantic import BaseModel
 from uuid import UUID
 from .security import WorkspaceIdentity, _settings, _verify_claims, _verified_profile, require_workspace_identity
@@ -68,6 +68,13 @@ def _query(identity:WorkspaceIdentity, resource:str,*,params=None):
 
 @router.get('/admin',include_in_schema=False)
 def admin_console(request:Request):
+    # Admin URL can initiate normal login; privileged contents still require live MFA and role checks.
+    if not request.cookies.get(COOKIE):
+        return RedirectResponse('/', status_code=303, headers={
+            'Cache-Control':'private, no-store',
+            'X-Robots-Tag':'noindex, nofollow',
+            'Referrer-Policy':'no-referrer',
+        })
     _admin_identity(request)
     from .admin_template import OPERATOR_HTML
     return HTMLResponse(OPERATOR_HTML,headers={
