@@ -322,8 +322,9 @@ def analyze(req:CopilotRequest) -> dict[str,Any]:
     previous = {'field': req.previous_field} if req.previous_field else None
     planning=plan_question(req.question,{'load_w':req.load_w,
         'battery_kwh':req.battery_kwh,'pv_area_m2':req.pv_area_m2},previous)
-    model_connected=(bool(os.environ.get('POLARIS_LLM_API_KEY','').strip())
-                     and os.environ.get('POLARIS_LLM_PROVIDER','groq').lower() in ('groq','huggingface'))
+    provider=os.environ.get('POLARIS_LLM_PROVIDER','groq').lower()
+    model_connected=bool((os.environ.get('OLLAMA_API_KEY','') if provider=='ollama'
+                          else os.environ.get('POLARIS_LLM_API_KEY','')).strip()) and provider in ('ollama','groq','huggingface')
     if model_connected and not planning.updates and not planning.handoff:
         from .flow import FlowPlan
         proposed=_llm_plan_edits(req)
