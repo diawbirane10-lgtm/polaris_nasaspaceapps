@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#08111b"><meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#ffffff"><meta name="robots" content="noindex,nofollow">
 <title>POLARIS — Mission Sign In · Secure Workspace</title>
 <style>
 :root{font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;background:#08111b;color:#f3f6f7;--panel:#101e2a;--line:#324a57;--muted:#b5c5cd;--bright:#9ef2e3;--amber:#ffcd82;--danger:#ffacaa}
@@ -14,36 +14,38 @@ fieldset{border:0;padding:0;margin:0;min-width:0}label{display:block;color:#c5d6
 @media(max-width:800px){header{height:auto;min-height:65px;padding:12px 15px;flex-wrap:wrap}.layout,.app-grid{grid-template-columns:1fr}.scene{min-height:200px}.visual{height:120px}.orb{width:88px;height:88px}.orb:after{inset:-16px}.missions{max-height:300px}.result-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:450px){.editor-grid,.result-grid{grid-template-columns:1fr}.layout{gap:12px}h1{font-size:31px}header nav{gap:8px;font-size:12px}}
 </style>
-<link rel="stylesheet" href="/assets/sport-workspace.css"></head>
-<body>
-<header><div class="logo">POLARIS<small>MISSION CONTROL / SECURE WORKSPACE</small></div><nav><a href="/demo">Public demo</a><span class="tag" id="sessionState">SIGN IN REQUIRED</span><button id="logout" class="secondary small hidden" type="button">Sign out</button></nav></header>
+<link rel="stylesheet" href="/assets/sport-workspace.css"><link rel="stylesheet" href="/assets/auth-gateway.css"></head>
+<body data-screen="loginSection">
+<header><div class="logo" aria-label="POLARIS">POLARIS<small>MISSION CONTROL</small></div><nav><span class="tag" id="sessionState" aria-live="polite">SIGN IN REQUIRED</span><button id="logout" class="secondary small hidden" type="button">Sign out</button></nav></header>
 <main>
-<div id="intro"><a class="public-demo" href="/demo">Explore public NASA demo without signing in ↗</a><div class="eyebrow">01 / Secure operations</div><h1>Your missions. Your models.<br><span style="color:var(--bright)">Your engineering record.</span></h1><p class="lead">A private mission planner with verified identities, mission-level access control and live database synchronization.</p></div>
-<div id="message" class="status" role="status" aria-live="polite">Checking workspace configuration…</div>
+<div id="intro" class="hidden" aria-hidden="true"></div>
+<div id="message" class="status" role="status" aria-live="polite">Checking secure sign-in…</div>
 <section id="loginSection" class="layout hidden" aria-labelledby="signTitle">
- <article class="panel scene"><div><span class="eyebrow">POLARIS IDENTITY</span><h2 style="font-size:32px;margin-top:10px">Every decision<br>has an author.</h2><p class="muted">MFA-protected sign-in. Private plans and engineering reports are attributed to a verified professional identity.</p></div><div class="visual" aria-hidden="true"><div class="orb"></div></div><span class="badge">Public NASA data stays available in demo mode</span></article>
- <article class="panel"><h2 id="signTitle">Sign in to Mission Workspace</h2><p class="muted textsmall">Use your verified POLARIS account.</p><form id="loginForm"><label for="email">Work email</label><input type="email" id="email" autocomplete="username" required placeholder="engineer@organisation.example"><label for="password">Password</label><input type="password" id="password" minlength="8" autocomplete="current-password" required><div class="actions"><button type="submit" id="loginBtn">Verify identity →</button></div></form><div class="actions"><button type="button" id="showRegister" class="secondary">Create an account</button></div>
-<p class="muted textsmall" style="margin-top:22px">New registrations are reviewed before mission access is granted.</p></article>
+ <article class="panel auth-panel"><div class="auth-eyebrow">SECURE ACCESS / 01</div><h1 id="signTitle">Welcome back.</h1><p class="auth-subtitle">Sign in to POLARIS.</p>
+  <form id="loginForm"><label for="email">Work email</label><input type="email" id="email" autocomplete="username" required placeholder="name@organisation.com"><label for="password">Password</label><input type="password" id="password" minlength="8" autocomplete="current-password" required>
+  <div class="actions"><button type="submit" id="loginBtn">Sign in →</button></div></form>
+  <div class="auth-divider"></div><div class="auth-bottom"><span>Don't have an account?</span><button type="button" id="showRegister" class="secondary">Create account</button></div>
+ </article>
 </section>
 <section id="registerSection" class="layout hidden" aria-labelledby="registerTitle">
- <article class="panel scene"><div><span class="eyebrow">POLARIS / ACCOUNT REQUEST</span><h2>Register your engineering identity.</h2><p class="muted">Your access request will be reviewed. The mission workspace remains private until it is approved and multifactor authentication is complete.</p></div><div class="eyebrow">REGISTRATION → REVIEW → VERIFICATION</div></article>
- <article class="panel"><h2 id="registerTitle">Create an account</h2><form id="registerForm">
+ <article class="panel auth-panel register-panel"><div class="auth-eyebrow">SECURE ACCESS / 02</div><h1 id="registerTitle">Create your account.</h1><p class="auth-subtitle">Registration is subject to approval.</p>
+ <form id="registerForm">
   <label for="givenName">First name</label><input id="givenName" autocomplete="given-name" maxlength="80" minlength="2" required>
   <label for="familyName">Last name</label><input id="familyName" autocomplete="family-name" maxlength="80" minlength="2" required>
   <label for="employeeId">Professional ID / matricule</label><input id="employeeId" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,31}" maxlength="32" required autocomplete="off">
-  <label for="signupEmail">Email address</label><input type="email" id="signupEmail" autocomplete="email" required>
+  <label for="signupEmail">Work email</label><input type="email" id="signupEmail" autocomplete="email" required>
   <label for="signupPassword">Password (12+ characters)</label><input type="password" id="signupPassword" minlength="12" autocomplete="new-password" required>
   <label for="signupConfirm">Confirm password</label><input type="password" id="signupConfirm" minlength="12" autocomplete="new-password" required>
-  <label class="terms-row"><input id="termsAccept" type="checkbox" required><span>I accept the <a href="/terms" target="_blank" rel="noopener">POLARIS terms and privacy notice</a> (polaris-2026-11-14).</span></label>
-  <div class="actions"><button type="submit" id="registerBtn">Submit access request</button><button type="button" id="backToSignIn" class="secondary">Back to sign in</button></div>
- </form></article>
+  <label class="terms-row"><input id="termsAccept" type="checkbox" required><span>I accept the <a href="/terms" target="_blank" rel="noopener">terms and privacy notice</a> (polaris-2026-11-14).</span></label>
+  <div class="actions"><button type="submit" id="registerBtn">Request access →</button></div>
+ </form><div class="auth-divider"></div><div class="auth-bottom"><span>Already registered?</span><button type="button" id="backToSignIn" class="secondary">Sign in</button></div>
+ </article>
 </section>
 <section id="pendingSection" class="layout hidden" aria-labelledby="pendingTitle">
  <article class="panel"><span class="eyebrow">ACCESS REQUEST</span><h2 id="pendingTitle">Review in progress</h2><p>Your request status is shown below. Your password and account tokens are never disclosed to reviewers.</p><div id="approvalBadge" class="approval-badge pending">PENDING</div><p class="muted textsmall" id="requestInfo">An authorized reviewer will examine your registration.</p></article>
  <article class="panel"><h2>Next steps</h2><p class="muted">If your email is unverified, complete the confirmation link first. After approval, sign in and complete multifactor verification to access your mission workspace.</p><div class="actions"><button type="button" id="refreshStatus">Refresh status</button><button type="button" id="pendingSignOut" class="secondary">Sign out</button></div></article>
 </section>
 <section id="mfaSection" class="layout hidden" aria-labelledby="mfaTitle">
- <article class="panel scene"><span class="eyebrow">02 / Multi-factor verification</span><h2>Something you know.<br>Something you have.</h2><p class="muted">Complete a TOTP verification with your authenticator app. Your token is kept only in memory in this browser tab.</p></article>
  <article class="panel"><h2 id="mfaTitle">Confirm your security code</h2><div id="enrolPane" class="hidden"><p class="muted textsmall">Scan this setup code with your authenticator. Do not share it.</p><img id="mfaQr" alt="TOTP enrollment QR code" width="196" height="196"><p id="mfaSecretHint" class="textsmall"></p></div><form id="mfaForm"><label for="totp">Six-digit authenticator code</label><input id="totp" autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required><div class="actions"><button type="submit">Verify code →</button><button type="button" class="secondary" id="cancelMfa">Cancel</button></div></form></article>
 </section>
 <section id="workspaceSection" class="hidden" aria-labelledby="appTitle">
@@ -62,7 +64,7 @@ fieldset{border:0;padding:0;margin:0;min-width:0}label{display:block;color:#c5d6
  </div><div class="actions"><button type="submit" id="saveMission">Save mission →</button><button type="button" class="secondary" id="runReview">Compute decision review</button></div></form></section>
  <section class="panel" style="margin-top:16px" id="resultSection"><div class="sync"><h2>Decision results</h2><span id="resultId" class="badge">NO RUN</span></div><p id="resultSummary" class="muted">Run the current mission to calculate constraints, compare alternatives and unlock engineering reports.</p><div class="result-grid" id="results"></div><div class="table-wrap"><table id="checksTable" class="hidden"><thead><tr><th>Scenario</th><th>Constraint</th><th>Result</th></tr></thead><tbody id="checkRows"></tbody></table></div><div class="actions"><button class="secondary" id="briefDownload" disabled>Download Decision Brief PDF</button><button class="secondary" id="dossierDownload" disabled>Download Engineering Dossier PDF</button></div><p class="muted textsmall" id="exportNote">Audited report export requires the server-side report service to be configured.</p></section></div></div>
 </section>
-<footer class="foot">POLARIS © 2026 · Mission Engineering · Protected workspace · Access is authorized per mission. For the public NASA challenge demonstration, use the <a href="/demo">Mission Control</a>.</footer>
+<footer class="foot">POLARIS © 2026 · Mission Engineering · Protected workspace.</footer>
 </main>
 <script src="/workspace.js" defer></script>
 </body></html>

@@ -5,7 +5,7 @@ let config=null, session=null, identity=null, pendingFactor=null, challengeId=nu
     activeId=null,liveSocket=null, heartbeat=null, latestReview=null, reconnectAttempt=0,signingOut=false,pendingTimer=null;
 const urls={auth:'/auth/v1',realtime:'/realtime/v1/websocket'};
 const safeMessage=(message,error=false)=>{$('message').textContent=message;$('message').className='status'+(error?' error':'')};
-function view(name){['loginSection','registerSection','pendingSection','mfaSection','workspaceSection'].forEach(x=>$(x).classList.toggle('hidden',x!==name));$('intro').classList.toggle('hidden',name==='workspaceSection')}
+function view(name){['loginSection','registerSection','pendingSection','mfaSection','workspaceSection'].forEach(x=>$(x).classList.toggle('hidden',x!==name));document.body.dataset.screen=name;$('intro').classList.add('hidden');$('sessionState').classList.toggle('hidden',name!=='workspaceSection')}
 function busy(id,val){$(id).disabled=val}
 function authHeaders(token){return {'apikey':config.publishable_key,'Authorization':'Bearer '+token,'Content-Type':'application/json'}}
 async function authCall(route,{method='GET',body,token=session?.access_token}={}){
@@ -20,10 +20,10 @@ async function api(route,{method='GET',body,blob=false}={}){
  if(!r.ok){const d=await r.json().catch(()=>({}));throw Error(d.detail||'Workspace request unsuccessful')}
  return blob?r.blob():r.json();
 }
-async function init(){try{
+async function init(){view('loginSection');try{
  const r=await fetch('/api/workspace-config',{cache:'no-store'});config=await r.json();
  if(!config.available)throw Error('The workspace requires a POLARIS Supabase connection. The public demonstration remains available.');
- view('loginSection');safeMessage('Workspace online · Authenticated access required.');
+ view('loginSection');safeMessage('');
  }catch(e){safeMessage(e.message,true)}}
 const TERMS_VERSION='polaris-2026-11-14';
 function stopPendingPoll(){if(pendingTimer){clearInterval(pendingTimer);pendingTimer=null}}
