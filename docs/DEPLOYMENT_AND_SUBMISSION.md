@@ -3,7 +3,7 @@
 **Public home:** https://polaris-spaceapps-2026.vercel.app/  
 **Seven-slide project overview:** https://polaris-spaceapps-2026.vercel.app/submission-slides.html  
 **Interactive engineering demo:** https://polaris-spaceapps-2026.vercel.app/demo  
-**Current source:** https://github.com/diawbirane10-lgtm/polaris_nasaspaceapps/tree/feature/secure-mission-workspace
+**Current source:** https://github.com/diawbirane10-lgtm/polaris_nasaspaceapps
 
 Vercel builds `api/index.py` with the Python runtime and `public/` as static assets. The root page offers two entry points; the demo has eight navigation views. No authentication is required.
 
