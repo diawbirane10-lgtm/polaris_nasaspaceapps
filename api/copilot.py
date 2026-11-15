@@ -145,7 +145,7 @@ def _llm_enrichment(req:CopilotRequest, response:dict[str,Any]) -> dict[str,Any]
         'groq':('https://api.groq.com/openai/v1/chat/completions','openai/gpt-oss-20b'),
         'huggingface':('https://router.huggingface.co/v1/chat/completions','openai/gpt-oss-120b'),
         # Free-LLM directory → Kilo Gateway; anonymous access restricted to free models.
-        'kilo':('https://ai-gateway.kilo.ai/api/v1/chat/completions','kilo-auto/free'),
+        'kilo':('https://api.kilo.ai/api/gateway/chat/completions','kilo-auto/free'),
     }
     url,default_model=endpoints[provider]
     if provider=='kilo' and os.environ.get('POLARIS_LLM_MODEL','kilo-auto/free')!='kilo-auto/free':
@@ -261,7 +261,7 @@ def _intent_answer(req: CopilotRequest, data: dict, response: dict, intent: str)
                 "The scientific audit compares SPICE with Horizons angular geometry.\n\n"
                 "Six-hour intervals may miss short visibility transitions; geometric Earth visibility is not verified RF connectivity. "
                 "See the evidence links below for source fingerprints and verification.")
-    if intent=='compare_sites':
+    if intent=='compare_sites' and not any(w in req.question.lower() for w in ('pv','power','puissance','solar','solaire','énergie','energy','battery','batterie','load','consommation')):
         return (f"Mission comparison with unchanged electrical assumptions:\n\n"
                 f"Original site: Earth locally visible {original['earth_visible_hours']:.1f} h, "
                 f"minimum battery SOC {original['min_soc_pct']:.1f}%, shortfall {original['unserved_energy_kwh']:.3f} kWh.\n\n"
