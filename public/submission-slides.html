@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="POLARIS NASA Space Apps 2026 seven-slide public project demonstration">
+<title>POLARIS — NASA Space Apps 2026 · Seven-slide demonstration</title>
+<style>
+:root{color-scheme:light;--ink:#101e2b;--blue:#155ff5;--mist:#e9eef5;--dim:#556779}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--ink);background:#dfe6ef}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px 16px 88px}
+main{width:min(1180px,100%);aspect-ratio:16/9;min-height:540px;display:grid;position:relative}
+.slide{grid-area:1/1;background:#fff;box-shadow:0 20px 70px #10213520;padding:clamp(22px,4vw,54px);position:relative;overflow:auto;display:flex;flex-direction:column;justify-content:space-between;border-top:8px solid var(--blue)}
+.slide[hidden]{display:none!important}.slide.cover{background:linear-gradient(120deg,#f5f8fe 5%,#fff 70%)}
+.overline,.footer{display:flex;justify-content:space-between;align-items:center;gap:15px;font-size:11px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}.overline span:first-child{color:var(--blue)}
+.slide-body{max-width:990px;padding:20px 0}.label{color:var(--blue);font-size:12px;font-weight:850;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+h1{font-size:clamp(35px,5vw,70px);letter-spacing:-.06em;line-height:1.05;margin:0 0 12px;max-width:900px}h2{font-size:clamp(17px,2vw,26px);font-weight:550;line-height:1.3;margin:0 0 20px;color:#486177}
+p.summary{font-size:clamp(15px,1.7vw,21px);line-height:1.52;max-width:920px;margin:0 0 25px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.fact{border-top:2px solid #bfd0eb;padding:14px 0}.fact span{display:block;color:var(--blue);font-size:11px;font-weight:850}.fact p{font-size:clamp(12px,1.3vw,16px);line-height:1.43;font-weight:600;margin:8px 0}
+nav{display:flex;gap:10px;align-items:center;justify-content:space-between;max-width:1180px;width:100%;padding-top:16px}
+button,a.action{border:1px solid #9eb1c9;background:#fff;color:var(--ink);text-decoration:none;padding:13px 18px;font-size:13px;font-weight:750;cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}button:focus-visible,a:focus-visible{outline:3px solid var(--blue)}.actions{display:flex;gap:9px;align-items:center}.num{font:750 14px ui-monospace,monospace}
+a.action{background:var(--ink);color:white} .hint{font-size:12px;color:var(--dim);text-align:center;margin:10px 0}
+@media(max-width:750px){body{padding:10px 10px 35px}main{aspect-ratio:auto;min-height:690px}.slide{padding:22px}.facts{grid-template-columns:1fr;gap:2px}.fact{padding:8px 0}.slide-body{padding:15px 0}.overline,.footer{font-size:9px}.actions{gap:5px}.actions button{padding:10px 12px}.hint{font-size:11px}}
+@media print{body{padding:0;background:#fff;display:block}main{display:block;aspect-ratio:auto;width:100%;min-height:0}.slide,.slide[hidden]{display:flex!important;position:relative;page-break-after:always;break-after:page;box-shadow:none;height:100vh;width:100%;padding:7%;border-top:6px solid var(--blue)}nav,.hint{display:none}@page{size:landscape;margin:0}}
+</style></head>
+<body><main id="slides"><section class="slide cover" data-slide="1" aria-label="Slide 1 of 7">
+  <div class="overline"><span>01 / INTRODUCTION</span><span>NASA SPACE APPS · 2026</span></div>
+  <div class="slide-body"><div class="label">NASA SPACE APPS CHALLENGE 2026 · LUNAR LANDING SITE NAVIGATOR</div><h1>POLARIS</h1><h2>Lunar Mission Decision Intelligence</h2><p class="summary">A NASA-data-driven engineering prototype for lunar south-pole mission planning.</p><div class="facts"><div class="fact"><span>01</span><p>Science-led decisions</p></div><div class="fact"><span>02</span><p>Electrical energy feasibility</p></div><div class="fact"><span>03</span><p>Explainable engineering Copilot</p></div></div></div>
+  <div class="footer"><span>POLARIS · Engineering Decision Intelligence</span><span>01 / 07</span></div>
+</section>
+<section class="slide" data-slide="2" aria-label="Slide 2 of 7" hidden>
+  <div class="overline"><span>02 / THE CHALLENGE</span><span>NASA SPACE APPS · 2026</span></div>
+  <div class="slide-body"><div class="label">Lunar south-pole operations face coupled constraints.</div><h1>A mission can change with time and terrain.</h1><h2>Lunar south-pole operations face coupled constraints.</h2><p class="summary">Low solar elevations and local terrain obstruct sunlight and the Earth. A delayed mission or alternative observation site can change the operational picture.</p><div class="facts"><div class="fact"><span>01</span><p>Local solar illumination windows</p></div><div class="fact"><span>02</span><p>Earth-above-terrain visibility — not RF link availability</p></div><div class="fact"><span>03</span><p>Energy continuity under mission schedule changes</p></div></div></div>
+  <div class="footer"><span>POLARIS · Engineering Decision Intelligence</span><span>02 / 07</span></div>
+</section>
+<section class="slide" data-slide="3" aria-label="Slide 3 of 7" hidden>
+  <div class="overline"><span>03 / NASA DATA</span><span>NASA SPACE APPS · 2026</span></div>
+  <div class="slide-body"><div class="label">Traceable space-science inputs</div><h1>Evidence, not guesswork.</h1><h2>Traceable space-science inputs</h2><p class="summary">POLARIS uses NASA GSFC LOLA topography and NASA/JPL Horizons observer ephemerides for two reference sites. NASA Moon Trek and LROC QuickMap provide contextual maps.</p><div class="facts"><div class="fact"><span>01</span><p>6 km local skyline derived from LOLA</p></div><div class="fact"><span>02</span><p>Six-hour Sun/Earth sampled geometry</p></div><div class="fact"><span>03</span><p>228 SPICE–Horizons angular cross-checks</p></div></div></div>
+  <div class="footer"><span>POLARIS · Engineering Decision Intelligence</span><span>03 / 07</span></div>
+</section>
+<section class="slide" data-slide="4" aria-label="Slide 4 of 7" hidden>
+  <div class="overline"><span>04 / ELECTRICAL ENGINEERING</span><span>NASA SPACE APPS · 2026</span></div>
+  <div class="slide-body"><div class="label">Preliminary photovoltaic + battery feasibility</div><h1>Can the lunar power system survive?</h1><h2>Preliminary photovoltaic + battery feasibility</h2><p class="summary">At every sampled interval, POLARIS models photovoltaic input and continuous electrical demand, updates battery state of charge and detects unmet energy.</p><div class="facts"><div class="fact"><span>01</span><p>PV generation = solar flux × area × efficiency × derate × orientation × solar visibility</p></div><div class="fact"><span>02</span><p>Battery SOC and energy deficit across changing illumination</p></div><div class="fact"><span>03</span><p>PV array → conceptual DC/DC → DC bus ↔ battery → mission load</p></div></div></div>
+  <div class="footer"><span>POLARIS · Engineering Decision Intelligence</span><span>04 / 07</span></div>
+</section>
+<section class="slide" data-slide="5" aria-label="Slide 5 of 7" hidden>
+  <div class="overline"><span>05 / INTERACTIVE MISSION</span><span>NASA SPACE APPS · 2026</span></div>
+  <div class="slide-body"><div class="label">Three comparable scenarios</div><h1>Change the plan. Recompute the evidence.</h1><h2>Three comparable scenarios</h2><p class="summary">Compare the original mission, a postponed mission and a delayed alternative-site observation. Adjust solar array area, electrical load and battery storage.</p><div class="facts"><div class="fact"><span>01</span><p>Connecting Ridge and Shackleton Rim reference locations</p></div><div class="fact"><span>02</span><p>Solar/Earth geometry, terrain and electrical outcomes</p></div><div class="fact"><span>03</span><p>User-defined requirements; no automatic “safe landing” claim</p></div></div></div>
+  <div class="footer"><span>POLARIS · Engineering Decision Intelligence</span><span>05 / 07</span></div>
+</section>
+<section class="slide" data-slide="6" aria-label="Slide 6 of 7" hidden>
+  <div class="overline"><span>06 / ENGINEERING COPILOT</span><span>NASA SPACE APPS · 2026</span></div>
+  <div class="slide-body"><div class="label">Explainable decision support</div><h1>Questions become calculations.</h1><h2>Explainable decision support</h2><p class="summary">Ask the Copilot to explain failure conditions or change supported engineering assumptions in natural language. The Python model recomputes results; optional external LLM commentary is not active by default.</p><div class="facts"><div class="fact"><span>01</span><p>Example: “Increase electrical load by 40%”</p></div><div class="fact"><span>02</span><p>Recomputed alternatives, SOC, energy shortfall and threshold results</p></div><div class="fact"><span>03</span><p>Decision Review and report generation with source traceability</p></div></div></div>
+  <div class="footer"><span>POLARIS · Engineering Decision Intelligence</span><span>06 / 07</span></div>
+</section>
+<section class="slide" data-slide="7" aria-label="Slide 7 of 7" hidden>
+  <div class="overline"><span>07 / DEMO &amp; LIMITS</span><span>NASA SPACE APPS · 2026</span></div>
+  <div class="slide-body"><div class="label">Open. Reproducible. Explicit about limits.</div><h1>Explore the working POLARIS prototype.</h1><h2>Open. Reproducible. Explicit about limits.</h2><p class="summary">A publicly accessible eight-view mission analysis workspace. Reference maps are aggregate products; local Earth visibility is not a verified communications link. Six-hour sampling, 6 km terrain horizon and simplified electrical modeling limit precision.</p><div class="facts"><div class="fact"><span>01</span><p>Live: polaris-spaceapps-2026.vercel.app</p></div><div class="fact"><span>02</span><p>Code: github.com/diawbirane10-lgtm/polaris_nasaspaceapps</p></div><div class="fact"><span>03</span><p>Next: validated power hardware and multi-objective optimization</p></div></div></div>
+  <div class="footer"><span>POLARIS · Engineering Decision Intelligence</span><span>07 / 07</span></div>
+</section></main>
+<nav aria-label="Slide controls"><a class="action" href="/" aria-label="Open live POLARIS demo">OPEN LIVE PROTOTYPE</a>
+<div class="actions"><button id="prev" type="button" disabled>← PREVIOUS</button><span class="num" id="counter" aria-live="polite">01 / 07</span><button id="next" type="button">NEXT →</button></div></nav>
+<p class="hint">Seven slides total · Use arrow keys or NEXT/PREVIOUS · Print / Save as PDF from the browser</p>
+<script src="/assets/submission-slides.js" defer></script></body></html>

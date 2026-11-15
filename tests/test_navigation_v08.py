@@ -9,7 +9,7 @@ CLIENT = TestClient(app)
 
 
 def test_eight_explorable_views_and_keyboard_ready_navigation():
-    r = CLIENT.get('/')
+    r = CLIENT.get('/demo')
     assert r.status_code == 200
     dom = BeautifulSoup(r.text, 'html.parser')
     routes = ['mission', 'sky', 'scenarios', 'power', 'atlas', 'evidence', 'copilot', 'review']
@@ -21,7 +21,7 @@ def test_eight_explorable_views_and_keyboard_ready_navigation():
 
 
 def test_power_controls_are_labeled_and_model_backed():
-    dom = BeautifulSoup(CLIENT.get('/').text,'html.parser')
+    dom = BeautifulSoup(CLIENT.get('/demo').text,'html.parser')
     for cid in ['powerArea','powerLoad','powerBattery','powerMode']:
         assert dom.select_one(f'label[for="{cid}"]') is not None
         assert dom.select_one('#'+cid) is not None

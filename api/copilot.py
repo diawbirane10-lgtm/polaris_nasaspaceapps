@@ -233,6 +233,63 @@ def _llm_plan_edits(req: CopilotRequest) -> dict[str, Any] | None:
         return None
 
 
+def _intent_answer(req: CopilotRequest, data: dict, response: dict, intent: str) -> str:
+    """Explain the actual question; numerical claims come exclusively from computed data."""
+    scenario=data['scenarios']
+    original=scenario['original']['summary']
+    delayed=scenario['delayed']['summary']
+    other=scenario['alternative_site_after_delay']['summary']
+    change=response.get('what_if')
+    if change:
+        values=', '.join(f'{k}: {v}' for k,v in change['changed_inputs'].items())
+        return (f"Engineering what-if — {change['label']}. Applied values: {values}.\n\n"
+                f"Delayed mission battery SOC minimum: {change['old']['min_soc_pct']:.1f}% → {change['new']['min_soc_pct']:.1f}%. "
+                f"Unserved electrical energy: {change['old']['unserved_energy_kwh']:.3f} → {change['new']['unserved_energy_kwh']:.3f} kWh.\n\n"
+                "These are simulation results; APPLY & SIMULATE commits the proposed parameters to the workspace.")
+    if intent=='sources':
+        return ("NASA evidence: NASA/JPL Horizons provides Sun/Earth observer angles; NASA GSFC LOLA terrain defines the local "
+                "6 km skyline. Moon Trek supplies aggregate mapping context, not time-specific forecasts. "
+                "The scientific audit compares SPICE with Horizons angular geometry.\n\n"
+                "Six-hour intervals may miss short visibility transitions; geometric Earth visibility is not verified RF connectivity. "
+                "See the evidence links below for source fingerprints and verification.")
+    if intent=='compare_sites':
+        return (f"Mission comparison with unchanged electrical assumptions:\n\n"
+                f"Original site: Earth locally visible {original['earth_visible_hours']:.1f} h, "
+                f"minimum battery SOC {original['min_soc_pct']:.1f}%, shortfall {original['unserved_energy_kwh']:.3f} kWh.\n\n"
+                f"Delayed same site: Earth visible {delayed['earth_visible_hours']:.1f} h, "
+                f"SOC {delayed['min_soc_pct']:.1f}%, shortfall {delayed['unserved_energy_kwh']:.3f} kWh.\n\n"
+                f"Delayed alternative site: Earth visible {other['earth_visible_hours']:.1f} h, "
+                f"SOC {other['min_soc_pct']:.1f}%, shortfall {other['unserved_energy_kwh']:.3f} kWh.\n\n"
+                f"The alternative provides {other['earth_visible_hours']-delayed['earth_visible_hours']:+.1f} h "
+                "of local Earth clearance relative to the delayed original site; this is not an RF link guarantee.")
+    q=req.question.lower()
+    if any(w in q for w in ('battery','batterie','power','puissance','solar','solaire','pv','énergie','energy','load','consommation','soc')):
+        hours=data['inputs']['duration_hours']
+        return (f"Electrical energy diagnosis: {req.load_w:g} W over {hours:g} h requires "
+                f"{req.load_w*hours/1000:.2f} kWh at constant load. The nominal battery is "
+                f"{req.battery_kwh:g} kWh, initially charged to 80%.\n\n"
+                f"Modeled minimum SOC is {original['min_soc_pct']:.1f}% for the original mission "
+                f"and {delayed['min_soc_pct']:.1f}% after delay; the delayed-site alternative yields "
+                f"{other['min_soc_pct']:.1f}%.\n\n"
+                "PV power varies with solar elevation, terrain, array area and orientation. "
+                "Converter, thermal and battery-aging losses are not validated.")
+    if any(w in q for w in ('earth','terre','sun','soleil','visibility','visibilité','horizon','terrain','communication')):
+        return (f"Local geometry: the original site has {original['earth_visible_hours']:.1f} h "
+                f"of modeled Earth clearance, and its longest Earth obstruction lasts "
+                f"{original['max_earth_gap_hours']:.1f} h. The delayed alternative has "
+                f"{other['earth_visible_hours']:.1f} h of Earth clearance.\n\n"
+                "Local terrain visibility does not establish a communications link; distant terrain, "
+                "antenna pointing and ground-station scheduling are not modeled.")
+    rows=[]
+    for key,sc in scenario.items():
+        failed=[r['label'] for r in constraints(req,sc['summary'])['rules'] if r['status']=='FAIL']
+        rows.append(key.replace('_',' ').title()+': '+(', '.join(failed) if failed else 'no failed selected thresholds'))
+    return ("Engineering constraints evaluated against your own thresholds:\n\n" +
+            "\n".join(rows) +
+            "\n\nChange electrical load, PV array, battery storage, observation site or schedule to test a different design. "
+            "A PASS is not flight qualification.")
+
+
 def analyze(req:CopilotRequest) -> dict[str,Any]:
     '''Interpret the actual question, execute whitelisted Python tools, return proof.''' 
     previous = {'field': req.previous_field} if req.previous_field else None
@@ -288,6 +345,7 @@ def analyze(req:CopilotRequest) -> dict[str,Any]:
         action_id=None
     response=_grounded_response(req,base,alternate,label,updates,action_id)
     response['intent']=planning.intent
+    response['answer']=_intent_answer(req,base,response,planning.intent)
     response['flow']={'intent':planning.intent,'confidence':planning.confidence,
        'reason':planning.interpretation, 'updates':updates,
        'tool_calls':[{'name':'counterfactual','description':'Compute baseline + delayed + alternate observation point',

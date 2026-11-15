@@ -2,7 +2,7 @@
 
 **NASA Space Apps Challenge 2026 · Lunar Landing Site Navigator**
 
-**[Launch public prototype](https://polaris-spaceapps-2026.vercel.app/)** · **[Public demo](https://polaris-spaceapps-2026.vercel.app/demo)** · **[Source for currently deployed prototype](https://github.com/diawbirane10-lgtm/polaris_nasaspaceapps/tree/feature/secure-mission-workspace)** · **[NASA challenge](https://www.spaceappschallenge.org/2026/challenges/lunar-landing-site-navigator/)**
+**[Project overview](https://polaris-spaceapps-2026.vercel.app/)** · **[Seven-slide demonstration](https://polaris-spaceapps-2026.vercel.app/submission-slides.html)** · **[Interactive prototype](https://polaris-spaceapps-2026.vercel.app/demo)** · **[Source for currently deployed prototype](https://github.com/diawbirane10-lgtm/polaris_nasaspaceapps/tree/feature/secure-mission-workspace)** · **[NASA challenge](https://www.spaceappschallenge.org/2026/challenges/lunar-landing-site-navigator/)**
 
 POLARIS is an open-source lunar south-pole mission decision-support prototype. Using NASA/JPL Horizons Sun/Earth ephemerides and NASA GSFC LOLA terrain-derived local skyline profiles, it compares original and delayed missions and alternative reference locations. An explainable electrical-energy model estimates photovoltaic generation, electrical demand, battery state of charge and unmet energy. The AI Copilot interprets supported natural-language engineering changes; all numerical outputs are calculated by the Python scientific engine. An optional external LLM is **not connected** by default.
 
@@ -10,7 +10,7 @@ POLARIS is an open-source lunar south-pole mission decision-support prototype. U
 
 Mission · Sky & terrain · Scenarios · Power systems · Lunar atlas · Evidence · AI Copilot · Decision Review.
 
-The working prototype is **public without registration, passwords, MFA or an administrator account**. Legacy `/admin` and `/workspace` URLs open the same public scientific application. No private account-management APIs are exposed.
+The project landing page offers **two choices: Project Overview (7 slides) or Launch Interactive Prototype**. The latter is public without registration, passwords, MFA or an administrator account. Legacy `/admin` and `/workspace` URLs open the public scientific application. No private account-management APIs are exposed.
 
 ## Engineering contribution
 
@@ -38,7 +38,7 @@ The reference observations are sampled at **six-hour intervals**; short visibili
 
 ## Source and reproducibility
 
-The actively deployed source is on the [`feature/secure-mission-workspace` branch](https://github.com/diawbirane10-lgtm/polaris_nasaspaceapps/tree/feature/secure-mission-workspace). Dependencies and `python -m pytest -q` tests are included there, along with NASA provenance records, calculation methods and the detailed [NASA submission draft](docs/NASA_PROJECT_SUBMISSION_DRAFT.md).
+The actively deployed source is on the [`feature/secure-mission-workspace` branch](https://github.com/diawbirane10-lgtm/polaris_nasaspaceapps/tree/feature/secure-mission-workspace). Dependencies and `python -m pytest -q` tests are included there, along with NASA provenance records, calculation methods and the scientific validation scripts and [engineering scope](docs/ELECTRICAL_ENGINEERING_CONTRIBUTION.md).
 
 ## AI disclosure
 

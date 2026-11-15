@@ -1,0 +1,93 @@
+"""ECC-inspired operational UI regression checks for NASA prototype.
+
+Static invariants complement (but never replace) real browser tests.
+"""
+from pathlib import Path
+from fastapi.testclient import TestClient
+from bs4 import BeautifulSoup
+from api.index import app
+
+ROOT=Path(__file__).resolve().parents[1]
+client=TestClient(app)
+
+def test_public_mission_control_does_not_offer_retired_login():
+    html=client.get('/').text
+    assert 'SECURE SIGN IN' not in html
+    assert 'SECURE WORKSPACE' not in html
+    assert 'id="copilotForm"' in html
+    assert 'id="reviewForm"' in html
+    for route in ('mission','sky','scenarios','power','atlas','evidence','copilot','review'):
+        assert f'data-nav="{route}"' in html
+
+def test_all_nav_destinations_have_content_sections():
+    soup=BeautifulSoup(client.get('/').text,'html.parser')
+    for anchor in soup.select('.railnav [data-nav]'):
+        route=anchor['data-nav']
+        assert anchor.get('href')=='#/'+route
+        assert soup.select_one('[data-page="'+route+'"]') is not None
+
+def test_feedback_is_visible_and_accessible_to_screen_readers():
+    soup=BeautifulSoup(client.get('/').text,'html.parser')
+    assert soup.select_one('#copilotFeedback[role="status"][aria-live="polite"]') is not None
+    assert soup.select_one('#reviewStatus[role="status"][aria-live="polite"]') is not None
+    assert soup.select_one('#coReportStatus[role="status"][aria-live="polite"]') is not None
+    for name in ('copilotSubmit','qRun','powerRun','reviewCompute'):
+        assert soup.select_one('#'+name) is not None
+    page=(ROOT/'public'/'polaris-app.js').read_text(encoding='utf-8')
+    for phrase in ('Calculating NASA-grounded mission response','Response complete','Review failed:',
+                   'COMPUTING SCENARIOS','RECOMPUTING POWER','Power calculation unavailable'):
+        assert phrase in page
+
+def test_mobile_navigation_shows_all_eight_sections():
+    css=(ROOT/'public'/'sport-mission.css').read_text(encoding='utf-8')
+    assert 'grid-template-columns:repeat(4,minmax(0,1fr))' in css
+    assert 'grid-template-rows:repeat(2,50px)' in css
+    assert 'prefers-reduced-motion' in css
+
+def test_demo_engine_remains_public():
+    assert client.get('/api/health').status_code==200
+    assert client.get('/api/copilot/status').status_code==200
+    for old in ('/api/registration/status','/api/admin/requests','/api/private/whoami'):
+        assert client.get(old).status_code==404
+
+
+def test_csp_allows_external_interactive_bundle_and_nasa_map_tiles():
+    import json
+    html=client.get('/').text
+    assert '<script src="/assets/polaris-app.js" defer></script>' in html
+    assert '<script>' not in html
+    assert client.get('/assets/polaris-app.js').status_code==200
+    script=client.get('/assets/polaris-app.js').text
+    assert "el('copilotForm').addEventListener('submit'" in script
+    assert "el('reviewForm').addEventListener('submit'" in script
+    config=json.loads((ROOT/'vercel.json').read_text(encoding='utf-8'))
+    csp=next(r['headers']['Content-Security-Policy'] for r in config['routes'] if r['src']=='/' and 'headers' in r)
+    assert "script-src 'self'" in csp
+    assert "script-src 'self' 'unsafe-inline'" not in csp
+    assert "img-src 'self' data: https://trek.nasa.gov" in csp
+
+
+def test_copilot_percentage_updates_fit_precise_controls():
+    html=client.get('/').text
+    assert 'id="load" max="1800" min="100" step="1"' in html
+    assert 'id="powerLoad" max="1800" min="100" step="1"' in html
+    assert 'id="area" max="60" min="2" step="0.1"' in html
+    assert 'id="powerArea" max="60" min="2" step="0.1"' in html
+    js=client.get('/assets/polaris-app.js').text
+    assert "el('powerLoad').value=v" in js
+    assert "syncPowerInputs();invalidateDecision()" in js
+
+
+def test_electrical_engineering_section_is_explicit_and_model_based():
+    html=client.get('/').text
+    js=client.get('/assets/polaris-app.js').text
+    for element in ('eeChainTitle','eeLoad','eeDemandDay','eePvEnergy',
+                    'eeLoadEnergy','eeDarkHours','eeMinSoc'):
+        assert 'id="'+element+'"' in html
+    assert 'DC/DC converter' in html
+    assert 'Conceptual — not sized' in html
+    assert 'not an implemented or verified circuit' in html
+    assert 'function renderElectricalBudget()' in js
+    assert 'Number(row.sample_hours)||0' in js
+    assert 'renderElectricalBudget();' in js
+    assert 'step="1" type="range" value="400"' in html

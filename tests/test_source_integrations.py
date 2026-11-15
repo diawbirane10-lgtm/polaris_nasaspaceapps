@@ -23,7 +23,7 @@ def test_spice_report_is_not_mission_certification():
     assert 'not' in j['interpretation'].lower()
 
 def test_real_moon_trek_wmts_and_quickmap_are_linked():
-    html=client.get('/').text
+    html=client.get('/demo').text + client.get('/assets/polaris-app.js').text
     assert 'trek.nasa.gov/tiles/Moon/SP/' in html
     assert 'quickmap.lroc.asu.edu' in html
     assert 'WAC_POLE_ILL_PCT_SOUTH_100M' in html

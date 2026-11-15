@@ -77,3 +77,137 @@ button:hover:not(:disabled){transform:none!important}
 .chat-line.bot,.chat-line.user{padding:14px 16px!important}
 .copilot-form textarea{min-height:104px!important;height:120px!important;line-height:1.55}
 .copilot-chat{min-height:280px!important}
+
+
+/* POLARIS operational usability pass — mission-first navigation and accessible controls. */
+html{scroll-padding-top:92px}
+body{overflow-x:hidden}
+.main{min-width:0}
+.top{gap:12px;align-items:center}
+.flowbar{gap:12px;flex-wrap:wrap}
+.flowbar #stepExplain{flex:1 1 260px;min-width:0}
+.flowbar button{min-height:44px;white-space:nowrap;font-weight:750}
+.railnav a:focus-visible,.railnav a[aria-current=page]{outline-offset:-3px}
+.railnav a[aria-current=page] .nav-icon{opacity:1}
+.intro{gap:18px;align-items:center}
+.intro h1{font-size:clamp(28px,3vw,43px)!important;line-height:1.12}
+.intro p{max-width:72ch;line-height:1.65}
+.field input,.field select,select,input,textarea{min-height:40px}
+button,input,select,textarea{font-family:inherit}
+button:disabled{cursor:not-allowed;opacity:.56}
+.panel-head,.copilot-head{gap:12px}
+.panel-inner{min-width:0}
+@media(max-width:1120px){
+ .topright .text{display:none}
+ .railnav .nav-name{letter-spacing:0!important}
+}
+@media(max-width:760px){
+ body{padding-bottom:116px!important}
+ .main{padding-bottom:26px!important}
+ .railnav{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:repeat(2,50px)!important;height:101px!important;overflow:visible!important}
+ .railnav a{height:50px!important;min-width:0!important;width:100%!important;flex:none!important;padding:4px 2px!important;gap:1px!important;border-bottom:1px solid #d9dce1!important;border-right:1px solid #d9dce1!important;justify-content:center!important}
+ .railnav .nav-name{font-size:8px!important;white-space:normal!important;line-height:1.12!important;max-width:100%;overflow-wrap:anywhere}
+ .railnav .nav-icon{height:17px!important;width:17px!important}
+ .railnav a[aria-current=page]{border-top:2px solid #145dff!important;background:#eaf4ff!important}
+ .top{flex-wrap:wrap}
+ .topright{flex:0 1 auto;min-width:0}
+ .intro{margin-bottom:14px!important}
+ .intro-actions{gap:8px;flex-wrap:wrap}
+ .flowbar{padding:10px!important}
+ .flowbar #stepExplain{flex-basis:100%;order:2}
+ .flowbar button{margin-left:auto}
+ .panel-inner{padding:14px!important}
+ .copilot-form textarea{min-height:125px!important}
+}
+@media(max-width:380px){
+ .railnav .nav-name{font-size:7px!important}
+ .wordmark{font-size:16px!important}
+ .main{padding-left:10px!important;padding-right:10px!important}
+}
+
+
+/* Engineering workstation: legible lunar DC system architecture and energy balance. */
+.ee-panel{margin:18px 0 30px!important}
+.ee-panel>.panel-inner{padding:clamp(15px,2vw,25px)!important}
+.ee-chain{display:flex;align-items:stretch;gap:8px;overflow-x:auto;padding:12px 0 16px;scrollbar-width:thin}
+.ee-node{flex:1 0 155px;min-width:140px;border:1px solid #aab9c6;background:#f8fbfd;color:#17232e;padding:15px 12px;display:flex;flex-direction:column;gap:5px}
+.ee-node small{font-size:10px;font-weight:800;letter-spacing:.07em;color:#145dff}
+.ee-node strong{font-size:15px}
+.ee-node span{font-size:11px;color:#5b6774;line-height:1.45}
+.ee-node.ee-unmodelled{border-style:dashed;background:#f7f7f5}
+.ee-node.ee-bus{border-left:4px solid #145dff}
+.ee-arrow{flex:0 0 17px;align-self:center;color:#145dff;font-size:22px;font-weight:800}
+.ee-readouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#ccd5de;border:1px solid #ccd5de;margin:10px 0 18px}
+.ee-readouts>div{background:#fff;padding:15px 12px;min-width:0}
+.ee-readouts small{display:block;font-weight:750;letter-spacing:.05em;font-size:10px;color:#5b6774;margin-bottom:9px}
+.ee-readouts strong{font-size:clamp(18px,2vw,25px);color:#111}
+.ee-method{background:#f7f9fc;border-left:3px solid #145dff;padding:15px 20px}
+.ee-method h3{font-size:16px;margin:0 0 9px}
+.ee-method p{font-size:13px;line-height:1.7;margin:8px 0;color:#303943}
+@media(max-width:830px){.ee-readouts{grid-template-columns:repeat(2,minmax(0,1fr))}.ee-chain{gap:6px}.ee-node{flex-basis:147px}}
+@media(max-width:450px){.ee-readouts{grid-template-columns:repeat(2,minmax(0,1fr))}.ee-readouts strong{font-size:17px}.ee-method{padding:12px}.ee-node{flex-basis:145px}}
+
+
+/* Final NASA submission legibility pass.
+   Dark ink on white surfaces, robust outlines, readable plots and meaningful states.
+   Do not express status by hue alone. */
+:root{
+ --muted:#465362!important;
+ --border:#a9b8c9!important;
+ --cyan:#1352c7!important;
+ --teal:#086f83!important;
+ --amber:#875a04!important;
+ --red:#a62b29!important;
+ --mint:#146b46!important;
+}
+body,.main,.panel,.panel-inner,.view-heading,.workspace,.copilot-panel,.decision-review>div{color:#182634!important}
+p,li,dd,dt,.figure-note,.analysis-sub,.micro,.tiny,.muted,.hint,.intro p,.view-heading p,.view-heading small,
+.field label,.field label em,.view-legend,.view-corner,.graphlegend,.graphlegend span,.formula span,
+.power-workspace .figure-note,.copilot-hint,.copilot-provenance,.chat-meta,.copilot-chat,.flight-label small,
+.review-rules,.review-rules p,.review-note,.review-source,.co-stat small,.co-card small,
+.panel-head small,.scen-card p,.scen-controls label,.source-card p,.source-link small,.view-tools span{
+ color:#43505e!important;
+ opacity:1!important;
+}
+.panel,.copilot-panel,.decision-review>div,.power-kpis>div,.co-card,.metric,.source-card,.intro-card,
+.analysis-card,.mission-flow,.scen-card,.review-left,.review-right,.report-download,.ee-node,
+.field input,.field select,select,input,textarea,.ghost,.siteopt,.filter-chip,.chat-quick button,
+.flowbar,.copilot-chat,.copilot-form,.viewport-panel,.flowbar button,.view-tools span{
+ border-color:#aebbc9!important;
+}
+.railnav a{color:#354557!important}
+.railnav a[aria-current="page"],.railnav a:hover{background:#e8f0ff!important;color:#123e91!important;border-bottom-color:#1352c7!important}
+.railnav .nav-icon{opacity:1!important;filter:brightness(0) saturate(100%)!important}
+.eyebrow,.panel-number,.analysis-label,.session-code,.caps,.co-stat strong,.metric .value,.analysis-big,
+.siteopt.on,.filter-chip.active{color:#104cbe!important}
+.live,.badge,.pill,.copilot-mode,.badge.good{color:#11633d!important;border-color:#78a58c!important;background:#eef7f1!important}
+.co-card.co-pass{border-left:4px solid #146b46!important}
+.co-card.co-fail{border-left:4px solid #a62b29!important}
+.field input:focus,.field select:focus,select:focus,textarea:focus,
+button:focus-visible,a:focus-visible{outline:3px solid #1352c7!important;outline-offset:2px!important}
+input::placeholder,textarea::placeholder{color:#506073!important;opacity:1}
+button:disabled,[aria-disabled="true"]{opacity:.75!important;filter:grayscale(.12);cursor:not-allowed}
+button:disabled{border-style:dashed!important}
+.ghost:hover,.siteopt:hover,.filter-chip:hover,.chat-quick button:hover,.flowbar button:hover{
+ background:#edf3ff!important;color:#102c64!important;border-color:#1352c7!important
+}
+.action:hover,.primary-button:hover,.co-apply:hover{
+ background:#122f5c!important;color:#fff!important;border-color:#122f5c!important
+}
+svg text,svg tspan,.power-chart text,#timeChart text,#powerChart text{
+ fill:#33465a!important;opacity:1!important
+}
+svg .series-solar{stroke:#986000!important}
+svg .series-earth{stroke:#1352c7!important}
+.graphlegend .line,.graphlegend i{opacity:1!important}
+.riskbar,.progress-track{background:#dce5ee!important}
+.riskbar span{background:#1352c7!important}
+.ee-readouts{background:#abb9c8!important;border-color:#abb9c8!important}
+.ee-method{background:#edf3fa!important}
+.ee-node small,.ee-readouts small{color:#204b85!important}
+.ee-node span{color:#43505e!important}
+.ee-node strong,.ee-readouts strong{color:#142333!important}
+@media(max-width:760px){
+ .railnav .nav-name{color:#314455!important;font-size:9px!important;font-weight:800!important}
+ .railnav a[aria-current="page"] .nav-name{color:#104cbe!important}
+}

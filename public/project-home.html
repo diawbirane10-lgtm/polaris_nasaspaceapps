@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f9fd">
+<meta name="description" content="POLARIS — NASA Space Apps Challenge 2026. Explore the seven-slide overview or launch the interactive lunar mission engineering prototype.">
+<title>POLARIS — Lunar Mission Decision Intelligence</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#101e2b;background:#f6f8fc}
+*{box-sizing:border-box}
+html{min-height:100%;background:#f6f8fc}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit}
+a:focus-visible{outline:3px solid #2467fa;outline-offset:5px}
+header{width:min(1140px,calc(100% - 44px));margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid #dce4f0;padding:25px 0}
+.brand{font-size:19px;font-weight:900;letter-spacing:.12em;text-decoration:none}.brand span{color:#145dff}
+.topnote{font-size:11px;font-weight:750;letter-spacing:.11em;color:#647487;text-transform:uppercase}
+main{width:min(1140px,calc(100% - 44px));margin:auto;flex:1;display:flex;flex-direction:column;justify-content:center;padding:56px 0 72px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.19em;color:#165df0;text-transform:uppercase}
+h1{font-size:clamp(44px,7.2vw,88px);line-height:1.04;letter-spacing:-.07em;margin:17px 0 20px;max-width:870px}
+h1 span{color:#2467fa}
+.lead{font-size:clamp(16px,2.1vw,20px);line-height:1.62;max-width:790px;color:#516273;margin:0}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:52px}
+.choice{display:flex;flex-direction:column;min-height:275px;border:1px solid #d4ddec;background:#fff;padding:29px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s}
+.choice:hover{transform:translateY(-4px);border-color:#165df0;box-shadow:0 17px 42px #14315b1a}
+.choice.primary{background:#101e2b;color:#fff;border-color:#101e2b}
+.choice.primary:hover{background:#142c47;border-color:#2467fa}
+.choice .num{font:800 12px ui-monospace,Consolas,monospace;letter-spacing:.08em;color:#2367ed}
+.choice.primary .num{color:#8cadff}
+.choice h2{font-size:clamp(23px,3vw,32px);letter-spacing:-.045em;margin:31px 0 9px}
+.choice p{font-size:15px;line-height:1.55;color:#617181;margin:0}
+.choice.primary p{color:#c3d0dc}
+.cta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:34px;font-size:13px;font-weight:850;letter-spacing:.05em}
+.cta .arrow{font-size:24px}
+footer{width:min(1140px,calc(100% - 44px));margin:0 auto;padding:19px 0 26px;border-top:1px solid #dce4f0;color:#687786;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){header{padding:19px 0}.topnote{font-size:10px;max-width:150px;text-align:right}main{padding:43px 0 55px}.choices{grid-template-columns:1fr;gap:13px;margin-top:32px}.choice{min-height:215px;padding:23px}.choice h2{margin-top:19px}.cta{padding-top:20px}footer{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.choice{transition:none}.choice:hover{transform:none}}
+</style>
+</head>
+<body>
+<header><a class="brand" href="/" aria-label="POLARIS home">P<span>O</span>LARIS</a><div class="topnote">NASA Space Apps Challenge · 2026</div></header>
+<main id="main">
+ <div class="eyebrow">Lunar Mission Decision Intelligence</div>
+ <h1>Explore the Moon.<br><span>Engineer the decisions.</span></h1>
+ <p class="lead">An open scientific and electrical engineering demonstrator combining NASA lunar terrain and ephemerides, photovoltaic–battery energy modeling, mission comparisons and an explainable engineering Copilot.</p>
+ <div class="choices" aria-label="Choose a project experience">
+  <a class="choice" href="/submission-slides.html">
+   <span class="num">01 / PROJECT OVERVIEW</span>
+   <h2>View the 7 slides</h2>
+   <p>A concise walkthrough of the challenge, NASA datasets, electrical engineering contribution, mission scenarios, Copilot and limitations.</p>
+   <span class="cta">OPEN PROJECT OVERVIEW <span class="arrow" aria-hidden="true">↗</span></span>
+  </a>
+  <a class="choice primary" href="/demo">
+   <span class="num">02 / LIVE ENGINEERING PROTOTYPE</span>
+   <h2>Launch POLARIS</h2>
+   <p>Explore eight interactive workspaces, run NASA-grounded mission calculations, investigate electrical power constraints and generate decision reports.</p>
+   <span class="cta">OPEN INTERACTIVE DEMO <span class="arrow" aria-hidden="true">↗</span></span>
+  </a>
+ </div>
+</main>
+<footer><span>Open prototype · No account required · Engineering demonstration, not flight-qualified</span><a href="https://github.com/diawbirane10-lgtm/polaris_nasaspaceapps/tree/feature/secure-mission-workspace" rel="noopener">Source code and documentation ↗</a></footer>
+</body>
+</html>
