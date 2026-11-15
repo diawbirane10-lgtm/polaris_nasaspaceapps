@@ -225,7 +225,7 @@ if (BASE/'public').exists():
 
 @app.get('/')
 def homepage():
-    return FileResponse(BASE/'public'/'workspace.html')
+    return FileResponse(BASE/'public'/'index.html')
 
 @app.get('/demo')
 def public_demo():
