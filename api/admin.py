@@ -70,7 +70,7 @@ def _query(identity:WorkspaceIdentity, resource:str,*,params=None):
 def admin_console(request:Request):
     # Admin URL can initiate normal login; privileged contents still require live MFA and role checks.
     if not request.cookies.get(COOKIE):
-        return RedirectResponse('/', status_code=303, headers={
+        return RedirectResponse('/workspace', status_code=303, headers={
             'Cache-Control':'private, no-store',
             'X-Robots-Tag':'noindex, nofollow',
             'Referrer-Policy':'no-referrer',
