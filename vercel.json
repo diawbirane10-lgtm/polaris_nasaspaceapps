@@ -24,27 +24,7 @@
     {
       "src": "/",
       "headers": {
-        "Content-Security-Policy": "default-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://jgfzkftwlqkmmddkjwrv.supabase.co wss://jgfzkftwlqkmmddkjwrv.supabase.co; upgrade-insecure-requests",
-        "Referrer-Policy": "no-referrer"
-      },
-      "continue": true
-    },
-    {
-      "src": "/workspace",
-      "headers": {
-        "Content-Security-Policy": "default-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://jgfzkftwlqkmmddkjwrv.supabase.co wss://jgfzkftwlqkmmddkjwrv.supabase.co; upgrade-insecure-requests",
-        "Cache-Control": "no-store, max-age=0",
-        "X-Robots-Tag": "noindex, nofollow",
-        "Referrer-Policy": "no-referrer"
-      },
-      "continue": true
-    },
-    {
-      "src": "/workspace\\.html",
-      "headers": {
-        "Content-Security-Policy": "default-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://jgfzkftwlqkmmddkjwrv.supabase.co wss://jgfzkftwlqkmmddkjwrv.supabase.co; upgrade-insecure-requests",
-        "Cache-Control": "no-store, max-age=0",
-        "X-Robots-Tag": "noindex, nofollow",
+        "Content-Security-Policy": "default-src 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://trek.nasa.gov https://ssd.jpl.nasa.gov; upgrade-insecure-requests",
         "Referrer-Policy": "no-referrer"
       },
       "continue": true
@@ -54,7 +34,7 @@
       "dest": "/public/terms.html"
     },
     {
-      "src": "/(api/.*|admin|terms)",
+      "src": "/(api/.*|admin|workspace|workspace\\.html|terms)",
       "dest": "/api/index.py"
     },
     {
@@ -71,7 +51,7 @@
     },
     {
       "src": "/workspace",
-      "dest": "/public/workspace.html"
+      "dest": "/public/index.html"
     },
     {
       "src": "/(.*)",
