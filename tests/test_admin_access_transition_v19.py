@@ -20,7 +20,10 @@ def test_public_auth_entry_and_public_demo_exist():
 
 
 def test_administration_undiscoverable_without_verified_session():
-    for route in ("/admin", "/api/admin/requests", "/api/admin/visits"):
+    response = client.get("/admin", follow_redirects=False)
+    assert response.status_code == 303
+    assert response.headers["location"] == "/"
+    for route in ("/api/admin/requests", "/api/admin/visits"):
         response = client.get(route)
         assert response.status_code == 404, (route, response.status_code)
     assert client.post(
