@@ -110,7 +110,7 @@ export default function Page(){
      <div className="geometry-metric"><span><Radio size={15}/> EARTH CLEARANCE</span><strong className={sample?.earth_visible?"text-good":"text-alert"}>{sample?(sample.earth_visible?"VISIBLE":"OBSTRUCTED"):"—"}</strong></div></div>
     <div className="side-section"><div className="side-title">ELECTRICAL BUS <span>MODEL OUTPUT</span></div><div className="bus-card"><div><span>PV SUPPLY</span><b>{sample?fmt(sample.pv_w,1)+" W":"—"}</b></div><div className="bus-bar"><span style={{width:sample?Math.min(100,Math.max(0,(sample.pv_w/(data?.assumptions.load_w||400))*100))+"%":"0%"}}/></div><div><span>CONTINUOUS LOAD</span><b>{data?fmt(data.assumptions.load_w,0)+" W":"—"}</b></div><div className="bus-bar"><span style={{width:"100%",background:"#c49562"}}/></div></div><small className="side-note">Modeled supply and load are not power-electronics circuit validation.</small></div>
     <div className="side-section side-provenance"><ShieldCheck size={19}/><div><strong>EVIDENCE-LINKED SYSTEM</strong><p>NASA/JPL reference data, six-hour cadence and a simplified energy model. All limitations remain applicable.</p></div></div>
-    <a className="full-app-link" href={APP+"/demo"} target="_blank" rel="noreferrer">OPEN CERTIFIED WORKFLOW? <ExternalLink size={14}/><small>Original research prototype / not flight-certified</small></a>
+    <a className="full-app-link" href={APP+"/demo"} target="_blank" rel="noreferrer">OPEN COMPLETE ORIGINAL PROTOTYPE <ExternalLink size={14}/><small>Original research prototype / not flight-certified</small></a>
    </aside>
   </div><div className="test-watermark">V2 UI EXPERIMENT — NOT THE NASA SUBMISSION</div>
  </div>
