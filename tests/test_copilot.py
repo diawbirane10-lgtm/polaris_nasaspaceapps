@@ -82,3 +82,21 @@ def test_copilot_ui_has_controls_and_route():
     assert 'APPLY THESE PARAMETERS' in html
     assert 'aria-live="polite"' in html
     assert 'prefers-reduced-motion' in html
+
+
+def test_offline_engineering_answers_follow_the_question(monkeypatch):
+    monkeypatch.delenv('POLARIS_LLM_API_KEY', raising=False)
+    sources=client.post('/api/copilot',json=payload(question="Explain the NASA data sources and validation")).json()
+    sites=client.post('/api/copilot',json=payload(question="Compare the two lunar sites")).json()
+    energy=client.post('/api/copilot',json=payload(question="Explain the battery and electrical energy budget")).json()
+    assert 'NASA/JPL Horizons' in sources['answer']
+    assert 'Original site:' in sites['answer'] and 'Delayed alternative site:' in sites['answer']
+    assert 'Electrical energy diagnosis' in energy['answer']
+    assert len(set(x['answer'] for x in (sources,sites,energy)))==3
+    assert all(len(x['scenarios'])==3 for x in (sources,sites,energy))
+
+def test_offline_copilot_still_recalculates_and_explains_the_actual_edit(monkeypatch):
+    monkeypatch.delenv('POLARIS_LLM_API_KEY', raising=False)
+    r=client.post('/api/copilot',json=payload(question='Increase electrical load by 40%')).json()
+    assert r['what_if']['changed_inputs']['load_w']==560
+    assert '560' in r['answer'] and 'minimum' in r['answer'].lower()
