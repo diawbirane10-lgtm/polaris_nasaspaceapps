@@ -49,7 +49,7 @@ def test_invalid_delay_is_rejected():
 
 
 def test_ui_supports_applying_mission_updates():
-    html=client.get('/demo').text
+    html=client.get('/demo').text + client.get('/assets/polaris-app.js').text
     assert "if(k==='site_key')" in html
     assert "if(k==='delay_hours')" in html
     assert 'APPLY & SIMULATE MISSION' in html
