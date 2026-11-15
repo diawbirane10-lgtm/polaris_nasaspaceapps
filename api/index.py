@@ -27,37 +27,17 @@ except ImportError:
     from api.review import MissionReviewRequest, build_review
     from api.review_pdf import make_decision_pdf, latex_decision_report
 
-app = FastAPI(title="POLARIS lunar mission navigator", version="1.9.0")
-from .private import router as private_router
-app.include_router(private_router)
-from .workspace import router as workspace_router
-app.include_router(workspace_router)
-from .registration import router as registration_router
-app.include_router(registration_router)
-from .admin import router as admin_router
-app.include_router(admin_router)
+app = FastAPI(title="POLARIS lunar mission navigator", version="2.0.0-prototype")
+# NASA prototype mode: private account/approval routers intentionally not mounted.
+# Existing Supabase data and its RLS policies are left intact and inaccessible here.
 BASE = Path(__file__).resolve().parent.parent
-
-@app.get('/api/workspace-config')
-def workspace_config():
-    # Only publishable keys can be exposed to the browser; never a service key.
-    from .security import _settings
-    from fastapi import HTTPException
-    try:
-        url, key, _ = _settings()
-        return {'available':True,'supabase_url':url,'publishable_key':key,
-                'mfa_required':True,'identity_source':'verified operator directory'}
-    except HTTPException:
-        return {'available':False,'mfa_required':True}
-
-@app.get('/terms')
-def terms_page():
-    return FileResponse(BASE/'public'/'terms.html')
 
 @app.get('/workspace')
 @app.get('/workspace.html')
-def workspace_page():
-    return FileResponse(BASE/'public'/'workspace.html')
+@app.get('/admin')
+def prototype_entry():
+    # Legacy links now land in the same eight-page public mission control.
+    return FileResponse(BASE/'public'/'index.html',headers={'Cache-Control':'no-cache'})
 
 @app.get('/api/health')
 def health():
