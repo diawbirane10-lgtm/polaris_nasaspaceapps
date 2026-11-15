@@ -54,13 +54,19 @@ async function refreshRequestStatus(){if(!session?.access_token){showStatusBadge
  if(result.status==='pending'){pendingTimer=setInterval(()=>{if(session)refreshRequestStatus().catch(()=>{});},20000)}
 }
 async function startMfaForApproved(){stopPendingPoll();
- const factorState=await authCall('/factors');const candidates=(factorState?.totp||[]).filter(x=>x.status==='verified');
+ // The GoTrue GET /user response contains the enrolled factors; GET /factors is not a list endpoint.
+ const account=await authCall('/user');
+ const candidates=(account?.factors||[]).filter(x=>x.factor_type==='totp'&&x.status==='verified');
  if(candidates.length){pendingFactor=candidates[0].id;await startChallenge();}
  else{const enrol=await authCall('/factors',{method:'POST',body:{factor_type:'totp',friendly_name:'POLARIS Mission Workspace'}});
  pendingFactor=enrol.id;$('enrolPane').classList.remove('hidden');
  const qr=enrol.totp?.qr_code||'';
- if(!qr.startsWith('data:image/svg+xml')&&!qr.startsWith('data:image/png'))throw Error('Authenticator QR code unavailable');
- $('mfaQr').src=qr;await startChallenge();}
+ // GoTrue returns a raw SVG; auth-js normally converts it to a data URL.
+ // Never inject the SVG as HTML: encode it as an image source only.
+ const qrSource=qr.startsWith('<svg')||qr.startsWith('<?xml')?'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(qr):
+   qr.startsWith('data:image/svg+xml')||qr.startsWith('data:image/png')?qr:null;
+ if(!qrSource)throw Error('Authenticator QR code unavailable');
+ $('mfaQr').src=qrSource;await startChallenge();}
 }
 async function login(e){e.preventDefault();busy('loginBtn',true);safeMessage('Verifying credentials…');try{
  const result=await authCall('/token?grant_type=password',{method:'POST',body:{email:$('email').value.trim(),password:$('password').value}});
