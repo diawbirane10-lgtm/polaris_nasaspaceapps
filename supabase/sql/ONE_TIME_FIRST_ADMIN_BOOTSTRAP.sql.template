@@ -1,0 +1,61 @@
+-- POLARIS: one-time owner-only bootstrap for the first administrator.
+-- Execute manually in the SUPABASE DASHBOARD SQL EDITOR, never from a web client.
+-- BEFORE USE: personally verify the operator's identity and confirmed email.
+-- Replace ONLY the target email; this template must not be run unchanged.
+-- Do NOT use it to approve routine registrations. Use /admin for those.
+-- All trigger changes are transactional: an error automatically rolls them back.
+BEGIN;
+SET LOCAL lock_timeout = '8s';
+DO $bootstrap$
+DECLARE
+    target_email text := 'REPLACE_WITH_VERIFIED_OPERATOR_EMAIL';
+    target_id uuid;
+    applicant record;
+BEGIN
+    IF target_email = 'REPLACE_WITH_VERIFIED_OPERATOR_EMAIL' OR position('@' in target_email) < 2 THEN
+        RAISE EXCEPTION 'Set target_email to the verified real operator email before running this script';
+    END IF;
+    IF EXISTS (SELECT 1 FROM public.operator_profiles WHERE active = true AND role = 'administrator') THEN
+        RAISE EXCEPTION 'An active POLARIS administrator already exists. Use normal review workflow';
+    END IF;
+    SELECT a.user_id, a.first_name, a.last_name, a.staff_id
+      INTO applicant
+      FROM public.access_requests a
+      JOIN auth.users u ON u.id = a.user_id
+     WHERE lower(u.email) = lower(target_email)
+       AND u.email_confirmed_at IS NOT NULL
+       AND a.status = 'pending';
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'No pending POLARIS application with confirmed email matched';
+    END IF;
+    target_id := applicant.user_id;
+    IF EXISTS (SELECT 1 FROM public.operator_profiles WHERE user_id = target_id) THEN
+        RAISE EXCEPTION 'This operator already has a verified profile; no bootstrap performed';
+    END IF;
+
+    -- Only the database owner may perform this exceptional first-admin bootstrap.
+    -- Locks remain held until COMMIT; no public session receives administrative privilege.
+    EXECUTE 'ALTER TABLE public.access_requests DISABLE TRIGGER polaris_validate_request_decision';
+    EXECUTE 'ALTER TABLE public.access_requests DISABLE TRIGGER polaris_approve_provision';
+
+    UPDATE public.access_requests
+       SET status = 'approved', reviewed_at = now(), reviewed_by = NULL
+     WHERE user_id = target_id AND status = 'pending';
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Application was changed; aborting bootstrap';
+    END IF;
+    INSERT INTO public.operator_profiles
+        (user_id, verified_name, first_name, last_name, staff_id, employee_id,
+         role, active, verified_at, verified_by)
+    VALUES
+        (target_id, applicant.first_name || ' ' || applicant.last_name,
+         applicant.first_name, applicant.last_name, applicant.staff_id, applicant.staff_id,
+         'administrator', true, now(), NULL);
+
+    EXECUTE 'ALTER TABLE public.access_requests ENABLE TRIGGER polaris_approve_provision';
+    EXECUTE 'ALTER TABLE public.access_requests ENABLE TRIGGER polaris_validate_request_decision';
+END $bootstrap$;
+COMMIT;
+-- Verify with:
+-- select role, active, verified_at from public.operator_profiles where role = 'administrator';
+-- Then enroll TOTP MFA and log in via the public / page.
