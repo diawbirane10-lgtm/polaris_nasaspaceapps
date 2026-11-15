@@ -109,3 +109,53 @@ def test_french_electrical_question_not_mistaken_for_site_comparison(monkeypatch
     assert result['mode']=='engineering'
     assert 'Electrical energy diagnosis' in result['answer']
     assert '9.60 kWh' in result['answer']
+
+
+def test_ollama_cloud_only_marks_verified_on_real_model_response(monkeypatch):
+    import api.copilot as cp
+    monkeypatch.setenv('POLARIS_LLM_PROVIDER', 'ollama')
+    monkeypatch.setenv('OLLAMA_API_KEY', 'fake-test-key')
+    seen={}
+    class FakeResponse:
+        ok=True
+        status_code=200
+        def json(self):
+            return {'choices':[{'message':{'content':'En 24 heures, 400 W continus représentent 9,6 kWh. La puissance est instantanée, alors que l’énergie est intégrée dans le temps.'}}], 'model':'gemma4:31b'}
+    def mocked_post(url,headers,json,timeout):
+        seen['url']=url
+        seen['auth']=headers.get('Authorization')
+        return FakeResponse()
+    monkeypatch.setattr(cp.requests,'post',mocked_post)
+    r=client.post('/api/copilot',json=payload(question='Explique 400 W et 9,6 kWh')).json()
+    assert r['mode']=='llm_explainer'
+    assert r['llm_status']=='verified_response'
+    assert r['provider']=='ollama'
+    assert '9,6 kWh' in r['answer']
+    assert seen['url']=='https://ollama.com/v1/chat/completions'
+    assert seen['auth']=='Bearer fake-test-key'
+
+
+def test_ollama_missing_key_keeps_engineering_and_status_honest(monkeypatch):
+    monkeypatch.setenv('POLARIS_LLM_PROVIDER','ollama')
+    monkeypatch.delenv('OLLAMA_API_KEY',raising=False)
+    monkeypatch.delenv('POLARIS_LLM_API_KEY',raising=False)
+    status=client.get('/api/copilot/status').json()
+    assert status['model_connected'] is False
+    assert status['provider_configured'] is False
+    assert status['setup_required'] is True
+    result=client.post('/api/copilot',json=payload()).json()
+    assert result['mode']=='engineering'
+
+
+def test_ollama_http_rejection_is_reported_without_leaking_secrets(monkeypatch):
+    import api.copilot as cp
+    monkeypatch.setenv('POLARIS_LLM_PROVIDER','ollama')
+    monkeypatch.setenv('OLLAMA_API_KEY','fake-secret-do-not-leak')
+    class Rejection:
+        ok=False
+        status_code=401
+    monkeypatch.setattr(cp.requests,'post',lambda *args,**kwargs: Rejection())
+    result=client.post('/api/copilot',json=payload()).json()
+    assert result['mode']=='engineering_fallback'
+    assert result['llm_status']=='http_401'
+    assert 'fake-secret' not in str(result)
