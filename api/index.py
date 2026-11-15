@@ -85,15 +85,22 @@ def replan(site: str=Query('connecting_ridge'),
 
 @app.get('/api/copilot/status')
 def copilot_status():
-    provider = os.environ.get('POLARIS_LLM_PROVIDER','groq').lower()
-    available = (provider == 'kilo' or (
-        bool(os.environ.get('POLARIS_LLM_API_KEY','').strip()) and provider in ('groq','huggingface')))
-    return {'model_connected':False, 'provider':provider if available else None,
-            'provider_configured':available, 'live_provider_health_verified':False,
-            'free_text_enabled':True,
-            'language_support':'multilingual; Python fallback when model unavailable',
-            'simulation_tool':'python', 'evidence':'JPL Horizons and LOLA',
-            'external_data_notice': 'LLM prompts may be processed or logged by third-party providers; do not enter confidential information.' if provider=='kilo' else None}
+    provider=os.environ.get('POLARIS_LLM_PROVIDER','ollama').lower()
+    key=(os.environ.get('OLLAMA_API_KEY','') if provider=='ollama' else os.environ.get('POLARIS_LLM_API_KEY','')).strip()
+    configured=provider in ('ollama','groq','huggingface') and bool(key)
+    return {
+        'model_connected':False,  # A configured key is not evidence of a successful live inference.
+        'provider':provider if configured else None,
+        'provider_configured':configured,
+        'live_provider_health_verified':False,
+        'setup_required':not configured,
+        'free_text_enabled':True,
+        'language_support':'multilingual with verified model inference; engineering fallback otherwise',
+        'simulation_tool':'python',
+        'evidence':'NASA JPL Horizons and LOLA',
+        'external_data_notice': ('Ollama Cloud processes prompts remotely. Do not enter secrets or private data.'
+                                if provider=='ollama' else None),
+    }
 
 @app.post('/api/copilot')
 def mission_copilot(request: CopilotRequest):
