@@ -47,7 +47,7 @@
     },
     {
       "src": "/",
-      "dest": "/public/index.html"
+      "dest": "/public/project-home.html"
     },
     {
       "src": "/demo",
