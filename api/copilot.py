@@ -247,7 +247,7 @@ def _intent_answer(req: CopilotRequest, data: dict, response: dict, intent: str)
                 f"Unserved electrical energy: {change['old']['unserved_energy_kwh']:.3f} → {change['new']['unserved_energy_kwh']:.3f} kWh.\n\n"
                 "These are simulation results; APPLY & SIMULATE commits the proposed parameters to the workspace.")
     if intent=='sources':
-        return ("NASA evidence: JPL Horizons provides Sun/Earth observer angles; NASA GSFC LOLA terrain defines the local "
+        return ("NASA evidence: NASA/JPL Horizons provides Sun/Earth observer angles; NASA GSFC LOLA terrain defines the local "
                 "6 km skyline. Moon Trek supplies aggregate mapping context, not time-specific forecasts. "
                 "The scientific audit compares SPICE with Horizons angular geometry.\n\n"
                 "Six-hour intervals may miss short visibility transitions; geometric Earth visibility is not verified RF connectivity. "
