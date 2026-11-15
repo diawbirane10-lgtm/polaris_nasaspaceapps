@@ -76,3 +76,18 @@ def test_copilot_percentage_updates_fit_precise_controls():
     js=client.get('/assets/polaris-app.js').text
     assert "el('powerLoad').value=v" in js
     assert "syncPowerInputs();invalidateDecision()" in js
+
+
+def test_electrical_engineering_section_is_explicit_and_model_based():
+    html=client.get('/').text
+    js=client.get('/assets/polaris-app.js').text
+    for element in ('eeChainTitle','eeLoad','eeDemandDay','eePvEnergy',
+                    'eeLoadEnergy','eeDarkHours','eeMinSoc'):
+        assert 'id="'+element+'"' in html
+    assert 'DC/DC converter' in html
+    assert 'Conceptual — not sized' in html
+    assert 'not an implemented or verified circuit' in html
+    assert 'function renderElectricalBudget()' in js
+    assert 'Number(row.sample_hours)||0' in js
+    assert 'renderElectricalBudget();' in js
+    assert 'step="1" type="range" value="400"' in html
