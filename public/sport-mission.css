@@ -77,3 +77,50 @@ button:hover:not(:disabled){transform:none!important}
 .chat-line.bot,.chat-line.user{padding:14px 16px!important}
 .copilot-form textarea{min-height:104px!important;height:120px!important;line-height:1.55}
 .copilot-chat{min-height:280px!important}
+
+
+/* POLARIS operational usability pass — mission-first navigation and accessible controls. */
+html{scroll-padding-top:92px}
+body{overflow-x:hidden}
+.main{min-width:0}
+.top{gap:12px;align-items:center}
+.flowbar{gap:12px;flex-wrap:wrap}
+.flowbar #stepExplain{flex:1 1 260px;min-width:0}
+.flowbar button{min-height:44px;white-space:nowrap;font-weight:750}
+.railnav a:focus-visible,.railnav a[aria-current=page]{outline-offset:-3px}
+.railnav a[aria-current=page] .nav-icon{opacity:1}
+.intro{gap:18px;align-items:center}
+.intro h1{font-size:clamp(28px,3vw,43px)!important;line-height:1.12}
+.intro p{max-width:72ch;line-height:1.65}
+.field input,.field select,select,input,textarea{min-height:40px}
+button,input,select,textarea{font-family:inherit}
+button:disabled{cursor:not-allowed;opacity:.56}
+.panel-head,.copilot-head{gap:12px}
+.panel-inner{min-width:0}
+@media(max-width:1120px){
+ .topright .text{display:none}
+ .railnav .nav-name{letter-spacing:0!important}
+}
+@media(max-width:760px){
+ body{padding-bottom:116px!important}
+ .main{padding-bottom:26px!important}
+ .railnav{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:repeat(2,50px)!important;height:101px!important;overflow:visible!important}
+ .railnav a{height:50px!important;min-width:0!important;width:100%!important;flex:none!important;padding:4px 2px!important;gap:1px!important;border-bottom:1px solid #d9dce1!important;border-right:1px solid #d9dce1!important;justify-content:center!important}
+ .railnav .nav-name{font-size:8px!important;white-space:normal!important;line-height:1.12!important;max-width:100%;overflow-wrap:anywhere}
+ .railnav .nav-icon{height:17px!important;width:17px!important}
+ .railnav a[aria-current=page]{border-top:2px solid #145dff!important;background:#eaf4ff!important}
+ .top{flex-wrap:wrap}
+ .topright{flex:0 1 auto;min-width:0}
+ .intro{margin-bottom:14px!important}
+ .intro-actions{gap:8px;flex-wrap:wrap}
+ .flowbar{padding:10px!important}
+ .flowbar #stepExplain{flex-basis:100%;order:2}
+ .flowbar button{margin-left:auto}
+ .panel-inner{padding:14px!important}
+ .copilot-form textarea{min-height:125px!important}
+}
+@media(max-width:380px){
+ .railnav .nav-name{font-size:7px!important}
+ .wordmark{font-size:16px!important}
+ .main{padding-left:10px!important;padding-right:10px!important}
+}
