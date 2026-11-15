@@ -146,3 +146,68 @@ button:disabled{cursor:not-allowed;opacity:.56}
 .ee-method p{font-size:13px;line-height:1.7;margin:8px 0;color:#303943}
 @media(max-width:830px){.ee-readouts{grid-template-columns:repeat(2,minmax(0,1fr))}.ee-chain{gap:6px}.ee-node{flex-basis:147px}}
 @media(max-width:450px){.ee-readouts{grid-template-columns:repeat(2,minmax(0,1fr))}.ee-readouts strong{font-size:17px}.ee-method{padding:12px}.ee-node{flex-basis:145px}}
+
+
+/* Final NASA submission legibility pass.
+   Dark ink on white surfaces, robust outlines, readable plots and meaningful states.
+   Do not express status by hue alone. */
+:root{
+ --muted:#465362!important;
+ --border:#a9b8c9!important;
+ --cyan:#1352c7!important;
+ --teal:#086f83!important;
+ --amber:#875a04!important;
+ --red:#a62b29!important;
+ --mint:#146b46!important;
+}
+body,.main,.panel,.panel-inner,.view-heading,.workspace,.copilot-panel,.decision-review>div{color:#182634!important}
+p,li,dd,dt,.figure-note,.analysis-sub,.micro,.tiny,.muted,.hint,.intro p,.view-heading p,.view-heading small,
+.field label,.field label em,.view-legend,.view-corner,.graphlegend,.graphlegend span,.formula span,
+.power-workspace .figure-note,.copilot-hint,.copilot-provenance,.chat-meta,.copilot-chat,.flight-label small,
+.review-rules,.review-rules p,.review-note,.review-source,.co-stat small,.co-card small,
+.panel-head small,.scen-card p,.scen-controls label,.source-card p,.source-link small,.view-tools span{
+ color:#43505e!important;
+ opacity:1!important;
+}
+.panel,.copilot-panel,.decision-review>div,.power-kpis>div,.co-card,.metric,.source-card,.intro-card,
+.analysis-card,.mission-flow,.scen-card,.review-left,.review-right,.report-download,.ee-node,
+.field input,.field select,select,input,textarea,.ghost,.siteopt,.filter-chip,.chat-quick button,
+.flowbar,.copilot-chat,.copilot-form,.viewport-panel,.flowbar button,.view-tools span{
+ border-color:#aebbc9!important;
+}
+.railnav a{color:#354557!important}
+.railnav a[aria-current="page"],.railnav a:hover{background:#e8f0ff!important;color:#123e91!important;border-bottom-color:#1352c7!important}
+.railnav .nav-icon{opacity:1!important;filter:brightness(0) saturate(100%)!important}
+.eyebrow,.panel-number,.analysis-label,.session-code,.caps,.co-stat strong,.metric .value,.analysis-big,
+.siteopt.on,.filter-chip.active{color:#104cbe!important}
+.live,.badge,.pill,.copilot-mode,.badge.good{color:#11633d!important;border-color:#78a58c!important;background:#eef7f1!important}
+.co-card.co-pass{border-left:4px solid #146b46!important}
+.co-card.co-fail{border-left:4px solid #a62b29!important}
+.field input:focus,.field select:focus,select:focus,textarea:focus,
+button:focus-visible,a:focus-visible{outline:3px solid #1352c7!important;outline-offset:2px!important}
+input::placeholder,textarea::placeholder{color:#506073!important;opacity:1}
+button:disabled,[aria-disabled="true"]{opacity:.75!important;filter:grayscale(.12);cursor:not-allowed}
+button:disabled{border-style:dashed!important}
+.ghost:hover,.siteopt:hover,.filter-chip:hover,.chat-quick button:hover,.flowbar button:hover{
+ background:#edf3ff!important;color:#102c64!important;border-color:#1352c7!important
+}
+.action:hover,.primary-button:hover,.co-apply:hover{
+ background:#122f5c!important;color:#fff!important;border-color:#122f5c!important
+}
+svg text,svg tspan,.power-chart text,#timeChart text,#powerChart text{
+ fill:#33465a!important;opacity:1!important
+}
+svg .series-solar{stroke:#986000!important}
+svg .series-earth{stroke:#1352c7!important}
+.graphlegend .line,.graphlegend i{opacity:1!important}
+.riskbar,.progress-track{background:#dce5ee!important}
+.riskbar span{background:#1352c7!important}
+.ee-readouts{background:#abb9c8!important;border-color:#abb9c8!important}
+.ee-method{background:#edf3fa!important}
+.ee-node small,.ee-readouts small{color:#204b85!important}
+.ee-node span{color:#43505e!important}
+.ee-node strong,.ee-readouts strong{color:#142333!important}
+@media(max-width:760px){
+ .railnav .nav-name{color:#314455!important;font-size:9px!important;font-weight:800!important}
+ .railnav a[aria-current="page"] .nav-name{color:#104cbe!important}
+}
