@@ -49,3 +49,19 @@ def test_demo_engine_remains_public():
     assert client.get('/api/copilot/status').status_code==200
     for old in ('/api/registration/status','/api/admin/requests','/api/private/whoami'):
         assert client.get(old).status_code==404
+
+
+def test_csp_allows_external_interactive_bundle_and_nasa_map_tiles():
+    import json
+    html=client.get('/').text
+    assert '<script src="/assets/polaris-app.js" defer></script>' in html
+    assert '<script>' not in html
+    assert client.get('/assets/polaris-app.js').status_code==200
+    script=client.get('/assets/polaris-app.js').text
+    assert "el('copilotForm').addEventListener('submit'" in script
+    assert "el('reviewForm').addEventListener('submit'" in script
+    config=json.loads((ROOT/'vercel.json').read_text(encoding='utf-8'))
+    csp=next(r['headers']['Content-Security-Policy'] for r in config['routes'] if r['src']=='/' and 'headers' in r)
+    assert "script-src 'self'" in csp
+    assert "script-src 'self' 'unsafe-inline'" not in csp
+    assert "img-src 'self' data: https://trek.nasa.gov" in csp
