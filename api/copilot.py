@@ -141,20 +141,17 @@ def _llm_enrichment(req:CopilotRequest, response:dict[str,Any]) -> dict[str,Any]
     Do not expose upstream headers, tokens or prompts in the public response.
     """
     provider=os.environ.get('POLARIS_LLM_PROVIDER','groq').lower()
-    key=os.environ.get('POLARIS_LLM_API_KEY','').strip()
+    key=(os.environ.get('OLLAMA_API_KEY','') if provider=='ollama' else os.environ.get('POLARIS_LLM_API_KEY','')).strip()
     endpoints={
         'groq':('https://api.groq.com/openai/v1/chat/completions','openai/gpt-oss-20b'),
         'huggingface':('https://router.huggingface.co/v1/chat/completions','openai/gpt-oss-120b'),
-        'kilo':('https://ai-gateway.kilo.ai/api/v1/chat/completions','kilo-auto/free'),
+        'ollama':('https://ollama.com/v1/chat/completions','gemma4:31b'),
     }
     response['llm_status']='disabled'
-    if provider not in endpoints or (not key and provider!='kilo'):
+    if provider not in endpoints or not key:
         return response
     url,default_model=endpoints[provider]
     model=os.environ.get('POLARIS_LLM_MODEL',default_model)
-    if provider=='kilo' and not (model=='kilo-auto/free' or model.endswith(':free')):
-        response['llm_status']='invalid_free_model'
-        return response
     response['llm_status']='requesting'
     response['llm_provider']=provider
     context={'question':req.question,'verified_python_evidence':response['answer'],
