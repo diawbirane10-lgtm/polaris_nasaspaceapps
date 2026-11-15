@@ -8,7 +8,7 @@ import api.copilot as copilot
 client=TestClient(app)
 
 def test_signin_first_with_public_demo_separate():
-    root=client.get('/')
+    root=client.get('/workspace')
     assert root.status_code==200
     assert 'id="loginForm"' in root.text
     assert 'href="/demo"' not in root.text  # no internal/demo navigation before authentication
