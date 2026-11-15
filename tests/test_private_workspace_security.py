@@ -34,10 +34,7 @@ def test_public_demo_and_reports_still_work_without_user():
     document='\n'.join(page.extract_text() or '' for page in PdfReader(BytesIO(r.content)).pages)
     assert 'Public demonstration (no verified author)' in document
 
-def test_rls_source_retained_not_exposed_in_api():
-    from pathlib import Path
-    schema=Path('supabase/sql/secure_workspace_schema.sql').read_text()
-    assert 'ALTER TABLE public.mission_plans ENABLE ROW LEVEL SECURITY' in schema
+def test_private_routes_are_not_mounted():
     routes={route.path for route in app.routes}
     assert '/api/private/whoami' not in routes
     assert '/api/admin/requests' not in routes

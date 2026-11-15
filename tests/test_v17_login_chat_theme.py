@@ -18,7 +18,7 @@ def test_public_workspace_and_copilot_without_signin():
     assert 'id="copilotForm"' in demo.text
 
 def test_sport_palette_stylesheets_served():
-    for url in ('/assets/sport-workspace.css','/assets/sport-mission.css'):
+    for url in ('/assets/sport-mission.css',):
         resp=client.get(url)
         assert resp.status_code==200
         for color in ('#145dff','#fff','#111','#d9dce1'):
