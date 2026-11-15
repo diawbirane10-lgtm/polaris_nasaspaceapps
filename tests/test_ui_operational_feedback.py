@@ -33,7 +33,7 @@ def test_feedback_is_visible_and_accessible_to_screen_readers():
     assert soup.select_one('#coReportStatus[role="status"][aria-live="polite"]') is not None
     for name in ('copilotSubmit','qRun','powerRun','reviewCompute'):
         assert soup.select_one('#'+name) is not None
-    page=(ROOT/'public'/'index.html').read_text(encoding='utf-8')
+    page=(ROOT/'public'/'polaris-app.js').read_text(encoding='utf-8')
     for phrase in ('Calculating NASA-grounded mission response','Response complete','Review failed:',
                    'COMPUTING SCENARIOS','RECOMPUTING POWER','Power calculation unavailable'):
         assert phrase in page
