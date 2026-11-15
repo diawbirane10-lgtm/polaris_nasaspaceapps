@@ -5,7 +5,7 @@ from api.index import app
 client = TestClient(app)
 
 def test_gateway_has_only_identity_actions():
-    r=client.get('/')
+    r=client.get('/workspace')
     assert r.status_code == 200
     html=r.text
     assert 'id="loginForm"' in html and 'id="registerForm"' in html
@@ -25,5 +25,5 @@ def test_auth_gateway_css_and_javascript():
 
 def test_public_demo_still_accessible_and_admin_not_linked():
     assert client.get('/demo').status_code==200
-    assert 'href="/admin"' not in client.get('/').text
+    assert 'href="/admin"' not in client.get('/workspace').text
     assert client.get('/admin',follow_redirects=False).status_code==303
