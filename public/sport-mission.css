@@ -286,3 +286,118 @@ html,body{color:#162537!important}
  .railnav .nav-name{font-size:9px!important;color:#243b53!important;font-weight:800!important}
  .railnav a[aria-current="page"] .nav-name{color:#0f438d!important}
 }
+
+
+/* ========================================================================
+   POLARIS ACCESSIBILITY / TYPE SCALE V3 — global V1 correction, 2026-11-15
+   Fixes inherited dark ink on preserved navy components in all eight views.
+   Semantic tokens: white surfaces -> navy text; dark surfaces -> off-white.
+   The original NASA-backed architecture, API, and data are unchanged.
+   ======================================================================== */
+:root{
+ --polaris-ink:#152436;
+ --polaris-muted:#33465a;
+ --polaris-soft:#465b70;
+ --polaris-white:#f4f9ff;
+ --polaris-navy:#0b2030;
+ --polaris-teal-light:#a8f4eb;
+ --polaris-blue-light:#8ac5ff;
+ --polaris-line:#899eaf;
+}
+html{font-size:16px!important;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+body{font-family:"Segoe UI",Inter,Arial,Helvetica,sans-serif!important;font-size:14.5px!important;line-height:1.6!important;letter-spacing:0!important}
+.main h1,.main h2,.main h3,.main h4{letter-spacing:-.015em!important;line-height:1.24!important;font-weight:750!important}
+.main h1{font-size:clamp(28px,3vw,42px)!important}
+.main h2,.main .sectionlabel h2{font-size:clamp(19px,1.7vw,23px)!important}
+.main h3,.main .panel-head h3,.main .panel-head h2{font-size:clamp(15px,1.2vw,17px)!important}
+.main :is(p,li,dd,dt,.figure-note,.status-inline,.decision,.keyrow,.review-rule,.source-card,.chat-line){line-height:1.65!important}
+.main p,.main li,.main .intro p,.main .sectionlabel p,.main .view-heading p{font-size:clamp(13px,1vw,15px)!important}
+.main :is(.tiny,.micro,.muted,.figure-note,.analysis-sub,.review-note,.review-source,.field label,.field label em,.view-legend,.graphlegend,.chat-meta,.metric small,.ee-node span,.ee-method p,.source-link small,.source-card p,.science-status){font-size:12.5px!important;line-height:1.6!important;opacity:1!important}
+.main :is(.sectionlabel,.panel-head,.field,label){color:var(--polaris-ink)!important}
+.main :is(.panel,.panel-inner,.source-card,.metric,.co-card,.copilot-panel,.review-left,.review-right,.scen-card,.analysis-card,.report-download,.ee-node) {color:var(--polaris-ink)!important}
+.main :is(.panel,.source-card,.metric,.co-card,.copilot-panel,.review-left,.review-right,.scen-card,.analysis-card,.ee-node){border-color:#95a8bb!important}
+.main :is(.tiny,.micro,.muted,.sectionlabel p,.figure-note,.science-status,.status-inline,.analysis-sub,.chat-meta,.field label,.field label em){color:var(--polaris-muted)!important}
+.main :is(input,textarea,select,.field input,.field select){font-size:14px!important;line-height:1.45!important;color:#142638!important}
+.main :is(button,.ghost,.action,.primary-button,.co-apply,.siteopt,.filter-chip){font-size:12.5px!important;font-weight:750!important;letter-spacing:0!important;min-height:40px}
+.main .railnav .nav-name,.railnav .nav-name{font-size:11px!important;line-height:1.25!important}
+.main :is(.metric .label,.co-stat small,.ee-readouts small,.panel-number,.analysis-label,.keyrow span){font-size:11.5px!important}
+.main :is(.metric .value,.co-stat strong,.analysis-big,.ee-readouts strong){font-variant-numeric:tabular-nums}
+.main .badge{font-size:10.5px!important;letter-spacing:.04em!important;line-height:1.35!important}
+.main .science-status{color:#485b71!important;font-weight:700!important}
+
+/* Preserved dark informational surfaces. Earlier light-theme rules painted
+   their inherited text navy, generating the unreadable screenshots. */
+.main :is(.scenario,.auditval,.status-inline,.figure-note,.source-link,
+  .power-kpis>div,.formula,.evidence-grid a,.mission-flow,.mesh-graph,
+  .mesh-node,.mesh-log,.cmd-box,.cmd-line,.cmd-output,.missioncmd,
+  .co-outcomes .scenario,.co-stats .co-stat){
+ background:#10283a!important;
+ border:1px solid #55768d!important;
+ color:var(--polaris-white)!important;
+}
+.main .scenario{padding:17px!important;min-height:155px!important}
+.main .scenario :is(h3,p,small,span,strong,b,div,em),
+.main .auditval :is(h3,p,small,span,strong,b,div,em),
+.main .status-inline :is(p,small,span,strong,b,div,em,i),
+.main .figure-note :is(p,small,span,strong,b,div,em,i),
+.main .source-link :is(p,small,span,strong,b,div,em),
+.main .power-kpis>div :is(p,small,span,strong,b,div,em),
+.main .formula :is(p,small,span,strong,b,div,em),
+.main .evidence-grid a :is(p,small,span,strong,b,div,em),
+.main .mission-flow :is(p,small,span,strong,b,div,em),
+.main .mesh-graph :is(p,small,span,strong,b,div,em),
+.main .mesh-node :is(p,small,span,strong,b,div,em),
+.main .mesh-log :is(p,small,span,strong,b,div,em),
+.main .cmd-box :is(p,small,span,strong,b,div,em),
+.main .cmd-output :is(p,small,span,strong,b,div,em){
+ color:var(--polaris-white)!important;opacity:1!important;
+}
+.main .scenario :is(p,small,span:not(.highlight)),
+.main .auditval small,
+.main .source-link :is(p,small,span),
+.main .power-kpis>div :is(p,small,span),
+.main .formula :is(p,small,span),
+.main .mesh-node small,
+.main .cmd-output small{
+ color:#ccdeeb!important;
+}
+.main .scenario h3{font-size:15px!important;color:#f4f9ff!important;margin:7px 0 12px!important;font-weight:800!important}
+.main .scenario p{font-size:12px!important;line-height:1.7!important}
+.main .scenario strong,.main .scenario .highlight{color:#81c4ff!important;font-size:clamp(20px,1.9vw,27px)!important;font-weight:800!important}
+.main .auditval{padding:16px!important}
+.main .auditval b{color:#89c4ff!important;font-size:clamp(25px,2.5vw,32px)!important;font-weight:800!important}
+.main .auditval small{font-size:12px!important;line-height:1.5!important}
+.main .status-inline{padding:15px 16px!important;font-size:13px!important;line-height:1.6!important}
+.main .status-inline i{color:#a8fff3!important;font-weight:900!important}
+.main .figure-note{padding:15px 16px!important;font-size:13px!important;line-height:1.7!important}
+.main .figure-note strong{color:#fff!important;font-weight:800!important}
+.main .source-link{min-height:130px!important}
+.main .source-link b{font-size:14px!important}
+.main .science-status:before{background:#946200!important}
+.main .source-link:hover,.main .evidence-grid a:hover{background:#1c3d52!important;border-color:#96bad6!important}
+.main :is(.scenario,.auditval,.status-inline,.figure-note,.source-link) a{color:#b0d8ff!important;text-decoration:underline!important;text-underline-offset:3px}
+.main :is(.scenario,.auditval,.status-inline,.figure-note,.source-link) :focus-visible{outline-color:#f6d08a!important}
+
+/* Ensure numerically important values remain high contrast on light panels */
+.main :is(.review-kpis,.ee-readouts,.metric,.co-card,.analysis-card,.panel,.sectionlabel) :is(.value,.metric-value,.number,.stat-number){
+ color:#154b9e!important;opacity:1!important
+}
+.main .panel-head :is(h2,h3),.main .sectionlabel h2{color:#12263a!important}
+.main .panel .ghost:disabled{color:#34495c!important;background:#eef3f8!important;border:1px dashed #788b9d!important;opacity:1!important}
+.main :is(.ghost,.filter-chip,.siteopt,.flowbar button,.chat-quick button){border-color:#8298ad!important}
+.main .badge.amber{background:#fff5df!important;border-color:#9b772e!important;color:#674808!important}
+.main .comparison{gap:13px!important;margin-top:18px!important}
+.main .auditgrid{gap:13px!important}
+.main .panel-inner{padding:clamp(17px,2vw,26px)!important}
+.main :is(.sectionlabel,.panel-head){gap:14px!important}
+.main svg text,.main svg tspan{font-family:"Segoe UI",Arial,sans-serif!important;font-size:12px!important}
+
+/* Navigation must not shrink to unreadable 8px labels */
+@media(max-width:1120px){.railnav .nav-name{font-size:10px!important}}
+@media(max-width:760px){
+ .railnav .nav-name{font-size:10px!important;line-height:1.18!important}
+ .main :is(.tiny,.micro,.muted,.science-status){font-size:12px!important}
+ .main .comparison{grid-template-columns:1fr!important}
+ .main .auditgrid{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:420px){.main .auditgrid{grid-template-columns:1fr!important}}
