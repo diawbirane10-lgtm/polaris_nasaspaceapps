@@ -100,3 +100,12 @@ def test_offline_copilot_still_recalculates_and_explains_the_actual_edit(monkeyp
     r=client.post('/api/copilot',json=payload(question='Increase electrical load by 40%')).json()
     assert r['what_if']['changed_inputs']['load_w']==560
     assert '560' in r['answer'] and 'minimum' in r['answer'].lower()
+
+
+def test_french_electrical_question_not_mistaken_for_site_comparison(monkeypatch):
+    monkeypatch.delenv('POLARIS_LLM_API_KEY', raising=False)
+    monkeypatch.setenv('POLARIS_LLM_PROVIDER','groq')
+    result=client.post('/api/copilot',json=payload(question='Bonjour, explique la différence entre puissance PV et énergie électrique consommée pendant 24 heures, avec les valeurs simulées')).json()
+    assert result['mode']=='engineering'
+    assert 'Electrical energy diagnosis' in result['answer']
+    assert '9.60 kWh' in result['answer']
