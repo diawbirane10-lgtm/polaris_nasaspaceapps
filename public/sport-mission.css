@@ -124,3 +124,25 @@ button:disabled{cursor:not-allowed;opacity:.56}
  .wordmark{font-size:16px!important}
  .main{padding-left:10px!important;padding-right:10px!important}
 }
+
+
+/* Engineering workstation: legible lunar DC system architecture and energy balance. */
+.ee-panel{margin:18px 0 30px!important}
+.ee-panel>.panel-inner{padding:clamp(15px,2vw,25px)!important}
+.ee-chain{display:flex;align-items:stretch;gap:8px;overflow-x:auto;padding:12px 0 16px;scrollbar-width:thin}
+.ee-node{flex:1 0 155px;min-width:140px;border:1px solid #aab9c6;background:#f8fbfd;color:#17232e;padding:15px 12px;display:flex;flex-direction:column;gap:5px}
+.ee-node small{font-size:10px;font-weight:800;letter-spacing:.07em;color:#145dff}
+.ee-node strong{font-size:15px}
+.ee-node span{font-size:11px;color:#5b6774;line-height:1.45}
+.ee-node.ee-unmodelled{border-style:dashed;background:#f7f7f5}
+.ee-node.ee-bus{border-left:4px solid #145dff}
+.ee-arrow{flex:0 0 17px;align-self:center;color:#145dff;font-size:22px;font-weight:800}
+.ee-readouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#ccd5de;border:1px solid #ccd5de;margin:10px 0 18px}
+.ee-readouts>div{background:#fff;padding:15px 12px;min-width:0}
+.ee-readouts small{display:block;font-weight:750;letter-spacing:.05em;font-size:10px;color:#5b6774;margin-bottom:9px}
+.ee-readouts strong{font-size:clamp(18px,2vw,25px);color:#111}
+.ee-method{background:#f7f9fc;border-left:3px solid #145dff;padding:15px 20px}
+.ee-method h3{font-size:16px;margin:0 0 9px}
+.ee-method p{font-size:13px;line-height:1.7;margin:8px 0;color:#303943}
+@media(max-width:830px){.ee-readouts{grid-template-columns:repeat(2,minmax(0,1fr))}.ee-chain{gap:6px}.ee-node{flex-basis:147px}}
+@media(max-width:450px){.ee-readouts{grid-template-columns:repeat(2,minmax(0,1fr))}.ee-readouts strong{font-size:17px}.ee-method{padding:12px}.ee-node{flex-basis:145px}}
