@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+<title id="title">POLARIS lunar mission patch</title>
+<desc id="desc">Original POLARIS insignia featuring a cratered lunar horizon, orbit line, satellite and guiding star, without NASA insignia.</desc>
+<defs>
+ <linearGradient id="space" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0b2237"/><stop offset="1" stop-color="#163e57"/></linearGradient>
+ <linearGradient id="moon" x1=".2" x2="1" y1="0" y2="1"><stop stop-color="#eaf7ff"/><stop offset="1" stop-color="#7a9bad"/></linearGradient>
+ <clipPath id="disc"><circle cx="128" cy="128" r="104"/></clipPath>
+ <path id="top-arc" d="M 38 131 A 90 90 0 0 1 218 131"/>
+ <path id="bottom-arc" d="M 37 145 A 91 91 0 0 0 219 145"/>
+</defs>
+<circle cx="128" cy="128" r="124" fill="#0c2437" stroke="#bdd6e5" stroke-width="3"/>
+<circle cx="128" cy="128" r="116" fill="none" stroke="#32969d" stroke-width="3"/>
+<circle cx="128" cy="128" r="104" fill="url(#space)" stroke="#6bbac8" stroke-width="1.5"/>
+<g clip-path="url(#disc)">
+ <path d="M -8 209 Q 65 160 118 185 T 270 153 L270 270 L-8 270Z" fill="url(#moon)"/>
+ <path d="M-8 217 Q70 176 129 202 T270 174" fill="none" stroke="#d9ecf4" stroke-width="3" opacity=".55"/>
+ <ellipse cx="79" cy="205" rx="22" ry="8" fill="#718f9f" opacity=".72"/>
+ <ellipse cx="155" cy="219" rx="31" ry="10" fill="#7b9aaa" opacity=".65"/>
+ <circle cx="109" cy="190" r="6" fill="#688a9e" opacity=".6"/>
+ <circle cx="199" cy="193" r="4" fill="#607e91" opacity=".65"/>
+ <path d="M 33 167 Q 113 84 223 127" fill="none" stroke="#62d3d1" stroke-width="2.8" stroke-dasharray="4 5"/>
+ <path d="M 64 149 L 192 99" stroke="#b2eefa" stroke-width="1" opacity=".3"/>
+ <g transform="translate(183 107) rotate(-24)">
+  <rect x="-12" y="-8" width="24" height="16" rx="2" fill="#dcebf2" stroke="#0b354b" stroke-width="1.5"/>
+  <rect x="-36" y="-9" width="21" height="18" fill="#1a88a2" stroke="#a6e2ef" stroke-width="1.2"/>
+  <rect x="15" y="-9" width="21" height="18" fill="#1a88a2" stroke="#a6e2ef" stroke-width="1.2"/>
+  <path d="M -29 -9 V9 M -22 -9 V9 M 22 -9 V9 M29 -9 V9" stroke="#b5e2eb" stroke-width=".8"/>
+  <path d="M0 -8 V-20" stroke="#b9e3f2" stroke-width="2"/><circle cx="0" cy="-21" r="3" fill="#80dad5"/>
+ </g>
+ <g fill="#c2f6fa"><circle cx="60" cy="106" r="2"/><circle cx="100" cy="68" r="1.8"/><circle cx="209" cy="72" r="1.8"/><circle cx="147" cy="54" r="1.3"/></g>
+ <path d="M125 90 L129 101 L140 105 L129 109 L125 120 L121 109 L110 105 L121 101 Z" fill="#f7fdff" stroke="#63d1cf" stroke-width="1.4"/>
+</g>
+<g fill="#f4faff" font-family="Arial,Helvetica,sans-serif" text-anchor="middle" font-weight="700">
+<text font-size="18" letter-spacing="2.4"><textPath href="#top-arc" startOffset="50%">POLARIS</textPath></text>
+<text font-size="9.8" letter-spacing="1.5"><textPath href="#bottom-arc" startOffset="50%">LUNAR MISSION · 2026</textPath></text>
+</g>
+<circle cx="23" cy="129" r="3.4" fill="#70d8d4"/><circle cx="233" cy="129" r="3.4" fill="#70d8d4"/>
+</svg>
