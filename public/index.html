@@ -484,7 +484,7 @@ el('nextPage').addEventListener('click',()=>{const pos=ROUTES.findIndex(x=>x.id=
 // Single click in sidebar, no page-length scrolling; browser history and back work.
 function syncQuickInputs(){el('qSite').value=state.site;el('qStart').value=el('landing').value;el('qDelay').value=el('shift').value}
 for (const id of ['qSite','qStart','qDelay']) el(id).addEventListener('change',()=>{state.site=el('qSite').value;el('landing').value=el('qStart').value;el('shift').value=el('qDelay').value;selected()});
-el('qRun').addEventListener('click',async()=>{state.site=el('qSite').value;el('landing').value=el('qStart').value;el('shift').value=el('qDelay').value;selected();if(!state.reference||state.reference.site_key!==state.site)await loadReference();if(!state.busy)await runDecision()});
+el('qRun').addEventListener('click',async()=>{const b=el('qRun');b.disabled=true;const label=b.textContent;b.textContent='COMPUTING SCENARIOS…';try{state.site=el('qSite').value;el('landing').value=el('qStart').value;el('shift').value=el('qDelay').value;selected();if(!state.reference||state.reference.site_key!==state.site)await loadReference();if(!state.busy)await runDecision()}catch(err){el('liveMsg').textContent='Scenario calculation unavailable: '+err.message}finally{b.disabled=false;b.textContent=label}});
 for (const pair of [['powerArea','powerAreaValue',' m²'],['powerLoad','powerLoadValue',' W']]) el(pair[0]).addEventListener('input',()=>{el(pair[1]).textContent=el(pair[0]).value+pair[2]});
 function syncPowerInputs(){el('powerArea').value=el('area').value;el('powerLoad').value=el('load').value;el('powerBattery').value=el('battery').value;el('powerMode').value=el('orientation').value;el('powerAreaValue').textContent=el('area').value+' m²';el('powerLoadValue').textContent=el('load').value+' W'}
 function renderPower(){if(!state.reference){el('powerConclusion').textContent='Loading NASA observations. If this persists, open the Mission screen and run the analysis.';return}
@@ -501,9 +501,13 @@ function renderPower(){if(!state.reference){el('powerConclusion').textContent='L
  el('powerConclusion').textContent=s.unserved_energy_kwh>0?'Model estimates '+n(s.unserved_energy_kwh,2)+' kWh of unmet demand under these parameters. Revise load, array area or battery storage; this is a non-certified approximation.':'No unserved energy under this simplified model and sampled 6 km horizon. This does not demonstrate actual lunar mission survivability.';
 }
 el('powerRun').addEventListener('click',async()=>{
+ const button=el('powerRun'),label=button.textContent;button.disabled=true;button.textContent='RECOMPUTING POWER…';
+ try{
  el('area').value=el('powerArea').value;el('load').value=el('powerLoad').value;el('battery').value=el('powerBattery').value;el('orientation').value=el('powerMode').value;
  el('areaVal').textContent=el('area').value+' m²';el('loadVal').textContent=el('load').value+' W';
  await loadReference();syncPowerInputs();renderPower();
+ }catch(err){el('powerConclusion').textContent='Power calculation unavailable: '+err.message}
+ finally{button.disabled=false;button.textContent=label}
 });
 el('powerSwapSite').addEventListener('click',async()=>{state.site=state.site==='connecting_ridge'?'shackleton_rim':'connecting_ridge';selected();await loadReference();renderPower()});
 const v08RenderMetrics=renderMetrics;renderMetrics=()=>{v08RenderMetrics();renderPower()};
