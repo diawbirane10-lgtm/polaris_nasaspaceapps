@@ -13,7 +13,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 def test_first_screen_contains_registration_and_legal_consent():
-    r=client.get('/')
+    r=client.get('/workspace')
     assert r.status_code==200
     for entry in ('id="loginForm"','id="registerForm"','id="termsAccept"','id="pendingSection"',
                   'id="givenName"','id="familyName"','id="employeeId"'):
