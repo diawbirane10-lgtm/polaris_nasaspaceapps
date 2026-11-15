@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#ffffff"><meta name="robots" content="noindex,nofollow">
-<title>POLARIS — Mission Sign In · Secure Workspace</title>
+<title>POLARIS — Sign in or create an account</title>
 <style>
 :root{font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;background:#08111b;color:#f3f6f7;--panel:#101e2a;--line:#324a57;--muted:#b5c5cd;--bright:#9ef2e3;--amber:#ffcd82;--danger:#ffacaa}
 *{box-sizing:border-box}body{margin:0}a{color:var(--bright)}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
@@ -21,14 +21,14 @@ fieldset{border:0;padding:0;margin:0;min-width:0}label{display:block;color:#c5d6
 <div id="intro" class="hidden" aria-hidden="true"></div>
 <div id="message" class="status" role="status" aria-live="polite">Checking secure sign-in…</div>
 <section id="loginSection" class="layout hidden" aria-labelledby="signTitle">
- <article class="panel auth-panel"><div class="auth-eyebrow">SECURE ACCESS / 01</div><h1 id="signTitle">Welcome back.</h1><p class="auth-subtitle">Sign in to POLARIS.</p>
+ <article class="panel auth-panel"><h1 id="signTitle">Sign in</h1>
   <form id="loginForm"><label for="email">Work email</label><input type="email" id="email" autocomplete="username" required placeholder="name@organisation.com"><label for="password">Password</label><input type="password" id="password" minlength="8" autocomplete="current-password" required>
   <div class="actions"><button type="submit" id="loginBtn">Sign in →</button></div></form>
   <div class="auth-divider"></div><div class="auth-bottom"><span>Don't have an account?</span><button type="button" id="showRegister" class="secondary">Create account</button></div>
  </article>
 </section>
 <section id="registerSection" class="layout hidden" aria-labelledby="registerTitle">
- <article class="panel auth-panel register-panel"><div class="auth-eyebrow">SECURE ACCESS / 02</div><h1 id="registerTitle">Create your account.</h1><p class="auth-subtitle">Registration is subject to approval.</p>
+ <article class="panel auth-panel register-panel"><h1 id="registerTitle">Create account</h1><p class="auth-subtitle">Access is granted after identity verification and approval.</p>
  <form id="registerForm">
   <label for="givenName">First name</label><input id="givenName" autocomplete="given-name" maxlength="80" minlength="2" required>
   <label for="familyName">Last name</label><input id="familyName" autocomplete="family-name" maxlength="80" minlength="2" required>
