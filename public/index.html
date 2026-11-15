@@ -257,7 +257,38 @@ footer.footer{margin-top:22px}
 <p class="figure-note" id="powerConclusion">Loading the scientific model…</p>
 <div class="formula"><b>ENGINEERING MODEL</b><span>PV energy = Irradiance × Area × Efficiency × Derate × Orientation × Visibility</span><span>Battery energy evolves from PV input minus the electrical load.</span></div>
 </div>
-</section><div class="sectionlabel" data-page="atlas" id="sources"><div><h2>NASA science atlas</h2><p>Original challenge resources and engineering source provenance</p></div><span class="badge">SOURCE-TRACKED</span></div>
+</section>
+<section class="panel ee-panel" data-page="power" aria-labelledby="eeChainTitle">
+ <div class="panel-inner">
+  <div class="panel-head"><div><div class="panel-number">ELECTRICAL ENGINEERING / DC POWER SYSTEM</div><h2 id="eeChainTitle">From lunar sunlight to a resilient DC bus</h2></div><span class="badge">PHYSICS-BASED BUDGET</span></div>
+  <p class="figure-note">Conceptual electrical architecture, not an implemented or verified circuit. The current numerical solver models PV generation, load demand and battery state of charge (SOC); converter losses, voltage regulation, temperature and protective devices require further design.</p>
+  <div class="ee-chain" role="img" aria-label="Conceptual lunar electrical architecture: solar array, power converter, DC bus, battery storage, and mission electrical loads">
+   <div class="ee-node"><small>01 / SOURCE</small><strong>Solar array</strong><span>Irradiance · area · orientation</span></div>
+   <div class="ee-arrow" aria-hidden="true">→</div>
+   <div class="ee-node ee-unmodelled"><small>02 / INTERFACE</small><strong>DC/DC converter</strong><span>Conceptual — not sized</span></div>
+   <div class="ee-arrow" aria-hidden="true">→</div>
+   <div class="ee-node ee-bus"><small>03 / DISTRIBUTION</small><strong>DC power bus</strong><span>Energy balance node</span></div>
+   <div class="ee-arrow" aria-hidden="true">↔</div>
+   <div class="ee-node"><small>04 / STORAGE</small><strong>Battery &amp; SOC</strong><span>Surplus / eclipse support</span></div>
+   <div class="ee-arrow" aria-hidden="true">→</div>
+   <div class="ee-node"><small>05 / DEMAND</small><strong>Mission loads</strong><span>Continuous demand assumption</span></div>
+  </div>
+  <div class="ee-readouts" aria-label="Calculated power engineering budget">
+   <div><small>DESIGN ELECTRICAL LOAD</small><strong id="eeLoad">—</strong></div>
+   <div><small>24-HOUR LOAD DEMAND</small><strong id="eeDemandDay">—</strong></div>
+   <div><small>MODELLED PV ENERGY / 96 H</small><strong id="eePvEnergy">—</strong></div>
+   <div><small>MODELLED LOAD ENERGY / 96 H</small><strong id="eeLoadEnergy">—</strong></div>
+   <div><small>MAX DARK INTERVAL</small><strong id="eeDarkHours">—</strong></div>
+   <div><small>BATTERY MINIMUM SOC</small><strong id="eeMinSoc">—</strong></div>
+  </div>
+  <div class="ee-method"><h3>Calculation and engineering boundary</h3>
+   <p><strong>PV model:</strong> P<sub>PV</sub> = 1361 W/m² × A × 0.28 × 0.78 × orientation factor × visible solar-disc fraction. These are declared model assumptions, not measured electrical hardware efficiencies.</p>
+   <p><strong>Load:</strong> E<sub>load</sub> = P<sub>load</sub> × Δt. <strong>Battery:</strong> E<sub>batt,k+1</sub> = clamp(E<sub>batt,k</sub> + (P<sub>PV</sub> − P<sub>load</sub>)Δt, 0, C<sub>batt</sub>). The solver accumulates unmet energy when storage is depleted.</p>
+   <p><strong>Design decisions:</strong> Compare candidate sites, reconfigure PV area / battery capacity / electrical loads, test an eclipse interval and record energy shortfall. A future electrical hardware study should size the converters, define DC-bus voltage and protections, and perform thermal/aging and transient validation.</p>
+  </div>
+ </div>
+</section>
+<div class="sectionlabel" data-page="atlas" id="sources"><div><h2>NASA science atlas</h2><p>Original challenge resources and engineering source provenance</p></div><span class="badge">SOURCE-TRACKED</span></div>
 <section class="sciencegrid" data-page="atlas">
 <div class="panel panel-inner"><div class="panel-head"><h3>Official NASA data providers</h3><span class="micro">2026 CLPS challenge</span></div><div class="source-grid">
 <a class="source-link" href="https://quickmap.lroc.asu.edu/" rel="noopener" target="_blank"><b>LROC QuickMap</b><small>High-resolution lunar surface and topographic reconnaissance</small><em>OPEN RESOURCE ↗</em></a>
