@@ -33,9 +33,9 @@ def test_public_scripts_do_not_route_to_login():
     assert 'id="loginForm"' not in page
     assert 'data-nav="mission"' in page
 
-def test_vercel_routes_keep_admin_and_workspace_on_api():
+def test_vercel_legacy_urls_serve_static_prototype_not_function():
     import json
     routes=json.loads((ROOT/'vercel.json').read_text())['routes']
-    match=next(r for r in routes if r['src'].startswith('/(api/.*|admin'))
-    assert 'workspace' in match['src']
-    assert match['dest']=='/api/index.py'
+    alias=next(r for r in routes if 'admin|workspace' in r['src'])
+    assert alias['dest']=='/public/index.html'
+    assert next(r for r in routes if r['src']=='/(api/.*|terms)')['dest']=='/api/index.py'
