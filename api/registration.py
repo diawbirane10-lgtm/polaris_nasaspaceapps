@@ -15,9 +15,9 @@ _bearer=HTTPBearer(auto_error=False)
 
 
 def _login_identity(credentials: HTTPAuthorizationCredentials|None=Depends(_bearer)):
-    url,key,_=_settings()
     if not credentials or credentials.scheme.lower()!='bearer':
         raise HTTPException(status_code=401,detail='Sign in to view your request')
+    url,key,_=_settings()
     claims=_verify_claims(credentials.credentials,url,require_mfa=False)
     return url,key,credentials.credentials,claims
 
