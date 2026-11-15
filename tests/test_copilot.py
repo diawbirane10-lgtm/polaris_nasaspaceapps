@@ -75,7 +75,7 @@ def test_provider_outage_uses_computed_fallback(monkeypatch):
 
 
 def test_copilot_ui_has_controls_and_route():
-    html=client.get('/').text
+    html=client.get('/demo').text
     assert 'data-nav="copilot"' in html
     assert 'data-page="copilot"' in html
     assert '/api/copilot' in html

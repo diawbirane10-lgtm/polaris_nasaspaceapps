@@ -1,25 +1,28 @@
-# POLARIS v1.8 — Registration, admin review and Supabase Auth sessions
-
 # POLARIS — Lunar Mission Decision Intelligence
 
 **NASA Space Apps Challenge 2026 · Lunar Landing Site Navigator (10 — CLPS)**
 
-[**Live Mission Control**](https://polaris-spaceapps-2026.vercel.app/) · [Official challenge](https://www.spaceappschallenge.org/2026/challenges/lunar-landing-site-navigator/) · [Submission instructions](https://www.spaceappschallenge.org/resources/project-submission-guide)
+[**Application & account registration**](https://polaris-spaceapps-2026.vercel.app/) · [**Open NASA demo**](https://polaris-spaceapps-2026.vercel.app/demo) · [**Official challenge**](https://www.spaceappschallenge.org/2026/challenges/lunar-landing-site-navigator/)
 
-> **A launch delay changes the Moon you land on.** POLARIS lets anyone explore how a mission's location and timing affect local solar illumination, potential direct-to-Earth visibility and a simplified energy budget — using documented NASA datasets, rather than invented scientific outputs.
+> POLARIS connects NASA lunar topography and ephemerides with engineering scenario comparison, power-system modeling, decision reviews and explainable reports.
 
-**Status: v0.8, engineering demonstrator (multi-view interface).** Deployed on Vercel and tested locally on 14 November 2026. **Not a flight-qualified tool, a certified landing-site selector, or a radio-link predictor.**
+**Release candidate v1.9 — account request + approval and protected operator console.** The public demonstration remains free to open without an account, as required by the NASA Space Apps 2026 submission guide. The private mission workspace requires approved account status and TOTP MFA.
 
-## What judges can try
+## Account access and governance
 
-1. Open the [live app](https://polaris-spaceapps-2026.vercel.app/). Compare the two south-pole reference observer coordinates, **Connecting Ridge** and **Shackleton Rim**. These are sample points, not approved landing sites.
-2. Examine real JPL Horizons Sun/Earth azimuth-elevation against a 6 km skyline derived from NASA LOLA elevation data. Inspect the plot and provenance labels.
-3. Use **Mission Reschedule Lab** to compare an initial mission, its delayed schedule and an alternative site under the same assumptions.
-4. Explore NASA Moon Trek WMTS cartographic layers for *aggregated* polar illumination and Earth visibility. These are **not** date-specific mission predictions.
-5. Inspect the [SPICE/Horizons cross-check](https://polaris-spaceapps-2026.vercel.app/api/spice-validation), [source register](https://polaris-spaceapps-2026.vercel.app/api/science-sources), and [temporal-sampling audit](https://polaris-spaceapps-2026.vercel.app/api/science-audit).
+1. The main page (`/`) offers sign in or account request. Registration requires first name, last name, professional ID, verified email, a password and terms acceptance.
+2. Supabase Auth creates the account and `polaris_private.capture_signup_request` creates a request automatically in `public.access_requests` with `pending` status. Applicant metadata is **not** a verified identity.
+3. Upon sign-in, the requester can inspect their current status (**Pending** / **Approved** / **Rejected**). Pending/rejected users cannot use the private workspace.
+4. A verified administrator with TOTP MFA can review requests and sign-in history in an unlinked protected operator console. The server returns 404 for direct unapproved access; a short-lived HttpOnly/Secure/SameSite cookie is issued only after verified MFA and active administrative role.
+5. Approving a request through a restricted `status` UPDATE passes PostgreSQL RLS and triggers, provisions an engineer profile with server-controlled name and enables private mission access. A reviewer cannot alter an applicant's identity fields or approve their own request.
+6. An administrator can see first/last name, professional ID, registration time, status, and Supabase Auth session timestamps. They cannot inspect passwords, refresh tokens, or authentication secrets.
+7. The NASA demo on `/demo` stays public; simulation reports without authenticated identities are clearly separated from private, audited reports.
 
-**Important example:** A 24-hour Shackleton Rim scenario showed 18 estimated hours of local Earth visibility at 6-hour sampling versus 21 hours when repeated with 1-hour JPL data. Sampling resolution matters; neither is a verified operational RF communication window.
+**Initial administrator bootstrap** requires a real verified account to be granted an active administrator profile by the project owner using the Supabase Dashboard. This cannot be performed by public sign-up or through the API. See [Account & approval deployment guide](docs/ACCOUNT_APPROVAL_v1.9.md).
 
+**Important:** do not upload classified or restricted mission information. This hackathon app does not claim to be an official NASA account system.
+
+---
 
 ## Mission Decision Review — v1.4
 
@@ -163,17 +166,3 @@ This code is an **integration candidate**: a new dedicated POLARIS Supabase proj
 - Free-form mission chat accepts multi-turn messages; the question is sent to the Python calculation engine.
 - Connected LLM conversations require `POLARIS_LLM_API_KEY` in server environment (`POLARIS_LLM_PROVIDER=groq` or `huggingface`). The UI explicitly reports when LLM is not connected. An offline rule-based calculation mode is NOT represented as a connected LLM.
 - No API tokens are sent to browsers or committed to GitHub.
-
-
-## Private workspace enrollment (v1.8)
-
-- Login / registration: `/`
-- Administrator console: `/admin`
-- Public NASA demonstration: `/demo`
-- Mission workspace: `/workspace`
-- Status tracking: `GET /api/access/status` (signed-in applicant)
-- Administrator queue: `GET /api/admin/requests`
-- Auth session history: `GET /api/admin/sessions`
-- Database migration and first administrator bootstrap: [`docs/ADMIN_APPROVAL_v18.md`](docs/ADMIN_APPROVAL_v18.md).
-
-The administrator approves the applicant; the applicant never chooses their own role or verified name. Status is pending amber, approved green and rejected red. Supabase Auth does not expose passwords to the administrator. The first administrator must be provisioned in the dedicated Supabase project before a real review can occur.

@@ -94,7 +94,7 @@ def test_charts_are_skipped_if_not_requested():
 
 
 def test_routes_and_ui_connected_to_active_settings():
-    html=c.get('/').text
+    html=c.get('/demo').text
     for term in ('data-nav="review"','id="reviewForm"','id="reviewStatus"',
                  'function reviewPayload()','/api/mission-review','/api/mission-decision/',
                  'id="coJumpReview"','id="reviewLabel"'):

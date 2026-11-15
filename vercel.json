@@ -11,8 +11,9 @@
     }
   ],
   "routes": [
+    {"src":"/terms","dest":"/public/terms.html"},
     {
-      "src": "/api/(.*)",
+      "src": "/(api/.*|admin|terms)",
       "dest": "/api/index.py"
     },
     {
@@ -26,14 +27,6 @@
     {
       "src": "/demo",
       "dest": "/public/index.html"
-    },
-    {
-      "src": "/admin/?",
-      "dest": "/public/admin.html"
-    },
-    {
-      "src": "/terms",
-      "dest": "/public/terms.html"
     },
     {
       "src": "/workspace",

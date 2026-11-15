@@ -27,13 +27,15 @@ except ImportError:
     from api.review import MissionReviewRequest, build_review
     from api.review_pdf import make_decision_pdf, latex_decision_report
 
-app = FastAPI(title="POLARIS lunar mission navigator", version="1.8.0")
+app = FastAPI(title="POLARIS lunar mission navigator", version="1.9.0")
 from .private import router as private_router
 app.include_router(private_router)
 from .workspace import router as workspace_router
 app.include_router(workspace_router)
-from .access_admin import router as access_admin_router
-app.include_router(access_admin_router)
+from .registration import router as registration_router
+app.include_router(registration_router)
+from .admin import router as admin_router
+app.include_router(admin_router)
 BASE = Path(__file__).resolve().parent.parent
 
 @app.get('/api/workspace-config')
@@ -48,11 +50,6 @@ def workspace_config():
     except HTTPException:
         return {'available':False,'mfa_required':True}
 
-@app.get('/admin')
-@app.get('/admin/')
-def admin_page():
-    return FileResponse(BASE/'public'/'admin.html', headers={'Cache-Control':'no-store'})
-
 @app.get('/terms')
 def terms_page():
     return FileResponse(BASE/'public'/'terms.html')
@@ -61,10 +58,6 @@ def terms_page():
 @app.get('/workspace.html')
 def workspace_page():
     return FileResponse(BASE/'public'/'workspace.html')
-
-@app.get('/admin')
-def admin_page():
-    return FileResponse(BASE/'public'/'admin.html')
 
 @app.get('/api/health')
 def health():

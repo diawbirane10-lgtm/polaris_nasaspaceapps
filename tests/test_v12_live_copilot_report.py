@@ -74,7 +74,7 @@ def test_invalid_report_input_is_not_accepted():
 
 
 def test_web_exposes_report_buttons_and_copilot():
-    html=client.get('/').text
+    html=client.get('/demo').text
     assert 'id="coReportPdf"' in html
     assert 'id="coReportTex"' in html
     assert 'downloadReport' in html
