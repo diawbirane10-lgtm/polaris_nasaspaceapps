@@ -401,3 +401,147 @@ body{font-family:"Segoe UI",Inter,Arial,Helvetica,sans-serif!important;font-size
  .main .auditgrid{grid-template-columns:1fr 1fr!important}
 }
 @media(max-width:420px){.main .auditgrid{grid-template-columns:1fr!important}}
+
+
+/* =========================================================================
+   POLARIS POLAR-ATLAS / unified color system V4
+   Accessible glacier-white workbench + midnight-blue science data islands.
+   One color language across all eight modules, overlays, forms and plots.
+   ========================================================================= */
+:root{
+ color-scheme:light!important;
+ --bg:#f3f7fc!important;--elev:#fff!important;--panel:#fff!important;
+ --panel2:#edf3fa!important;--border:#96a9bd!important;
+ --bright:#172a40!important;--muted:#40556b!important;
+ --cyan:#1753a5!important;--teal:#08777a!important;
+ --amber:#81570b!important;--red:#ae3437!important;
+ --mint:#16704c!important;
+ --polaris-ink:#15273e;--polaris-muted:#40556b;
+ --polaris-navy:#112c42;--polaris-navy-border:#517a93;
+ --polaris-light:#f4faff;--polaris-light-muted:#d1e3ee;
+ --polaris-link:#13549c;--polaris-action:#164d8c;
+}
+html,body{background:#f3f7fc!important;color:#172a40!important}
+body{font-family:"Segoe UI",Inter,Arial,sans-serif!important;font-size:15px!important;line-height:1.62!important}
+.shell,.main{background:#f3f7fc!important}
+.main{color:#172a40!important}
+.rail,.top{background:#fff!important;border-color:#98adbf!important}
+.railnav{background:#fff!important}
+.railnav a{color:#2a415b!important}
+.railnav a:hover,.railnav a[aria-current=page]{
+ background:#e1edfa!important;border-bottom-color:#1856a4!important;color:#133f7b!important
+}
+.railnav .nav-icon{filter:none!important;opacity:1!important}
+.main :is(.panel,.copilot-panel,.decision-review>div,.metric,.source-card,.intro-card,.analysis-card,.scen-card,.review-left,.review-right,.report-download,.viewport-panel,.copilot-chat,.copilot-form,.power-chart-wrap){
+ background:#fff!important;background-image:none!important;color:#172a40!important;
+ border-color:#9aafc3!important;
+}
+.main :is(.panel-head h2,.panel-head h3,.sectionlabel h2,.intro h1,.view-heading h1,.top h2,h1,h2,h3){color:#142941!important}
+.main :is(.tiny,.micro,.muted,.intro p,.view-heading p,.sectionlabel p,.field label,.field label em,.chat-meta,.analysis-sub,.science-status,.figure-note,.view-legend,.review-note,.review-source){
+ color:#40556b!important;opacity:1!important
+}
+.main :is(.panel-number,.analysis-label,.eyebrow,.caps,.session-code,.metric .value,.analysis-big,.co-stat strong){color:#14549d!important}
+.main :is(.field input,.field select,input,select,textarea,.copilot-form textarea){
+ background:#fff!important;border:1px solid #7d94ad!important;color:#172a40!important
+}
+.main :is(input,textarea)::placeholder{color:#536b82!important;opacity:1!important}
+.main :is(.action,.co-apply,.primary-button,.chat-submit,.send-button){
+ background:#164d8c!important;border:1px solid #164d8c!important;color:#fff!important
+}
+.main :is(.action,.co-apply,.primary-button,.chat-submit,.send-button):hover:not(:disabled){
+ background:#0e3868!important;border-color:#0e3868!important;color:#fff!important
+}
+.main :is(.ghost,.chat-quick button,.flowbar button,.siteopt,.filter-chip,.report-download button){
+ background:#edf3fa!important;border:1px solid #859bb1!important;color:#173c68!important
+}
+.main :is(.ghost,.chat-quick button,.flowbar button,.siteopt,.filter-chip):hover:not(:disabled){
+ background:#dbeafa!important;border-color:#1656a4!important;color:#123e73!important
+}
+.main :is(.siteopt.on,.filter-chip.active){
+ background:#dceafb!important;color:#0e4385!important;border:2px solid #1859a6!important
+}
+.main :is(.flowbar,.view-bottom,.copilot-hint,.copilot-provenance,.copilot-privacy,.copilot-loading,.ee-method){
+ background:#edf3fa!important;color:#31495f!important;border-color:#9aafc3!important
+}
+.main :is(.live,.badge.good,.copilot-mode){
+ background:#e4f5ec!important;color:#145a40!important;border-color:#6a9b84!important
+}
+.main .badge.amber,.main .science-status{
+ background:#fff1d2!important;color:#754b08!important;border-color:#ac8c4d!important
+}
+.main .badge:not(.amber):not(.good){
+ background:#e5eff9!important;color:#1c4b7e!important;border-color:#819db8!important
+}
+.main :is(.badge,.live,.pill){font-weight:800!important}
+.main :is(.metric,.power-kpis>div,.co-card,.ee-readouts>div,.review-kpis>div){
+ border-color:#9aafc3!important
+}
+.main :is(.power-kpis>div,.ee-readouts>div,.review-kpis>div){
+ background:#e9f1f9!important;color:#173049!important
+}
+.main :is(.power-kpis>div,.ee-readouts>div,.review-kpis>div) :is(span,small,p,label){
+ color:#40556b!important
+}
+.main :is(.power-kpis>div,.ee-readouts>div,.review-kpis>div) :is(strong,b,.value){
+ color:#124c92!important
+}
+/* Deliberately dark data surfaces: every descendant receives light-on-navy,
+   overriding old light-theme rules that previously produced black-on-navy. */
+.main :is(.scenario,.auditval,.status-inline,.figure-note,.source-link,.formula,
+ .evidence-grid a,.mission-flow,.mesh-graph,.mesh-node,.mesh-log,
+ .cmd-box,.cmd-line,.cmd-output,.missioncmd){
+ background:#112c42!important;background-image:none!important;
+ border:1px solid #557c96!important;color:#f4faff!important
+}
+.main :is(.scenario,.auditval,.status-inline,.figure-note,.source-link,.formula,
+ .evidence-grid a,.mission-flow,.mesh-graph,.mesh-node,.mesh-log,
+ .cmd-box,.cmd-line,.cmd-output,.missioncmd) :is(h2,h3,h4,p,b,strong,span,small,em,div,i,label,li,code){
+ color:#f4faff!important;opacity:1!important
+}
+.main :is(.scenario,.auditval,.status-inline,.figure-note,.source-link,.formula,
+ .evidence-grid a,.mission-flow,.mesh-graph,.mesh-node,.mesh-log,
+ .cmd-box,.cmd-line,.cmd-output,.missioncmd) :is(p,small,em,li){
+ color:#d1e3ee!important
+}
+.main :is(.scenario,.auditval,.status-inline,.figure-note,.source-link,.formula,
+ .evidence-grid a,.mission-flow,.mesh-graph,.mesh-node,.mesh-log,
+ .cmd-box,.cmd-line,.cmd-output,.missioncmd) a{
+ color:#b6dcff!important;text-decoration:underline;text-underline-offset:3px
+}
+.main .scenario strong,.main .scenario .highlight,.main .auditval b{
+ color:#a7d6ff!important;font-weight:850!important
+}
+.main .scenario h3{color:#fff!important}
+.main .status-inline i{color:#a5f0dd!important}
+.main .figure-note strong{color:#fff!important}
+.main .scenario{min-height:165px!important}
+.main .source-link:hover,.main .evidence-grid a:hover{
+ background:#1d415c!important;border-color:#96c7e5!important
+}
+.main :is(.chat-line.bot,.chat-line.user){
+ background:#edf3f9!important;color:#18304b!important;border-color:#a0b5c8!important
+}
+.main .chat-line.user{background:#dfeaf9!important}
+.main :is(.chat-line.bot,.chat-line.user) :is(span,p,strong,small,div){
+ color:#1a334f!important
+}
+.main .co-card.co-fail{border-left:4px solid #ae3437!important}
+.main .co-card.co-pass{border-left:4px solid #16704c!important}
+.main :is(.riskbar,.progress-track){background:#d9e5f0!important}
+.main :is(.riskbar,.progress-track)>span{background:#1757a0!important}
+.main .world{border-color:#9aafc3!important}
+.main .view-tools span,.main .view-corner{color:#40556b!important;border-color:#9aafc3!important}
+.main :is(svg text,svg tspan,.power-chart text,#timeChart text,#powerChart text){
+ fill:#304960!important;opacity:1!important;font-size:12px!important
+}
+.main svg .series-solar{stroke:#a06a0b!important}
+.main svg .series-earth{stroke:#1756a0!important}
+.main :is(.ghost,.action,.primary-button,button,select,input,textarea,a):focus-visible{
+ outline:3px solid #1377a8!important;outline-offset:3px!important
+}
+@media(max-width:760px){
+ .railnav{background:#fff!important;border-top-color:#90a7ba!important}
+ .railnav .nav-name{color:#25415e!important;font-size:10px!important}
+ .railnav a[aria-current=page] .nav-name{color:#0d4a95!important}
+ .main .comparison{grid-template-columns:1fr!important}
+}
