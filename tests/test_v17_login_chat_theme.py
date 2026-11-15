@@ -32,7 +32,7 @@ def test_real_llm_status_not_invented(monkeypatch):
     assert resp.json()['free_text_enabled'] is True
 
 def test_chat_input_not_a_dropdown_or_preprogrammed_prompts():
-    html=client.get('/demo').text
+    html=client.get('/demo').text + client.get('/assets/polaris-app.js').text
     assert 'maxlength="2000"' in html
     assert 'copilotHistory.slice(-12)' in html
     assert 'data-coprompt' not in html
