@@ -86,10 +86,14 @@ def replan(site: str=Query('connecting_ridge'),
 @app.get('/api/copilot/status')
 def copilot_status():
     provider = os.environ.get('POLARIS_LLM_PROVIDER','groq').lower()
-    available = bool(os.environ.get('POLARIS_LLM_API_KEY','').strip()) and provider in ('groq','huggingface')
+    available = (provider == 'kilo' or (
+        bool(os.environ.get('POLARIS_LLM_API_KEY','').strip()) and provider in ('groq','huggingface')))
     return {'model_connected':available, 'provider':provider if available else None,
-            'free_text_enabled':True, 'language_support':'multilingual with connected language model',
-            'simulation_tool':'python', 'evidence':'JPL Horizons and LOLA'}
+            'provider_configured':available, 'live_provider_health_verified':False,
+            'free_text_enabled':True,
+            'language_support':'multilingual; Python fallback when model unavailable',
+            'simulation_tool':'python', 'evidence':'JPL Horizons and LOLA',
+            'external_data_notice': 'LLM prompts may be processed or logged by third-party providers; do not enter confidential information.' if provider=='kilo' else None}
 
 @app.post('/api/copilot')
 def mission_copilot(request: CopilotRequest):
