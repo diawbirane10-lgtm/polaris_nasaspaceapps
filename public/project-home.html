@@ -58,6 +58,15 @@ header,footer{border-color:#a5b8c8!important}
 .choice:hover{border-color:#17559f!important}
 :focus-visible{outline:3px solid #08777a!important;outline-offset:3px}
 
+
+/* Compact original mission insignia — readable, responsive and clearly independent. */
+.mission-patch{display:flex;align-items:center;gap:19px;margin:34px 0 -17px;padding:12px 18px 12px 12px;max-width:545px;border:1px solid #a3b9c9;background:#e9f2f9;color:#152d47}
+.mission-patch img{width:104px;height:104px;flex:none;object-fit:contain;filter:drop-shadow(0 4px 7px #0a2d4429)}
+.mission-patch-copy{display:flex;flex-direction:column;gap:8px;min-width:0}
+.mission-patch-copy strong{font-size:13px;line-height:1.4;letter-spacing:.05em;color:#173a5c}
+.mission-patch-copy span{font-size:10.5px;letter-spacing:.09em;font-weight:800;color:#146c79}
+.mission-patch-copy small{font-size:11px;line-height:1.5;color:#46617a}
+@media(max-width:700px){.mission-patch{gap:13px;margin:22px 0 -9px;padding:10px;max-width:100%}.mission-patch img{width:84px;height:84px}.mission-patch-copy strong{font-size:11.5px}.mission-patch-copy span{font-size:9px}.mission-patch-copy small{font-size:10px}}
 </style>
 </head>
 <body>
@@ -66,6 +75,10 @@ header,footer{border-color:#a5b8c8!important}
  <div class="eyebrow">Lunar Mission Decision Intelligence</div>
  <h1>Explore the Moon.<br><span>Engineer the decisions.</span></h1>
  <p class="lead">An open scientific and electrical engineering demonstrator combining NASA lunar terrain and ephemerides, photovoltaic–battery energy modeling, mission comparisons and an explainable engineering Copilot.</p>
+ <div class="mission-patch" aria-label="Original POLARIS Lunar Mission Intelligence insignia, 2026">
+  <img src="/assets/polaris-mission-patch.svg" width="104" height="104" alt="POLARIS original lunar mission patch with Moon, satellite and guiding star" loading="eager" decoding="async"/>
+  <div class="mission-patch-copy"><strong>POLARIS · LUNAR MISSION INTELLIGENCE</strong><span>ORIGINAL PROJECT INSIGNIA · 2026</span><small>Independent engineering demonstrator · Not an official NASA emblem</small></div>
+ </div>
  <div class="choices" aria-label="Choose a project experience">
   <a class="choice" href="/submission-slides.html">
    <span class="num">01 / PROJECT OVERVIEW</span>
