@@ -147,3 +147,13 @@ def test_csrf_blocks_an_outside_decision_even_with_mocked_admin(monkeypatch):
     r=client.post('/api/admin/decision',headers={'origin':'https://evil.example'},json={
         'request_id':str(uuid4()),'decision':'approved'})
     assert r.status_code==404
+
+
+def test_totp_enrollment_reads_user_factors_and_encodes_svg_qr():
+    source=(ROOT/'public'/'workspace.js').read_text(encoding='utf-8')
+    assert "authCall('/user')" in source
+    assert "account?.factors||[]" in source
+    assert "factor_type==='totp'" in source
+    assert "encodeURIComponent(qr)" in source
+    assert "mfaQr').src=qrSource" in source
+    assert "authCall('/factors');" not in source
