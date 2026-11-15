@@ -65,3 +65,14 @@ def test_csp_allows_external_interactive_bundle_and_nasa_map_tiles():
     assert "script-src 'self'" in csp
     assert "script-src 'self' 'unsafe-inline'" not in csp
     assert "img-src 'self' data: https://trek.nasa.gov" in csp
+
+
+def test_copilot_percentage_updates_fit_precise_controls():
+    html=client.get('/').text
+    assert 'id="load" max="1800" min="100" step="1"' in html
+    assert 'id="powerLoad" max="1800" min="100" step="1"' in html
+    assert 'id="area" max="60" min="2" step="0.1"' in html
+    assert 'id="powerArea" max="60" min="2" step="0.1"' in html
+    js=client.get('/assets/polaris-app.js').text
+    assert "el('powerLoad').value=v" in js
+    assert "syncPowerInputs();invalidateDecision()" in js
