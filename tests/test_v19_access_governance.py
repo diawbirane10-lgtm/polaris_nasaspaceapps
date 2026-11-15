@@ -30,7 +30,8 @@ def test_admin_documents_are_not_published_as_static_assets():
 
 
 def test_admin_route_returns_not_found_without_cookie():
-    for p in ('/admin','/api/admin/requests','/api/admin/visits'):
+    assert client.get('/admin',follow_redirects=False).status_code==303
+    for p in ('/api/admin/requests','/api/admin/visits'):
         assert client.get(p).status_code==404
     assert client.post('/api/admin/decision',headers={'origin':'https://testserver'},json={
         'request_id':str(uuid4()),'decision':'approved'}).status_code==404
