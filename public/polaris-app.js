@@ -131,7 +131,23 @@ for (const id of ['qSite','qStart','qDelay']) el(id).addEventListener('change',(
 el('qRun').addEventListener('click',async()=>{const b=el('qRun');b.disabled=true;const label=b.textContent;b.textContent='COMPUTING SCENARIOS…';try{state.site=el('qSite').value;el('landing').value=el('qStart').value;el('shift').value=el('qDelay').value;selected();if(!state.reference||state.reference.site_key!==state.site)await loadReference();if(!state.busy)await runDecision()}catch(err){el('liveMsg').textContent='Scenario calculation unavailable: '+err.message}finally{b.disabled=false;b.textContent=label}});
 for (const pair of [['powerArea','powerAreaValue',' m²'],['powerLoad','powerLoadValue',' W']]) el(pair[0]).addEventListener('input',()=>{el(pair[1]).textContent=el(pair[0]).value+pair[2]});
 function syncPowerInputs(){el('powerArea').value=el('area').value;el('powerLoad').value=el('load').value;el('powerBattery').value=el('battery').value;el('powerMode').value=el('orientation').value;el('powerAreaValue').textContent=el('area').value+' m²';el('powerLoadValue').textContent=el('load').value+' W'}
+function renderElectricalBudget(){
+ const ref=state.reference;
+ if(!ref)return;
+ const rows=ref.samples||[];
+ const load=Number(el('load').value);
+ const energyPvKwh=rows.reduce((sum,row)=>sum+(Number(row.pv_w)||0)*(Number(row.sample_hours)||0)/1000,0);
+ const hours=Number(ref.summary?.duration_hours)||0;
+ const write=(id,value)=>{const node=el(id);if(node)node.textContent=value};
+ write('eeLoad',load.toFixed(0)+' W');
+ write('eeDemandDay',(load*24/1000).toFixed(2)+' kWh / day');
+ write('eePvEnergy',energyPvKwh.toFixed(2)+' kWh / '+hours.toFixed(0)+' h');
+ write('eeLoadEnergy',(load*hours/1000).toFixed(2)+' kWh / '+hours.toFixed(0)+' h');
+ write('eeDarkHours',Number(ref.summary.max_dark_hours).toFixed(1)+' h');
+ write('eeMinSoc',Number(ref.summary.min_soc_pct).toFixed(1)+' %');
+}
 function renderPower(){if(!state.reference){el('powerConclusion').textContent='Loading NASA observations. If this persists, open the Mission screen and run the analysis.';return}
+ renderElectricalBudget();
  const ref=state.reference,s=ref.summary,rows=ref.samples,plot=el('powerChart');
  el('powerMinSoc').textContent=n(s.min_soc_pct,1)+'%';el('powerDeficit').textContent=n(s.unserved_energy_kwh,2)+' kWh';el('powerFinalSoc').textContent=n(s.last_soc_pct,1)+'%';
  el('powerSiteTitle').textContent=state.site==='connecting_ridge'?'CONNECTING RIDGE':'SHACKLETON RIM';
