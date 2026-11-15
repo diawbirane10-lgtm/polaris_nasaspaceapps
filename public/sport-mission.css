@@ -211,3 +211,78 @@ svg .series-earth{stroke:#1352c7!important}
  .railnav .nav-name{color:#314455!important;font-size:9px!important;font-weight:800!important}
  .railnav a[aria-current="page"] .nav-name{color:#104cbe!important}
 }
+
+
+/* ACCESSIBLE CONTRAST V2 — white-on-light and faded science labels corrected.
+   Main text ~#162537, secondary #304459, stronger control outlines.
+   Respect explicit dark backgrounds and avoid recoloring plotted shapes. */
+:root{
+ --bright:#142333!important;
+ --muted:#304459!important;
+ --border:#899bad!important;
+ --cyan:#124cb6!important;
+ --teal:#0a6474!important;
+ --amber:#805600!important;
+ --red:#a82724!important;
+ --mint:#12603e!important;
+}
+html,body{color:#162537!important}
+.main,.main .panel,.main .panel-inner,.main .view-heading,
+.main .copilot-panel,.main .review-left,.main .review-right,
+.main .co-card,.main .metric,.main .ee-node{color:#162537!important}
+.main p,.main li,.main label,.main small,.main .tiny,.main .micro,
+.main .muted,.main .figure-note,.main .analysis-sub,.main .copilot-hint,
+.main .chat-meta,.main .view-legend,.main .view-corner,.main .graphlegend,
+.main .view-tools span,.main .field label,.main .field label em,
+.main .co-stat small,.main .co-card small,.main .ee-readouts small,
+.main .ee-node span,.main .ee-method p,.main .source-card p,
+.main .report-download small,.main .review-note,.main .review-source,
+.main .scen-card p,.main .scen-controls label,.main .copilot-privacy,
+.main .copilot-feedback,.main .copilot-form small,
+.main .copilot-thresholds label,.main .copilot-provenance{
+  color:#304459!important;opacity:1!important;
+}
+.main .copilot-chat,.main .chat-line.bot,.main .chat-line.user,
+.main .copilot-hint,.main .copilot-provenance,.main .copilot-privacy{
+ background:#f0f4f9!important;color:#182b3e!important;
+ border:1px solid #9aabbb!important;
+}
+.main .chat-line.user{background:#e3efff!important;border-color:#81a8d7!important}
+.main .chat-line.bot{background:#f5f7fa!important;border-color:#a2aebd!important}
+.main .copilot-chat .chat-meta{color:#29486b!important;font-weight:750!important}
+.main .copilot-chat .chat-line{color:#172839!important;line-height:1.6!important}
+.main .copilot-privacy{padding:12px 14px!important;line-height:1.5!important;font-size:12px!important;margin-top:9px!important}
+.main .copilot-privacy strong{color:#153b73!important}
+.main .badge,.main .pill,.main .live,.main .copilot-mode{
+ color:#155534!important;background:#edf6ee!important;
+ border-color:#7c9a86!important;font-weight:800!important
+}
+.main .field input,.main .field select,.main select,.main input,.main textarea,
+.main .ghost,.main .filter-chip,.main .siteopt,.main .chat-quick button,
+.main .flowbar button,.main .report-download button{
+ color:#14273d!important;border:1px solid #8499ad!important;
+}
+.main input::placeholder,.main textarea::placeholder{color:#475b6e!important;opacity:1!important}
+.main button:disabled{opacity:.72!important;border-style:dashed!important}
+.main button:not(:disabled):focus-visible,.main a:focus-visible,
+.main input:focus-visible,.main select:focus-visible,.main textarea:focus-visible{
+ outline:3px solid #145dff!important;outline-offset:2px!important
+}
+.main .railnav a,.railnav a{color:#243b53!important}
+.railnav a[aria-current="page"]{background:#e5efff!important;color:#0f438d!important}
+.main .panel,.main .metric,.main .source-card,.main .co-card,.main .report-download,
+.main .analysis-card,.main .scen-card,.main .ee-node{
+ border-color:#a0afbd!important
+}
+.main .ee-readouts small{color:#244467!important}
+.main .ee-readouts strong,.main .co-stat strong,.main .metric strong{color:#15283d!important}
+.main svg text,.main svg tspan,.main #powerChart text,.main #timeChart text{
+ fill:#24384d!important;opacity:1!important
+}
+.main svg .series-solar{stroke:#896000!important}
+.main svg .series-earth{stroke:#174eac!important}
+.main .graphlegend .line,.main .graphlegend i{opacity:1!important}
+@media(max-width:760px){
+ .railnav .nav-name{font-size:9px!important;color:#243b53!important;font-weight:800!important}
+ .railnav a[aria-current="page"] .nav-name{color:#0f438d!important}
+}
