@@ -26,4 +26,4 @@ def test_auth_gateway_css_and_javascript():
 def test_public_demo_still_accessible_and_admin_not_linked():
     assert client.get('/demo').status_code==200
     assert 'href="/admin"' not in client.get('/').text
-    assert client.get('/admin').status_code==404
+    assert client.get('/admin',follow_redirects=False).status_code==303
