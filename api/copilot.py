@@ -233,13 +233,13 @@ def _llm_plan_edits(req: CopilotRequest) -> dict[str, Any] | None:
         return None
 
 
-def _intent_answer(req: CopilotRequest, data: dict, intent: str) -> str:
+def _intent_answer(req: CopilotRequest, data: dict, response: dict, intent: str) -> str:
     """Explain the actual question; numerical claims come exclusively from computed data."""
     scenario=data['scenarios']
     original=scenario['original']['summary']
     delayed=scenario['delayed']['summary']
     other=scenario['alternative_site_after_delay']['summary']
-    change=data.get('what_if')
+    change=response.get('what_if')
     if change:
         values=', '.join(f'{k}: {v}' for k,v in change['changed_inputs'].items())
         return (f"Engineering what-if — {change['label']}. Applied values: {values}.\n\n"
@@ -345,7 +345,7 @@ def analyze(req:CopilotRequest) -> dict[str,Any]:
         action_id=None
     response=_grounded_response(req,base,alternate,label,updates,action_id)
     response['intent']=planning.intent
-    response['answer']=_intent_answer(req,response,planning.intent)
+    response['answer']=_intent_answer(req,base,response,planning.intent)
     response['flow']={'intent':planning.intent,'confidence':planning.confidence,
        'reason':planning.interpretation, 'updates':updates,
        'tool_calls':[{'name':'counterfactual','description':'Compute baseline + delayed + alternate observation point',
