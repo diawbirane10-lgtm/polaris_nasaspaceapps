@@ -88,7 +88,7 @@ def copilot_status():
     provider = os.environ.get('POLARIS_LLM_PROVIDER','groq').lower()
     available = (provider == 'kilo' or (
         bool(os.environ.get('POLARIS_LLM_API_KEY','').strip()) and provider in ('groq','huggingface')))
-    return {'model_connected':available, 'provider':provider if available else None,
+    return {'model_connected':False, 'provider':provider if available else None,
             'provider_configured':available, 'live_provider_health_verified':False,
             'free_text_enabled':True,
             'language_support':'multilingual; Python fallback when model unavailable',
