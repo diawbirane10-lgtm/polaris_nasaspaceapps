@@ -67,6 +67,13 @@ header,footer{border-color:#a5b8c8!important}
 .mission-patch-copy span{font-size:10.5px;letter-spacing:.09em;font-weight:800;color:#146c79}
 .mission-patch-copy small{font-size:11px;line-height:1.5;color:#46617a}
 @media(max-width:700px){.mission-patch{gap:13px;margin:22px 0 -9px;padding:10px;max-width:100%}.mission-patch img{width:84px;height:84px}.mission-patch-copy strong{font-size:11.5px}.mission-patch-copy span{font-size:9px}.mission-patch-copy small{font-size:10px}}
+
+/* Submission-ready team and challenge descriptions; original hero and demo cards stay unchanged. */
+.project-context{margin-top:48px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.project-context article{background:#fff;border:1px solid #a3b9c9;padding:24px;min-width:0}
+.project-context h2{margin:0 0 13px;font-size:17px;letter-spacing:.04em;color:#17559f}
+.project-context p{margin:0;color:#40556b;font-size:14px;line-height:1.7}
+@media(max-width:760px){.project-context{grid-template-columns:1fr;gap:14px;margin-top:27px}.project-context article{padding:20px}}
 </style>
 </head>
 <body>
@@ -93,6 +100,16 @@ header,footer{border-color:#a5b8c8!important}
    <span class="cta">OPEN INTERACTIVE DEMO <span class="arrow" aria-hidden="true">↗</span></span>
   </a>
  </div>
+ <section class="project-context" aria-label="About the POLARIS project and its NASA Space Apps challenge">
+  <article aria-labelledby="polaris-team-heading">
+   <h2 id="polaris-team-heading">ABOUT THE TEAM</h2>
+   <p>POLARIS is an independent engineering-driven team participating in NASA Space Apps 2026. We bring together electrical power-system modeling, simulation, space-science data analysis and explainable AI-assisted workflows. Our public prototype compares lunar south-pole reference sites and mission schedule changes, evaluates a preliminary photovoltaic–battery energy budget and documents the assumptions behind each result. POLARIS is a participant project, not a NASA-endorsed mission-planning system.</p>
+  </article>
+  <article aria-labelledby="polaris-challenge-heading">
+   <h2 id="polaris-challenge-heading">ABOUT THE CHALLENGE</h2>
+   <p>Near the Moon’s south pole, low-angle sunlight and rugged terrain can obstruct local views of the Sun and Earth. A mission delay or a change in electrical demand can alter the operating conditions of a candidate site. The challenge is to make NASA observations easier to compare: sites, dates, local-horizon geometry and the potential for solar power generation. POLARIS combines NASA-derived geometry with a simplified energy model and transparent scenario assessment. Earth visibility is a geometric estimate, not a verified direct-to-Earth radio communication window.</p>
+  </article>
+ </section>
 </main>
 <footer><span>Open prototype · No account required · Engineering demonstration, not flight-qualified</span><a href="https://github.com/diawbirane10-lgtm/polaris_nasaspaceapps" target="_blank" rel="noopener noreferrer" aria-label="Open POLARIS GitHub repository (new tab)"><svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .75a11.25 11.25 0 0 0-3.557 21.924c.563.104.768-.244.768-.544 0-.269-.01-.982-.015-1.928-3.124.679-3.784-1.505-3.784-1.505-.51-1.297-1.246-1.643-1.246-1.643-1.018-.696.077-.681.077-.681 1.126.08 1.719 1.156 1.719 1.156 1.001 1.715 2.626 1.219 3.266.933.102-.725.391-1.22.711-1.5-2.494-.284-5.116-1.247-5.116-5.555 0-1.228.438-2.231 1.157-3.018-.116-.283-.502-1.427.11-2.974 0 0 .945-.302 3.094 1.153A10.775 10.775 0 0 1 12 6.1c.956.005 1.916.13 2.812.375 2.148-1.455 3.09-1.153 3.09-1.153.614 1.547.228 2.691.113 2.974.72.787 1.155 1.79 1.155 3.018 0 4.319-2.626 5.267-5.128 5.546.402.35.759 1.042.759 2.1 0 1.516-.015 2.737-.015 3.109 0 .302.202.652.774.542A11.252 11.252 0 0 0 12 .75Z"/></svg> GitHub Repository <span aria-hidden="true">↗</span></a></footer>
 </body>
