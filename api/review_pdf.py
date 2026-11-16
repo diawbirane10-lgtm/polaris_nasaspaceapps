@@ -11,6 +11,7 @@ from math import isfinite
 from typing import Any
 
 from .report import _tex_escape, compiled_latex_pdf
+from .branding import draw_polaris_pdf_logo
 
 COLOR={'original':'#246EA0','delayed':'#C98637','alternative_site_after_delay':'#2A9689'}
 NAME={'soc_pct':'Battery state of charge (%)','pv_w':'Photovoltaic output (W)',
@@ -64,14 +65,14 @@ def latex_decision_report(d:dict[str,Any],kind:str)->str:
 \usepackage{fontspec}
 \setmainfont{LibertinusSerif-Regular.otf}[BoldFont=LibertinusSerif-Bold.otf,ItalicFont=LibertinusSerif-Italic.otf]
 \usepackage[margin=19mm,headheight=25pt]{geometry}
-\usepackage{booktabs,longtable,tabularx,array,microtype,pgfplots,tikz,xcolor,fancyhdr}
+\usepackage{booktabs,longtable,tabularx,array,microtype,pgfplots,tikz,xcolor,fancyhdr,graphicx}
 \pgfplotsset{compat=1.18}
 \definecolor{polarisblue}{HTML}{246EA0}\definecolor{polariscyan}{HTML}{2A9689}\definecolor{polarisgold}{HTML}{C98637}
 \pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small POLARIS | Mission Decision Intelligence}\fancyhead[R]{\small REPORTKIND}
 \fancyfoot[L]{\scriptsize NASA Space Apps 2026}\fancyfoot[R]{\scriptsize Page \thepage}\renewcommand{\headrulewidth}{.35pt}
 \begin{document}
 \thispagestyle{empty}
-\noindent\begin{minipage}{.19\linewidth}\begin{tikzpicture}[scale=.8]\draw[polarisblue,line width=1.7pt](0,0)circle(1);\draw[polariscyan,line width=1.5pt,rotate=38](0,0)ellipse(1.35 and .38);\fill[polarisgold](.78,.58)circle(.12);\end{tikzpicture}\end{minipage}
+\noindent\begin{minipage}{.19\linewidth}\IfFileExists{polaris-mission-patch-v2.png}{\includegraphics[width=2.65cm]{polaris-mission-patch-v2.png}}{\fbox{\strut POLARIS}}\end{minipage}
 \begin{minipage}{.8\linewidth}\fontsize{25}{29}\selectfont\textbf{\textcolor{polarisblue}{POLARIS}}\\\normalsize Mission Decision Intelligence\end{minipage}
 \vspace{.65cm}\hrule\vspace{.45cm}
 {\LARGE\textbf{REPORTKIND}}\\[.15cm]
@@ -149,11 +150,10 @@ def portable_decision_pdf(d:dict[str,Any],kind:str)->bytes:
     class Logo(Flowable):
         def __init__(self):super().__init__();self.width=usable;self.height=62
         def draw(self):
-            c=self.canv;c.saveState();c.setStrokeColor(colors.HexColor('#246EA0'));c.setLineWidth(1.7);c.circle(26,32,18)
-            c.translate(26,32);c.rotate(32);c.setStrokeColor(colors.HexColor('#2A9689'));c.ellipse(-28,-7,28,7)
-            c.rotate(-32);c.setFillColor(colors.HexColor('#C98637'));c.circle(13,13,3,fill=1,stroke=0)
-            c.translate(-26,-32);c.setFont(heavy,24);c.setFillColor(colors.HexColor('#246EA0'));c.drawString(64,33,'POLARIS')
-            c.setFillColor(colors.black);c.setFont(normal,10);c.drawString(66,18,'Mission Decision Intelligence');c.restoreState()
+            c=self.canv;c.saveState()
+            draw_polaris_pdf_logo(c, x=0, y=3, size=55)
+            c.setFont(heavy,24);c.setFillColor(colors.HexColor('#246EA0'));c.drawString(72,33,'POLARIS')
+            c.setFillColor(colors.black);c.setFont(normal,10);c.drawString(74,18,'Mission Decision Intelligence');c.restoreState()
     story=[Logo(),para(title,'title'),para(d['mission_label']),
        para('Review ID: '+d['review_id']+' | Generated: '+d['generated_utc'],'small'),
        para('Prepared by: '+d.get('prepared_by','Public demonstration (no verified author)'), 'small'),
