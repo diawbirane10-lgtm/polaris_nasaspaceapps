@@ -24,6 +24,7 @@ from .core import mission_metrics
 from .decision import _date, _rows
 from .horizon import HorizonProfile
 from .nasa_reference import load_dataset
+from .branding import LOGO_FILE, LOGO_NAME, draw_polaris_pdf_logo
 
 SCENARIO_KEYS=(('original','Original mission'),('delayed','Delayed mission'),('alternative_site_after_delay','Alternate site after delay'))
 SCENARIO_COLORS={'original':'#195E9C','delayed':'#CF873B','alternative_site_after_delay':'#318A81'}
@@ -132,7 +133,7 @@ def latex_source(d:dict[str,Any])->str:
 \usepackage{booktabs,longtable,array,tabularx,microtype}
 \usepackage{tikz,pgfplots,xcolor}
 \pgfplotsset{compat=1.18}
-\usepackage{fancyhdr,hyperref}
+\usepackage{fancyhdr,hyperref,graphicx}
 \hypersetup{hidelinks}
 \definecolor{polarisblue}{HTML}{296FA7}
 \definecolor{polariscyan}{HTML}{218FA8}
@@ -147,12 +148,7 @@ def latex_source(d:dict[str,Any])->str:
 \begin{document}
 \thispagestyle{empty}
 \noindent\begin{minipage}{0.21\linewidth}
-\begin{tikzpicture}[scale=.75]
-\draw[polarisblue,line width=1.5pt] (0,0) circle (1.22);
-\draw[polariscyan,line width=1.4pt,rotate=36] (0,0) ellipse (1.65 and .45);
-\fill[polarisgold] (0.95,.75) circle (.13);
-\fill[polarisblue] (0,0) circle (.14);
-\end{tikzpicture}
+\IfFileExists{polaris-mission-patch-v2.png}{\includegraphics[width=2.7cm]{polaris-mission-patch-v2.png}}{\fbox{\strut POLARIS}}
 \end{minipage}\begin{minipage}{.78\linewidth}
 {\fontsize{26}{29}\selectfont\bfseries\textcolor{polarisblue}{POLARIS}}\\
 {\large Lunar Mission Decision Intelligence}\\
@@ -263,6 +259,9 @@ def compiled_latex_pdf(tex:str) -> bytes|None:
     with tempfile.TemporaryDirectory(prefix='polaris_report_') as wd:
         p=Path(wd)
         (p/'report.tex').write_text(tex,encoding='utf-8')
+        # Supply the same project insignia to XeLaTeX that ReportLab embeds in PDFs.
+        if LOGO_FILE.is_file():
+            shutil.copyfile(LOGO_FILE, p / LOGO_NAME)
         try:
             res=subprocess.run(['xelatex','-no-shell-escape','-interaction=nonstopmode',
                                 '-halt-on-error','report.tex'],cwd=p,capture_output=True,
@@ -334,11 +333,9 @@ def portable_pdf(d:dict[str,Any])->bytes:
         def __init__(self):super().__init__();self.width=W-84;self.height=80
         def draw(self):
             c=self.canv
-            c.setStrokeColor(colors.HexColor('#276AA1'));c.setLineWidth(2);c.circle(42,48,20,stroke=1,fill=0)
-            c.saveState();c.translate(42,48);c.rotate(28);c.setStrokeColor(colors.HexColor('#1F9CAF'));c.ellipse(-28,-7,28,7,stroke=1,fill=0);c.restoreState()
-            c.setFillColor(colors.HexColor('#DDAE58'));c.circle(53,60,4,stroke=0,fill=1)
-            c.setFont(strong,26);c.setFillColor(colors.HexColor('#276AA1'));c.drawString(78,49,'POLARIS')
-            c.setFillColor(colors.black);c.setFont(base,11);c.drawString(79,31,'Lunar Mission Decision Intelligence')
+            draw_polaris_pdf_logo(c, x=7, y=9, size=65)
+            c.setFont(strong,26);c.setFillColor(colors.HexColor('#276AA1'));c.drawString(86,49,'POLARIS')
+            c.setFillColor(colors.black);c.setFont(base,11);c.drawString(87,31,'Lunar Mission Decision Intelligence')
     def table(rows,widths,header=True):
         cells=[[P(str(v),'small') for v in row] for row in rows]
         tbl=Table(cells,colWidths=widths,hAlign='LEFT',repeatRows=1 if header else 0)
